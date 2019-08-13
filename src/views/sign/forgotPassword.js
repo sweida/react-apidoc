@@ -1,32 +1,15 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
+import Wrapper from './Wrapper'
 
-class ForgotPassword extends Component {
+
+class PasswordForm extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     render() {
         return (
-            ForgotPasswordControl
-        )
-    }
-}
-
-
-
-const ForgotPasswordControl = (
-  <main>
-    <section class="section section-shaped section-lg my-0">
-        <div class="shape shape-style-1 bg-gradient-default">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="container pt-lg-md">
-            <div class="row justify-content-center">
             <div class="col-lg-5">
                 <div class="card bg-secondary shadow border-0">
                 <div class="card-header bg-white pb-1">
@@ -92,10 +75,18 @@ const ForgotPasswordControl = (
                 </div>
                 </div>
             </div>
-            </div>
-        </div>
-        </section>
-  </main>
-)
+        )
+    }
+}
 
+
+class ForgotPassword extends React.Component {
+    render() {
+        return (
+            <Wrapper>
+                <PasswordForm />
+            </Wrapper>
+        )
+    }
+}
 export default ForgotPassword
