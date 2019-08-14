@@ -4,7 +4,6 @@ import './assets/css/argon-1.0.css'
 import './assets/vendor/nucleo/css/nucleo.css'
 import './assets/vendor/font-awesome/css/font-awesome.min.css'
 
-// import './assets/css/argon.min.css'
 import { BrowserRouter, Route } from 'react-router-dom'
 import router from './router/router'
 
