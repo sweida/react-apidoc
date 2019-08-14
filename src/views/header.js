@@ -1,4 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
+
 
 class Header extends React.Component {
     render() {
@@ -8,25 +10,25 @@ class Header extends React.Component {
     }
 }
 
-
-
 function HeaderContoller() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-default">
             <div className="container">
                 <a className="navbar-brand" href="#">天翼保理api接口文档</a>
-                <a href="/" className="btn btn-3 btn-icon btn-info">
+                
+                <Link to="/" className="btn btn-3 btn-icon btn-info">
                     <span className="btn-inner--icon">
                         <i className="ni ni-atom"></i>
                     </span>
                     <span className="btn-inner--text">api接口列表</span>
-                </a>
-                <a href="addapi" className="btn btn-3 btn-icon btn-primary">
+                </Link>
+                <Link to="addapi" className="btn btn-3 btn-icon btn-primary">
                     <span className="btn-inner--icon">
                         <i className="ni ni-atom"></i>
                     </span>
                     <span className="btn-inner--text">新增接口</span>
-                </a>
+                </Link>
+
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -67,7 +69,7 @@ function HeaderContoller() {
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
                                 <a className="dropdown-item" href="#">
                                     <i className="ni ni-planet"></i>
-                                    我添加的接口</a>
+                                    我添加的API</a>
                                 <a className="dropdown-item" href="#">
                                     <i className="ni ni-settings-gear-65"></i>
                                     修改密码

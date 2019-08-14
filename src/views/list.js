@@ -33,13 +33,13 @@ function ListControl(props) {
 	const list = apidocList.map((item) => {
 		switch (item.requestType){
 			case 'post':
-				return <CommonControl data={item} colorType={"success"}/>
+				return <CommonControl key={item.id} data={item} colorType={"success"}/>
 			case 'get':
-				return <CommonControl data={item} colorType={"info"} />
+				return <CommonControl key={item.id} data={item} colorType={"info"} />
 			case 'delete':
-				return <CommonControl data={item} colorType={"danger"} />
+				return <CommonControl key={item.id} data={item} colorType={"danger"} />
 			case 'put':
-				return <CommonControl data={item} colorType={"warning"} />
+				return <CommonControl key={item.id} data={item} colorType={"warning"} />
 		}
 	});
 	return (
@@ -53,7 +53,7 @@ function CommonControl(props) {
 	const data = props.data
 	return (
 		<div className={`${data.requestType} border border-${props.colorType} my-3`}>
-			<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+			<div className="px-3 py-2" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
 				<button className={`btn btn-sm btn-${props.colorType}`} type="button">{data.requestType}</button>
 				<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
 				<small>{data.title}</small>
@@ -70,7 +70,7 @@ function CommonControl(props) {
 function Detail(props) {
 	const data = props.data
 	return (
-		<div id="collapseOne1" className={`border-${props.border} border-top collapse show`}>
+		<div id={data.id} className={`border-${props.border} border-top collapse`}>
 			<div className="card-body">
 				<div className="row mb-3 border-bottom">
 					<div className="col-2 mt-3">
