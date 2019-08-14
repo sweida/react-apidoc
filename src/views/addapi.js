@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Header from './header'
+import "./list.css"
 
-class Addapi extends Component {
+class Addapi extends React.Component {
     render() {
         return (
             <App />
@@ -14,11 +15,42 @@ function App() {
     return (
         <div>
             <Header />
+            <Top />
             <AddapiControl />
         </div>
     );
 }
 
+function Top() {
+    return (
+        <div class="header bg-primary pb-6">
+            <div class="container container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                        <div class="col-lg-6 col-7">
+                            <h6 class="h2 text-white d-inline-block mb-0">Examples</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a
+                                        href="https://argon-dashboard-pro-laravel.creative-tim.com/dashboard"><i
+                                            class="fas fa-home"></i></a></li>
+                                    <li class="breadcrumb-item"><a
+                                        href="https://argon-dashboard-pro-laravel.creative-tim.com/item">Item
+										Management</a></li>
+                                    <li class="breadcrumb-item active" aria-current="page">Add Item</li>
+                                </ol>
+                            </nav>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            <a href="#" class="btn btn-sm btn-neutral">New</a>
+                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
 
 
 function AddapiControl() {
@@ -54,18 +86,18 @@ function AddapiControl() {
                                             role="tablist">
                                             <li className="nav-item">
                                                 <a className="nav-link btn-outline-success active" data-toggle="tab"
-                                                    href="javascript:;" role="tab" aria-selected="true">POST</a>
+                                                    href="#" role="tab" aria-selected="true">POST</a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link btn-outline-info" data-toggle="tab" href="javascript:;"
+                                                <a className="nav-link btn-outline-info" data-toggle="tab" href="#"
                                                     role="tab" aria-selected="false">GET</a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link btn-danger" data-toggle="tab" href="javascript:;"
+                                                <a className="nav-link btn-danger" data-toggle="tab" href="#"
                                                     role="tab" aria-selected="false">DELETE</a>
                                             </li>
                                             <li className="nav-item">
-                                                <a className="nav-link btn-warning" data-toggle="tab" href="javascript:;"
+                                                <a className="nav-link btn-warning" data-toggle="tab" href="#"
                                                     role="tab" aria-selected="false">PUT</a>
                                             </li>
                                         </ul>

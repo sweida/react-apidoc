@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 let data = {}
-class Home extends Component {
+class Home extends React.Component {
 
     constructor(props) {
         super(props)

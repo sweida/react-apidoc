@@ -1,13 +1,13 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
+import React from 'react'
+// import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
 import Wrapper from './Wrapper'
 
 
 class RegisterForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
     render () {
         return (
             <div className="col-lg-5">

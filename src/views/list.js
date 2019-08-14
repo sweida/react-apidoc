@@ -1,42 +1,87 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Header from './header'
+import "./list.css"
+import { apidocs } from '../server/api'
 // import ReactDOM from 'react-dom';
 // import { Link } from 'react-router-dom'
 
-class List extends Component {
+
+
+class List extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = { apidocList: [] };
+	}
+	componentDidMount() {
+		apidocs().then(res => {
+			this.setState({ apidocList: res.data.data })
+		})
+	}
+
     render() {
         return (
-            <App />
+			<div>
+				<Header />
+				<ListControl apidocList={this.state.apidocList}/>
+			</div>
         )
     }
 }
 
+function ListControl(props) {
+	const apidocList = props.apidocList
+	const list = apidocList.map((item) => {
+		switch (item.requestType){
+			case 'post':
+				return <CommonControl data={item} colorType={"success"}/>
+			case 'get':
+				return <CommonControl data={item} colorType={"info"} />
+			case 'delete':
+				return <CommonControl data={item} colorType={"danger"} />
+			case 'put':
+				return <CommonControl data={item} colorType={"warning"} />
+		}
+	});
+	return (
+		<div className="container">
+			{list}
+		</div>
+	)
+}
 
-function App() {
-    return (
-        <div>
-            <Header />
-            <ListControl />
-        </div>
-    );
+function CommonControl(props) {
+	const data = props.data
+	return (
+		<div className={`${data.requestType} border border-${props.colorType} my-3`}>
+			<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
+				<button className={`btn btn-sm btn-${props.colorType}`} type="button">{data.requestType}</button>
+				<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
+				<small>{data.title}</small>
+				<button type="button" className="close" data-dismiss="alert" aria-label="Close">
+					<i className={`fa fa-code text-${props.colorType}`}></i>
+				</button>
+			</div>
+			<Detail data={data} border={`${props.colorType}`} />
+		</div>
+	)
 }
 
 
-function ListControl() {
-    return (
-<div className="container">
-
-	<div className="post border border-success my-3 ">
-		<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne1" aria-expanded="true" aria-controls="collapseOne">
-			<button className="btn btn-sm btn-success" type="button">post</button>
-			<span className="font-weight-bold mr-3">/apply</span>
-			<small>提额接口</small>
-			<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-				<i className="fa fa-code text-success"></i>
-			</button>
-		</div>
-		<div id="collapseOne1" className="border-top border-success collapse show" >
+function Detail(props) {
+	const data = props.data
+	return (
+		<div id="collapseOne1" className={`border-${props.border} border-top collapse show`}>
 			<div className="card-body">
+				<div className="row mb-3 border-bottom">
+					<div className="col-2 mt-3">
+						<span>api地址</span>
+					</div>
+					<div className="col-10">
+						<div className={`alert alert-default`}>
+							<strong>/{data.url}</strong> 
+						</div>
+					</div>
+				</div>
 				<div className="row mb-3 border-bottom">
 					<div className="col-2">
 						<span>params</span>
@@ -44,9 +89,8 @@ function ListControl() {
 					</div>
 					<div className="col-10">
 						<div className="alert alert-default">
-					
 							<blockquote className="blockquote text-white p-2 mb-0">
-								<footer className="blockquote-footer text-danger">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+								<footer className="blockquote-footer text-danger">{data.requestParams}</footer>
 							</blockquote>
 						</div>
 					</div>
@@ -59,6 +103,7 @@ function ListControl() {
 					<div className="col-10">
 						<div className="alert alert-default">
 							<blockquote className="blockquote text-white p-2 mb-0">
+								{data.results}
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
 								<footer className="blockquote-footer text-danger">Someone famous in <cite title="Source Title">Source Title</cite></footer>
 							</blockquote>
@@ -66,7 +111,7 @@ function ListControl() {
 					</div>
 				</div>
 				<div className="text-right">
-					<button type="button" className="btn btn-sm btn-primary "> 
+					<button type="button" className="btn btn-sm btn-primary ">
 						<span className="btn-inner--icon">
 							<i className="ni ni-planet"></i>
 						</span>
@@ -75,56 +120,9 @@ function ListControl() {
 				</div>
 			</div>
 		</div>
-	</div>
-	<div className="get border border-info my-3">
-		<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne2" aria-expanded="true" aria-controls="collapseOne">
-			<button className="btn btn-sm btn-info" type="button">get</button>
-			<span className="font-weight-bold mr-3">/apply</span>
-			<small>提额接口</small>
-			<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-				<i className="fa fa-angle-right text-info"></i>
-			</button>
-		</div>
-		<div id="collapseOne2" className="border-top border-info collapse" >
-			<div className="card-body">
-			<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
-			</div>
-		</div>
-	</div>
-	<div className="delete border border-danger my-3">
-		<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne3" aria-expanded="true" aria-controls="collapseOne">
-			<button className="btn btn-sm btn-danger" type="button">delete</button>
-			<span className="font-weight-bold mr-3">/apply</span>
-			<small>提额接口</small>
-			<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-				<i className="fa fa-angle-right text-danger"></i>
-			</button>
-		</div>
-		<div id="collapseOne3" className="border-top border-danger collapse" >
-			<div className="card-body">
-			<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
-			</div>
-		</div>
-	</div>
-	<div className="put border border-warning my-3">
-		<div className="px-3 py-2" data-toggle="collapse" data-target="#collapseOne4" aria-expanded="true" aria-controls="collapseOne">
-			<button className="btn btn-sm btn-warning" type="button">put</button>
-			<span className="font-weight-bold mr-3">/apply</span>
-			<small>提额接口</small>
-			<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-				<i className="fa fa-angle-right text-warning"></i>
-			</button>
-		</div>
-		<div id="collapseOne4" className="border-top border-warning collapse">
-			<div className="card-body">
-			<p>Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
-			</div>
-		</div>
-	</div>
-
-
-</div>
-    )
+	)
 }
 
+
 export default List
+

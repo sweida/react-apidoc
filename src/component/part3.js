@@ -73,13 +73,13 @@ const Login = (
                                     <small>使用下面方式登录</small>
                                 </div>
                                 <div class="btn-wrapper text-center">
-                                    <a href="javascript:;" class="btn btn-neutral btn-icon">
+                                    <a href="#" class="btn btn-neutral btn-icon">
                                         <span class="btn-inner--icon">
                                             <img src="assets/img/icons/common/github.svg" alt="">
                     </span>
                                             <span class="btn-inner--text">Github</span>
                   </a>
-                                        <a href="javascript:;" class="btn btn-neutral btn-icon">
+                                        <a href="#" class="btn btn-neutral btn-icon">
                                             <span class="btn-inner--icon">
                                                 <img src="assets/img/icons/common/google.svg" alt="">
                     </span>

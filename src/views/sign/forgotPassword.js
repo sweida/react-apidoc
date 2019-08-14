@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom';
+import React from 'react'
+// import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
 import Wrapper from './Wrapper'
 
 
 class PasswordForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
     render() {
         return (
             <div class="col-lg-5">
                 <div class="card bg-secondary shadow border-0">
                 <div class="card-header bg-white pb-1">
                     <div class="text-muted text-center mb-2">
-                    <small>通过邮件重置密码</small>
+                        <small>通过邮件重置密码</small>
                     </div>
                     <div class="card-body px-lg-4 py-lg-4">
                     <form role="form">

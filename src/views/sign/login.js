@@ -1,12 +1,12 @@
 import React from 'react'
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
 import Wrapper from './Wrapper'
 
 class LoginForm extends React.Component {
-    constructor(props) {
-        super(props)
-    }
+    // constructor(props) {
+    //     super(props)
+    // }
     render() {
         return (
             <div className="col-lg-5">
@@ -16,13 +16,13 @@ class LoginForm extends React.Component {
                             <small>使用下面方式登录</small>
                         </div>
                         <div className="btn-wrapper text-center">
-                            <a href="javascript:;" className="btn btn-neutral btn-icon">
+                            <a href="#" className="btn btn-neutral btn-icon">
                                 <span className="btn-inner--icon">
                                     <img src="assets/img/icons/common/github.svg" alt="" />
                                 </span>
                                 <span className="btn-inner--text">Github</span>
                             </a>
-                            <a href="javascript:;" className="btn btn-neutral btn-icon">
+                            <a href="#" className="btn btn-neutral btn-icon">
                                 <span className="btn-inner--icon">
                                     <img src="assets/img/icons/common/google.svg" alt="" />
                                 </span>
