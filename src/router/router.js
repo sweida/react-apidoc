@@ -6,12 +6,12 @@ import List from '../views/list'
 import Addapi from '../views/addapi'
 
 const router = [
-    { path: "/", component: List },
+    { path: "/", component: List, auth: true },
     { path: "/login", component: Login },
     { path: "/register", component: Register },
     { path: "/forgotPassword", component: ForgotPassword },
-    { path: "/list", component: List },
-    { path: "/addapi", component: Addapi },
+    { path: "/list", component: List, auth: true },
+    { path: "/addapi", component: Addapi, auth: true },
 ];
 
 export default router

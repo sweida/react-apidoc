@@ -52,16 +52,24 @@ function ListControl(props) {
 function CommonControl(props) {
 	const data = props.data
 	return (
-		<div className={`${data.requestType} border border-${props.colorType} my-3`}>
-			<div className="px-3 py-2" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
-				<button className={`btn btn-sm btn-${props.colorType}`} type="button">{data.requestType}</button>
-				<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
-				<small>{data.title}</small>
-				<button type="button" className="close" data-dismiss="alert" aria-label="Close">
-					<i className={`fa fa-code text-${props.colorType}`}></i>
-				</button>
+		<div>
+			{/* <button type="button" className="btn btn-info ">
+				
+				<span className="btn-inner--text">所属项目 -- {data.classify}</span>
+			</button> */}
+		
+			<div className={`${data.requestType} border border-${props.colorType} my-3`}>
+				<div className="px-3 py-2" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
+					<button className={`btn btn-sm btn-${props.colorType}`} type="button">{data.requestType}</button>
+					<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
+					<small>{data.title}</small>
+					<div  className="close">
+						<i className={`fa fa-code text-${props.colorType}`}></i>
+					</div>
+					{/* <span class="badge badge-success float-right mr-3">所属项目：{data.classify}</span> */}
+				</div>
+				<Detail data={data} border={`${props.colorType}`} />
 			</div>
-			<Detail data={data} border={`${props.colorType}`} />
 		</div>
 	)
 }
