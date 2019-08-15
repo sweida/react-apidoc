@@ -290,6 +290,16 @@ module.exports = function(webpackEnv) {
         // Support React Native Web
         // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
         'react-native': 'react-native-web',
+
+        // 绝对路径的引用  
+        '@': path.resolve(__dirname, '链接Scr的路径'),  // 这样如果再调用Src下的Api文件的话，就可直接 import Api from '@/src'
+
+        // 少侠留步，如果还想偷懒，老衲也可以给你看看下面....
+        'component': path.resolve(__dirname, '../src/component'), 
+        'utils': path.resolve(__dirname, '../src/utils'), 
+        'assets': path.resolve(__dirname, '../src/assets'), 
+        'pages': path.resolve(__dirname, '../src/views'), 
+
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding
