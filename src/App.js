@@ -27,21 +27,19 @@ class App extends Component {
 
     return (
       <BrowserRouter>
-        <div>
-          {/* 路由拦截 */}
-          <Switch>
-            {router.map((item, index) => {
-              return <Route key={index} path={item.path} exact render={props =>
-                (!item.auth ? (<item.component {...props} />) : 
-                  (token ? 
-                    <item.component {...props} /> : 
-                    <Redirect to={{pathname: '/login', state: {from: props.location }}} />
-                  )
-                )} />
-            })}
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+        {/* 路由拦截 */}
+        <Switch>
+          {router.map((item, index) => {
+            return <Route key={index} path={item.path} exact render={props =>
+              (!item.auth ? (<item.component {...props} />) : 
+                (token ? 
+                  <item.component {...props} /> : 
+                  <Redirect to={{pathname: '/login', state: {from: props.location }}} />
+                )
+              )} />
+          })}
+          <Route component={NotFound} />
+        </Switch>
       </BrowserRouter>
     );
   }

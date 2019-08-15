@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { Fragment }from 'react'
 import './modal.css'
 
 class Modal extends React.Component {
     render() {
         return (
-            <div>
+            <React.Fragment>
                 <div className={`modal-bg ${!this.props.fadeOut ? 'fadeOut' : ''}`}></div>
                 <div className={`modal fade show ${!this.props.fadeOut ? 'slideOut' : ''}`}>
                     <div className="modal-dialog modal-dialog-centered" role="document">
@@ -29,7 +29,7 @@ class Modal extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

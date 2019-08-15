@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
 import { apidocs } from '../server/api'
@@ -20,10 +20,10 @@ class List extends React.Component {
 
     render() {
         return (
-			<div>
+			<React.Fragment>
 				<Header />
 				<ListControl apidocList={this.state.apidocList}/>
-			</div>
+			</React.Fragment>
         )
     }
 }

@@ -1,15 +1,17 @@
 // import Home from '../views/home'
-import Login from '../views/sign/login'
-import Register from '../views/sign/register'
-import ForgotPassword from '../views/sign/forgotPassword'
-import List from '../views/list'
-import Addapi from '../views/addapi'
+import Login from 'pages/sign/login'
+import Register from 'pages/sign/register'
+import ForgotPassword from 'pages/sign/forgotPassword'
+import ChangePassword from 'pages/sign/changePassword'
+import List from 'pages/list'
+import Addapi from 'pages/addapi'
 
 const router = [
     { path: "/", component: List, auth: true },
     { path: "/login", component: Login },
     { path: "/register", component: Register },
     { path: "/forgotPassword", component: ForgotPassword },
+    { path: "/changePassword", component: ChangePassword },
     { path: "/list", component: List, auth: true },
     { path: "/addapi", component: Addapi, auth: true },
 ];

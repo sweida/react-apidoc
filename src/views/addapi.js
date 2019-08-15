@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import Header from './header'
 import "./list.css"
 import { addapi } from '../server/api'
@@ -62,7 +62,7 @@ class Addapi extends React.Component {
     }
     render() {
         return (
-            <div> 
+            <React.Fragment>
                 {this.state.alert ? <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/> : null}
                 <Header />
                 <Top />
@@ -179,7 +179,7 @@ class Addapi extends React.Component {
                         </div>
                     </div>
                 </div>
-            </div>
+            </React.Fragment>
         )
     }
 }

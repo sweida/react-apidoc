@@ -69,29 +69,30 @@ class Header extends React.Component {
                                 </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link nav-link-icon" href="#">
+                                <Link className="nav-link nav-link-icon" to="#">
                                     <i className="ni ni-notification-70"></i>
                                     <span className="nav-link-inner--text d-lg-none">Profile</span>
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link nav-link-icon" href="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <Link className="nav-link nav-link-icon" to="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i className="ni ni-circle-08"></i>
                                     <span className="nav-link-inner--text d-lg-none">Settings</span>
-                                </a>
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                                    <a className="dropdown-item" href="#">
+                                    <Link className="dropdown-item" to="#">
                                         <i className="ni ni-planet"></i>
-                                        我添加的API</a>
-                                    <a className="dropdown-item" href="#">
+                                        我添加的API
+                                    </Link>
+                                    <Link to="changePassword" className="dropdown-item">
                                         <i className="ni ni-settings-gear-65"></i>
                                         修改密码
-                                </a>
+                                    </Link>
                                     <div className="dropdown-divider"></div>
-                                    <a className="dropdown-item" href="#" onClick={this.LogoutHandle}>
+                                    <Link className="dropdown-item" to="#" onClick={this.LogoutHandle}>
                                         <i className="ni ni-user-run"></i>
                                         退出登录
-                                </a>
+                                    </Link>
                                 </div>
                             </li>
                         </ul>
