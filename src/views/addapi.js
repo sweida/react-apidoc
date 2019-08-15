@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './header'
 import "./list.css"
 import { addapi } from '../server/api'
-import SuccessModal from 'component/successModal' 
+import Modal from "component/Modal"
 
 class Addapi extends React.Component {
     constructor(props) {
@@ -15,6 +15,8 @@ class Addapi extends React.Component {
                 title: '',
                 requestParams: '',
                 results: '',
+                alert: false,
+                fade: true
             // }
         };
     }
@@ -27,7 +29,6 @@ class Addapi extends React.Component {
         e.preventDefault();
         let params = {
             ...this.state,
-            user_id: 1,
             // url: this.state.url,
             // requestType: this.state.requestType,
             // classify: this.state.classify,
@@ -37,18 +38,32 @@ class Addapi extends React.Component {
         }
         addapi(params).then(res => {
             if (res.status == 'success') {
-                console.log(3333);
-                return <SuccessModal />
+                this.setState({
+                    alert: true
+                })
             }
-            console.log(res);
         })
-        console.log(params, 4343433);
-        
+    }
+    showModal = () => {
+        this.setState({
+            alert: true,
+            fade: true
+        })
+    }
+    closeModal = () => {
+        this.setState({
+            fade: false
+        })
+        setTimeout(() => {
+            this.setState({
+                alert: false
+            })
+        }, 400);
     }
     render() {
         return (
-            <div>
-                <SuccessModal />
+            <div> 
+                {this.state.alert ? <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/> : null}
                 <Header />
                 <Top />
                 <div className="container container-fluid mt--6 mb-5">
@@ -156,7 +171,7 @@ class Addapi extends React.Component {
                                         </div>
 
                                         <div className="text-center m-auto col-md-3">
-                                            <button className="btn btn-success btn-block mb-3" type="sumbit">提 交</button>
+                                            <button className="btn btn-success btn-block mb-3" type="sumbit" >提 交</button>
                                         </div>
                                     </form>
                                 </div>
@@ -168,7 +183,6 @@ class Addapi extends React.Component {
         )
     }
 }
-
 
 
 function Top() {
