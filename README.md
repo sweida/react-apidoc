@@ -1,3 +1,6 @@
+## api文档手动编写项目
+![项目预览](http://static.golang365.com/Egnk9ozxVmLMHqZmQDyArGroBlD12OsQGQWuQLW2.png)
+
 ## 开发过程
 
 ### 安装路由
@@ -9,7 +12,20 @@ yarn add react-router-dom
 import { BrowerRouter, Roure, Link } from "react-router-dom"
 
 // exact 去掉重复/路径
-<Route key={index} path='/' exact compoent={app} >
+<Route key={index} path='/' exact compoent={app} />
+
+
+// to为string
+<Link to="/about">关于</Link>
+ 
+// to为obj
+<Link to={{
+  pathname: '/courses',
+  search: '?sort=name',
+  hash: '#the-hash',
+  state: { fromDashboard: true }
+}}/>
+
 ```
 
 ### 安装api请求
