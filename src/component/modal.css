@@ -1,0 +1,19 @@
+.none {
+    display: none
+}
+
+.flex {
+    display: flex;
+}
+
+.overflow_y {
+    overflow-y: auto
+}
+
+.block {
+  display: block;
+}
+
+.col-success {
+    background-color: rgb(255, 255, 255);
+}

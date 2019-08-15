@@ -8,7 +8,8 @@ export default {
                 body: JSON.stringify(data),// data can be `string` or {object}!
                 headers: {
                     'Content-Type': 'application/json',
-                    // 'accesstoken': sessionStorage.getItem('token')
+                    'Authorization': localStorage.getItem('token'),
+                    'X-Requested-With': 'XMLHttpRequest'
                 }
             }
         )
@@ -28,6 +29,12 @@ export default {
                 url += '&' + paramsArray.join('&')
             }
         }
-        return fetch(url)
+        return fetch(url,{
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token'),
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
     }
 }

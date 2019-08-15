@@ -1,16 +1,48 @@
 import React from 'react'
 // import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import Wrapper from './Wrapper'
+import { login } from 'server/api'
+// import { createBrowserHistory } from 'history';
+import github from 'assets/img/icons/common/github.svg'
+import google from 'assets/img/icons/common/google.svg'
 
-import github from '../../assets/img/icons/common/github.svg'
-import google from '../../assets/img/icons/common/google.svg'
-
+// const history = createBrowserHistory();
 class LoginForm extends React.Component {
-    // constructor(props) {
-    //     super(props)
-    // }
+    constructor(props) {
+        super(props);
+        this.state = { 
+            name: '',
+            password: '',
+            loginStatus: false
+        }
+    }
+    handleInputChange = (name, e) => {
+        this.setState({
+            [name]: e.target.value
+        });
+    }
+    handleSubmit = (e) => {
+        e.preventDefault();
+        let params = {
+            name: this.state.name,
+            password: this.state.password,
+        }
+        login(params).then(res => {
+            if (res.status == 'success') {
+                localStorage.setItem('token', res.data.token)
+                this.setState({
+                    loginStatus: true
+                });
+            }
+        })
+    }
+
+    
     render() {
+        if (this.state.loginStatus) {
+            return <Redirect push to="/" />
+        }
         return (
             <div className="col-lg-5">
                 <div className="card bg-secondary shadow border-0">
@@ -38,15 +70,21 @@ class LoginForm extends React.Component {
                             <small>或者使用账号登录</small>
                         </div>
 
-                        <form role="form">
+                        <form onSubmit={this.handleSubmit}>
                             <div className="form-group mb-3">
                                 <div className="input-group input-group-alternative">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i
                                             className="ni ni-email-83"></i></span>
                                     </div>
-                                    <input className="form-control" placeholder="username" type="text"
-                                        required />
+                                    <input
+                                        className="form-control"
+                                        type="text"
+                                        placeholder="username"
+                                        value={this.state.name}
+                                        onChange={(e) => this.handleInputChange('name', e)}
+                                        required
+                                    />
                                 </div>
                             </div>
                             <div className="form-group">
@@ -55,14 +93,20 @@ class LoginForm extends React.Component {
                                         <span className="input-group-text"><i
                                             className="ni ni-lock-circle-open"></i></span>
                                     </div>
-                                    <input className="form-control" placeholder="Password" type="password"
-                                        required />
+                                    <input
+                                        className="form-control"
+                                        type="Password"
+                                        placeholder="Password"
+                                        value={this.state.password}
+                                        onChange={(e) => this.handleInputChange('password', e)}
+                                        required
+                                    />
                                 </div>
                             </div>
                             <div className="custom-control custom-control-alternative custom-checkbox">
                                 <input className="custom-control-input" id=" customCheckLogin"
                                     type="checkbox" />
-                                <label className="custom-control-label" htmlfor=" customCheckLogin">
+                                <label className="custom-control-label" htmlFor=" customCheckLogin">
                                     <span>记住密码</span>
                                 </label>
                             </div>
@@ -88,6 +132,18 @@ class LoginForm extends React.Component {
         )
 
     }
+}
+
+function succeeeMessage() {
+    return (
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
+            <span class="alert-text"><strong>Success!</strong> This is a success alert—check it out!</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    )
 }
 
 class Login extends React.Component {

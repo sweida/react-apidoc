@@ -2,7 +2,7 @@ import React from 'react'
 import Header from './header'
 import "./list.css"
 import { addapi } from '../server/api'
-
+import SuccessModal from 'component/successModal' 
 
 class Addapi extends React.Component {
     constructor(props) {
@@ -36,6 +36,10 @@ class Addapi extends React.Component {
             // results: this.state.results,
         }
         addapi(params).then(res => {
+            if (res.status == 'success') {
+                console.log(3333);
+                return <SuccessModal />
+            }
             console.log(res);
         })
         console.log(params, 4343433);
@@ -44,6 +48,7 @@ class Addapi extends React.Component {
     render() {
         return (
             <div>
+                <SuccessModal />
                 <Header />
                 <Top />
                 <div className="container container-fluid mt--6 mb-5">
