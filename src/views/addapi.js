@@ -1,19 +1,21 @@
 import React from 'react'
 import Header from './header'
 import "./list.css"
+import { addapi } from '../server/api'
+
 
 class Addapi extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            apiData: {
+            // apiData: {
                 url: '',
                 requestType: 'post',
                 classify: '',
                 title: '',
                 requestParams: '',
                 results: '',
-            }
+            // }
         };
     }
     handleInputChange = (name, e) => {
@@ -23,7 +25,20 @@ class Addapi extends React.Component {
     }
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log(4343433);
+        let params = {
+            ...this.state,
+            user_id: 1,
+            // url: this.state.url,
+            // requestType: this.state.requestType,
+            // classify: this.state.classify,
+            // title: this.state.title,
+            // requestParams: this.state.requestParams,
+            // results: this.state.results,
+        }
+        addapi(params).then(res => {
+            console.log(res);
+        })
+        console.log(params, 4343433);
         
     }
     render() {
@@ -48,20 +63,20 @@ class Addapi extends React.Component {
                                 <div className="card-body">
                                     <form onSubmit={this.handleSubmit}>
                                         <div className="form-group row">
-                                            <label for="example-text-input"
+                                            <label htmlFor="example-text-input"
                                                 className="col-md-2 col-form-label form-control-label">api地址</label>
                                             <div className="col-md-10">
                                                 <input 
                                                     className="form-control" 
                                                     type="text" 
                                                     value={this.state.url} 
-                                                    onChange={this.handleInputChange.bind(this, 'url')}
+                                                    onChange={(e) => this.handleInputChange('url', e)}
                                                     required 
                                                 />
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label for="example-search-input"
+                                            <label htmlFor="example-search-input"
                                                 className="col-md-2 col-form-label form-control-label">请求方式</label>
                                             <div className="col-md-5">
                                                 <ul className="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-text"
@@ -86,50 +101,50 @@ class Addapi extends React.Component {
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label for="example-email-input"
+                                            <label htmlFor="example-email-input"
                                                 className="col-md-2 col-form-label form-control-label">描叙</label>
                                             <div className="col-md-10">
                                                 <input
                                                     className="form-control"
                                                     type="text"
                                                     value={this.state.title}
-                                                    onChange={this.handleInputChange.bind(this, 'title')}
+                                                    onChange={(e) => this.handleInputChange('title', e)}
                                                     required
                                                 />
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label for="example-url-input"
+                                            <label htmlFor="example-url-input"
                                                 className="col-md-2 col-form-label form-control-label">所属项目</label>
                                             <div className="col-md-10">
                                                 <input
                                                     className="form-control"
                                                     type="text"
                                                     value={this.state.classify}
-                                                    onChange={this.handleInputChange.bind(this, 'classify')}
+                                                    onChange={(e) => this.handleInputChange('classify', e)}
                                                     required
                                                 />
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label for="example-tel-input"
+                                            <label htmlFor="example-tel-input"
                                                 className="col-md-2 col-form-label form-control-label">请求参数</label>
                                             <div className="col-md-10">
                                                 <textarea
                                                     className="form-control"
                                                     value={this.state.requestParams}
-                                                    onChange={this.handleInputChange.bind(this, 'requestParams')}
+                                                    onChange={(e) => this.handleInputChange('requestParams', e)}
                                                     rows="6"
                                                 />
                                             </div>
                                         </div>
                                         <div className="form-group row">
-                                            <label for="example-password-input" className="col-md-2 col-form-label form-control-label">返回值</label>
+                                            <label htmlFor="example-password-input" className="col-md-2 col-form-label form-control-label">返回值</label>
                                             <div className="col-md-10">
                                                 <textarea
                                                     className="form-control"
                                                     value={this.state.results}
-                                                    onChange={this.handleInputChange.bind(this, 'results')}
+                                                    onChange={(e) => this.handleInputChange('results', e)}
                                                     rows="6"
                                                 />
                                             </div>
@@ -153,27 +168,27 @@ class Addapi extends React.Component {
 
 function Top() {
     return (
-        <div class="header bg-primary pb-6">
-            <div class="container container-fluid">
-                <div class="header-body">
-                    <div class="row align-items-center py-4">
-                        <div class="col-lg-6 col-7">
-                            <h6 class="h4 text-white d-inline-block mb-0">天翼保理api</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a
+        <div className="header bg-primary pb-6">
+            <div className="container container-fluid">
+                <div className="header-body">
+                    <div className="row align-items-center py-4">
+                        <div className="col-lg-6 col-7">
+                            <h6 className="h4 text-white d-inline-block mb-0">天翼保理api</h6>
+                            <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
+                                <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li className="breadcrumb-item"><a
                                         href="https://argon-dashboard-pro-laravel.creative-tim.com/dashboard"><i
-                                            class="fas fa-home"></i></a></li>
-                                    <li class="breadcrumb-item"><a
+                                            className="fas fa-home"></i></a></li>
+                                    <li className="breadcrumb-item"><a
                                         href="https://argon-dashboard-pro-laravel.creative-tim.com/item">Item
 										Management</a></li>
-                                    <li class="breadcrumb-item active" aria-current="page">Add Item</li>
+                                    <li className="breadcrumb-item active" aria-current="page">Add Item</li>
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-6 col-5 text-right">
-                            <a href="#" class="btn btn-sm btn-neutral">New</a>
-                            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
+                        <div className="col-lg-6 col-5 text-right">
+                            <a href="#" className="btn btn-sm btn-neutral">New</a>
+                            <a href="#" className="btn btn-sm btn-neutral">Filters</a>
                         </div>
                     </div>
                 </div>

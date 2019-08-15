@@ -3,6 +3,9 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Wrapper from './Wrapper'
 
+import github from '../../assets/img/icons/common/github.svg'
+import google from '../../assets/img/icons/common/google.svg'
+
 class LoginForm extends React.Component {
     // constructor(props) {
     //     super(props)
@@ -18,13 +21,13 @@ class LoginForm extends React.Component {
                         <div className="btn-wrapper text-center">
                             <a href="#" className="btn btn-neutral btn-icon">
                                 <span className="btn-inner--icon">
-                                    <img src="assets/img/icons/common/github.svg" alt="" />
+                                    <img src={github} alt="" />
                                 </span>
                                 <span className="btn-inner--text">Github</span>
                             </a>
                             <a href="#" className="btn btn-neutral btn-icon">
                                 <span className="btn-inner--icon">
-                                    <img src="assets/img/icons/common/google.svg" alt="" />
+                                    <img src={google} alt="" />
                                 </span>
                                 <span className="btn-inner--text">Google</span>
                             </a>
@@ -59,7 +62,7 @@ class LoginForm extends React.Component {
                             <div className="custom-control custom-control-alternative custom-checkbox">
                                 <input className="custom-control-input" id=" customCheckLogin"
                                     type="checkbox" />
-                                <label className="custom-control-label" for=" customCheckLogin">
+                                <label className="custom-control-label" htmlfor=" customCheckLogin">
                                     <span>记住密码</span>
                                 </label>
                             </div>

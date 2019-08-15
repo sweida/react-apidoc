@@ -4,4 +4,8 @@ import req from './fetch'
 const apidocs = () => {
     return req.get("apidoc/list").then(res => res.json())
 }
-export { apidocs }
+
+const addapi = (data) => {
+    return req.post("apidoc/add", data).then(res => res.json())
+}
+export { apidocs, addapi }

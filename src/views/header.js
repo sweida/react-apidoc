@@ -50,10 +50,10 @@ function HeaderContoller() {
                     </div>
                     <ul className="navbar-nav ml-lg-auto">
                         <li className="nav-item">
-                            <a className="nav-link nav-link-icon" href="#">
+                            <Link className="nav-link nav-link-icon" to="login">
                                 <i className="ni ni-favourite-28"></i>
                                 <span className="nav-link-inner--text d-lg-none">Discover</span>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link nav-link-icon" href="#">
