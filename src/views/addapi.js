@@ -39,7 +39,8 @@ class Addapi extends React.Component {
         addapi(params).then(res => {
             if (res.status == 'success') {
                 this.setState({
-                    modal: true
+                    modal: true,
+                    fade: true
                 })
             }
         })

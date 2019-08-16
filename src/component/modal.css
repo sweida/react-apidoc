@@ -18,7 +18,6 @@
 
 .fade {
   animation: slideIn .4s;
-  display: block;
 }
 
 .fadeOut {

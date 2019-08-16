@@ -1,38 +1,26 @@
-import React, { Fragment }from 'react'
-import './modal.css'
+import React from 'react'
 
-class Modal extends React.Component {
+class Alert extends React.Component {
     render() {
-        return (
-            <React.Fragment>
-                <div className={`modal-bg ${!this.props.fadeOut ? 'fadeOut' : ''}`}></div>
-                <div className={`modal fade show ${!this.props.fadeOut ? 'slideOut' : ''}`}>
-                    <div className="modal-dialog modal-dialog-centered" role="document">
-                        <div className="modal-content">
-                            <div className="modal-body">
-                                <div className="swal2-icon swal2-success swal2-animate-success-icon">
-                                    <div className="swal2-success-circular-line-left" ></div>
-                                    <span className="swal2-success-line-tip"></span>
-                                    <span className="swal2-success-line-long"></span>
-                                    <div className="swal2-success-ring"></div>
-                                    <div className="swal2-success-fix" ></div>
-                                    <div className="swal2-success-circular-line-right" ></div>
-                                </div>
-                                <div className="text-center">
-                                    <span >添加成功！</span>
-                                </div>
-                            </div>
-                            <div className="modal-footer justify-content-center border-top-0">
-                                {/* 调用父组件方法 */}
-                                <button type="button" className="btn btn-success" onClick={this.props.closeModal}>确 定</button>
-                            </div>
-                        </div>
+        let alertMain
+        if (this.props.show) {
+            alertMain = (
+                <div className="message">
+                    <div className="alert col-lg-4 m-auto alert-success alert-dismissible fade show " role="alert">
+                        <span className="alert-icon mr-2"><i className="ni ni-check-bold"></i></span>
+                        <span className="alert-text"><strong></strong> {this.props.message}</span>
+                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
-            </React.Fragment>
-        )
+            )
+        } else {
+            alertMain = null
+        }
+        return (alertMain)
     }
 }
 
 
-export default Modal;
+export default Alert;

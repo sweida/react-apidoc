@@ -6,7 +6,7 @@ class Modal extends React.Component {
         return (
             <React.Fragment>
                 <div className={`modal-bg ${!this.props.fadeOut ? 'fadeOut' : ''}`}></div>
-                <div className={`modal fade show ${!this.props.fadeOut ? 'slideOut' : ''}`}>
+                <div className={`modal fade show ${!this.props.fadeOut ? 'slideOut' : ''}`} style={{display: 'block'}}>
                     <div className="modal-dialog modal-dialog-centered" role="document">
                         <div className="modal-content">
                             <div className="modal-body">
