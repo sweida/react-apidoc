@@ -2,7 +2,7 @@
 import Login from 'pages/sign/login'
 import Register from 'pages/sign/register'
 import ForgotPassword from 'pages/sign/forgotPassword'
-import ChangePassword from 'pages/sign/changePassword'
+import ChangePassword from 'pages/changePassword'
 import List from 'pages/list'
 import Addapi from 'pages/addapi'
 

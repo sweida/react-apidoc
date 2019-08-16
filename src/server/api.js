@@ -17,7 +17,12 @@ export const logout = (data) => {
     return req.post("logout", data).then(res => res.json())
 }
 
-
+// 个人信息
 export const userInfo = (data) => {
     return req.get("user/info", data).then(res => res.json())
+}
+
+// 修改密码
+export const resetpassword = (data) => {
+    return req.post("user/resetpassword", data).then(res => res.json())
 }

@@ -16,3 +16,41 @@ code {
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
+.section-profile-cover {
+  z-index: -1;
+}
+
+.mt--400{
+  margin-top: -28rem;
+}
+
+.message{
+  position: fixed;
+  top: 40px;
+  width: 100%;
+  z-index: 9999;
+}
+
+.form-group .invalid-feedback {
+  display: block;
+}
+
+/* .fadeOut2 {
+  transition: transform .4s ease-out 1s;
+  opacity: 0;
+} */
+.fadeOut2 {
+  transition: all .3s linear 1.5s;
+}
+
+.opacity{
+  opacity: 0;
+}
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

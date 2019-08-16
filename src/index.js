@@ -3,16 +3,12 @@ import ReactDOM from 'react-dom';
 import '@/style/main.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from "redux";
-import reducer from './reducers'
-import { composeWithDevTools } from "redux-devtools-extension";
-import logger from "redux-logger";
+import configureStore from './redux/configureStore'
 
 import * as serviceWorker from './serviceWorker';
 
-const store = createStore(reducer, composeWithDevTools(
-    applyMiddleware(logger)
-))
+
+const store = configureStore()
 
 
 ReactDOM.render( 
@@ -21,6 +17,18 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root') 
 );
+
+//上面的代码本身已经有了，加下面的代码即可
+if (module.hot) {
+    module.hot.accept('./App', () => {
+        ReactDOM.render(
+            <Provider store={store}>
+                <App />
+            </Provider>,
+            document.getElementById('root'),
+        )
+    })
+}
 
 // if (module.hot) {
 //     module.hot.accept('./App', () => {

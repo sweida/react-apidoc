@@ -15,7 +15,7 @@ class Addapi extends React.Component {
                 title: '',
                 requestParams: '',
                 results: '',
-                alert: false,
+                modal: false,
                 fade: true
             // }
         };
@@ -39,14 +39,14 @@ class Addapi extends React.Component {
         addapi(params).then(res => {
             if (res.status == 'success') {
                 this.setState({
-                    alert: true
+                    modal: true
                 })
             }
         })
     }
     showModal = () => {
         this.setState({
-            alert: true,
+            modal: true,
             fade: true
         })
     }
@@ -56,14 +56,14 @@ class Addapi extends React.Component {
         })
         setTimeout(() => {
             this.setState({
-                alert: false
+                modal: false
             })
         }, 400);
     }
     render() {
         return (
             <React.Fragment>
-                {this.state.alert ? <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/> : null}
+                {this.state.modal ? <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/> : null}
                 <Header />
                 <Top />
                 <div className="container container-fluid mt--6 mb-5">
