@@ -2,6 +2,9 @@ import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
 import { apidocs } from '../server/api'
+import marked from 'marked'
+import hljs from 'highlight.js'
+import 'highlight.js/styles/github.css';
 // import ReactDOM from 'react-dom';
 // import { Link } from 'react-router-dom'
 
@@ -16,6 +19,19 @@ class List extends React.Component {
 		apidocs().then(res => {
 			this.setState({ apidocList: res.data.data })
 		})
+		marked.setOptions({
+			highlight: function (code) {
+				return hljs.highlightAuto(code).value;
+			},
+			pedantic: false,
+			gfm: true,
+			tables: true,
+			breaks: false,
+			sanitize: false,
+			smartLists: true,
+			smartypants: false,
+			xhtml: false
+		}); 
 	}
 
     render() {
@@ -85,7 +101,7 @@ function Detail(props) {
 						<span>api地址</span>
 					</div>
 					<div className="col-10">
-						<div className={`alert alert-default`}>
+						<div className="alert code-bg">
 							<strong>/{data.url}</strong> 
 						</div>
 					</div>
@@ -96,9 +112,8 @@ function Detail(props) {
 						<p>(请求参数)</p>
 					</div>
 					<div className="col-10">
-						<div className="alert alert-default">
-							<blockquote className="blockquote text-white p-2 mb-0">
-								<footer className="blockquote-footer text-danger">{data.requestParams}</footer>
+						<div className="alert code-bg">
+							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML= {{ __html: marked(data.requestParams) }}>
 							</blockquote>
 						</div>
 					</div>
@@ -109,11 +124,8 @@ function Detail(props) {
 						<p>(返回值)</p>
 					</div>
 					<div className="col-10">
-						<div className="alert alert-default">
-							<blockquote className="blockquote text-white p-2 mb-0">
-								{data.results}
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-								<footer className="blockquote-footer text-danger">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+						<div className="alert code-bg">
+							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML={{ __html: marked(data.results) }}>
 							</blockquote>
 						</div>
 					</div>

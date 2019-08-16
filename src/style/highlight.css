@@ -1,0 +1,14 @@
+pre {
+  font-size: 14px;
+  color: #fff;
+  line-height: 20px;
+}
+.hljs-tag, .hljs-name, .hljs-attribute{
+  color: #11cdef;
+}
+.hljs-string, .hljs-doctag {
+    color: #f93cd5;
+}
+.hljs-comment, .hljs-quote {
+    color: #8898aa;
+}

@@ -34,3 +34,46 @@ main {
   border: 0;
   box-shadow: 0 0 2rem 0 rgba(136, 152, 170, .15);
 }
+
+pre {
+  font-size: 14px !important;
+  color: #fff !important;
+  line-height: 20px;
+  margin-bottom: 0 !important;
+}
+
+/* 第一种配色 */
+/* .hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #11cdef !important;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #f93cd5 !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #8898aa !important;
+} */
+
+.code-bg {
+  background: #282a36;
+}
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #50fa7b !important;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #ff79c6 !important;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #8898aa !important;
+}

@@ -28,13 +28,13 @@ class Addapi extends React.Component {
     handleSubmit = (e) => {
         e.preventDefault();
         let params = {
-            ...this.state,
-            // url: this.state.url,
-            // requestType: this.state.requestType,
-            // classify: this.state.classify,
-            // title: this.state.title,
-            // requestParams: this.state.requestParams,
-            // results: this.state.results,
+            // ...this.state,
+            url: this.state.url,
+            requestType: this.state.requestType,
+            classify: this.state.classify,
+            title: this.state.title,
+            requestParams: '```js\n' + this.state.requestParams + '\n```',
+            results: '```js\n' + this.state.results + '\n```',
         }
         addapi(params).then(res => {
             if (res.status == 'success') {
@@ -155,7 +155,7 @@ class Addapi extends React.Component {
                                                     className="form-control"
                                                     value={this.state.requestParams}
                                                     onChange={(e) => this.handleInputChange('requestParams', e)}
-                                                    rows="6"
+                                                    rows="8"
                                                 />
                                             </div>
                                         </div>
@@ -166,7 +166,7 @@ class Addapi extends React.Component {
                                                     className="form-control"
                                                     value={this.state.results}
                                                     onChange={(e) => this.handleInputChange('results', e)}
-                                                    rows="6"
+                                                    rows="12"
                                                 />
                                             </div>
                                         </div>
