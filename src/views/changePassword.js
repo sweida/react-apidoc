@@ -160,7 +160,7 @@ class Alert extends React.Component {
         let alertMain
         if (this.props.show) {
             alertMain = (
-                <div className="message">
+                <div className="message alertClose">
                     <div className="alert col-lg-4 m-auto alert-success alert-dismissible fade show " role="alert">
                         <span className="alert-icon mr-2"><i className="ni ni-check-bold"></i></span>
                         <span className="alert-text"><strong></strong> {this.props.message}</span>

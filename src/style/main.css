@@ -39,15 +39,15 @@ input:-webkit-autofill {
   transition: transform .4s ease-out 1s;
   opacity: 0;
 } */
-.fadeOut2 {
-  transition: all .3s linear 1.5s;
+.alertClose {
+  animation: close 2s;
 }
 
-.opacity{
-  opacity: 0;
-}
 @keyframes close {
   0% {
+    opacity: 1;
+  }
+  80% {
     opacity: 1;
   }
   100% {
