@@ -2,6 +2,8 @@ import React, { Fragment } from 'react'
 // import ReactDOM from 'react-dom';
 import { Link } from 'react-router-dom'
 import Header from './header'
+import Alert from 'component/Alert'
+import sucMask from 'component/sucMask'
 import { resetpassword } from "server/api";
 
 class ForgotPassword extends React.Component {
@@ -11,11 +13,7 @@ class ForgotPassword extends React.Component {
             old_password: '',
             new_password: '',
             confirm_password: '',
-            loginStatus: false,
             diff: false,
-            alert: false,
-            show: false,
-            message: ''
         }
     }
     handleInputChange = (name, e) => {
@@ -27,7 +25,6 @@ class ForgotPassword extends React.Component {
         e.preventDefault();
         this.setState({
             diff: false,
-            error: false,
         })
 
         if (this.state.new_password != this.state.confirm_password) {
@@ -44,22 +41,19 @@ class ForgotPassword extends React.Component {
         }
         resetpassword(params).then(res => {
             if (res.status == 'success') {
+                Alert.show({
+                    type: 'success',
+                    message: res.message
+                })
                 this.setState({
-                    show: true,
-                    message: res.message,
                     old_password: '',
                     new_password: '',
                     confirm_password: '',
                 })
-                setTimeout(() => {
-                    this.setState({
-                        show: false,
-                    })
-                }, 2000);
             } else {
-                this.setState({
-                    error: true,
-                    errorMsg: res.message
+                Alert.show({
+                    type: 'error',
+                    message: res.message
                 })
             }
         })
@@ -104,7 +98,6 @@ class ForgotPassword extends React.Component {
                                                     required
                                                 />
                                             </div>
-                                            {this.state.error ? <div className="invalid-feedback"> {this.state.errorMsg} </div> : null}
                                         </div>
                                         <div className="form-group">
                                             <div className="input-group input-group-alternative">
@@ -148,32 +141,8 @@ class ForgotPassword extends React.Component {
                         </div>
                     </div>
                 </section>
-                
-                <Alert show={this.state.show} message={this.state.message}/>
             </React.Fragment>
         )
-    }
-}
-
-class Alert extends React.Component {
-    render() {
-        let alertMain
-        if (this.props.show) {
-            alertMain = (
-                <div className="message alertClose">
-                    <div className="alert col-lg-4 m-auto alert-success alert-dismissible fade show " role="alert">
-                        <span className="alert-icon mr-2"><i className="ni ni-check-bold"></i></span>
-                        <span className="alert-text"><strong></strong> {this.props.message}</span>
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            )
-        } else {
-            alertMain = null
-        }
-        return (alertMain)
     }
 }
 

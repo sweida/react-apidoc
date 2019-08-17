@@ -80,7 +80,7 @@ class Header extends React.Component {
                                     <span className="nav-link-inner--text d-lg-none">Settings</span>
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                                    <Link className="dropdown-item" to="#">
+                                    <Link className="dropdown-item" to="myapi">
                                         <i className="ni ni-planet"></i>
                                         我添加的API
                                     </Link>

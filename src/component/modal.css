@@ -16,6 +16,10 @@
   zoom: normal
 }
 
+.display-block{
+  display: block;
+}
+
 .fade {
   animation: slideIn .4s;
 }
@@ -28,7 +32,7 @@
   animation: slideOut .4s;
 }
 
-.modal-bg {
+.mask {
   background-color: rgba(0, 0, 0, .15);
   height: 100%;
   position: fixed;
@@ -216,5 +220,21 @@
   100% {
     opacity: 0;
     transform: translateY(-60px)
+  }
+}
+
+.alertClose {
+  animation: close 2s;
+}
+
+@keyframes close {
+  0% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

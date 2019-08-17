@@ -3,7 +3,7 @@ import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import Wrapper from './Wrapper'
 import { login } from 'server/api'
-// import { createBrowserHistory } from 'history';
+import Alert from 'component/Alert'
 import github from 'assets/img/icons/common/github.svg'
 import google from 'assets/img/icons/common/google.svg'
 
@@ -34,6 +34,10 @@ class LoginForm extends React.Component {
                 this.setState({
                     loginStatus: true
                 });
+                Alert.show({
+                    title: '提 示',
+                    message: '登录成功，欢迎回来！！'
+                })
             }
         })
     }

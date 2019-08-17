@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react'
 import Header from './header'
+import { Link } from 'react-router-dom'
 import "./list.css"
 import { addapi } from '../server/api'
-import Modal from "component/Modal"
+import Modal from "component/sucModal"
 
 class Addapi extends React.Component {
     constructor(props) {
@@ -77,7 +78,7 @@ class Addapi extends React.Component {
                                             <h5 className="mb-0">添加api文档</h5>
                                         </div>
                                         <div className="col-4 text-right">
-                                            <a href="#" className="btn btn-sm btn-primary">后退</a>
+                                            <Link onClick={() => window.history.go(-1)} className="btn btn-sm btn-primary">后退</Link>
                                         </div>
                                     </div>
                                 </div>

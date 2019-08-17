@@ -1,26 +1,73 @@
-import React from 'react'
+import React, { Fragment } from 'react';
+import './modal.css'
+import ReactDOM from 'react-dom';
 
-class Alert extends React.Component {
-    render() {
-        let alertMain
-        if (this.props.show) {
-            alertMain = (
-                <div className="message">
-                    <div className="alert col-lg-4 m-auto alert-success alert-dismissible fade show " role="alert">
-                        <span className="alert-icon mr-2"><i className="ni ni-check-bold"></i></span>
-                        <span className="alert-text"><strong></strong> {this.props.message}</span>
-                        <button type="button" className="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                </div>
-            )
-        } else {
-            alertMain = null
+/*
+*** 封装4种alert, 使用方法
+Alert.show({
+    type: 'success',
+    message: '这是内容'
+})
+type: success info danger warning， 默认success可以不传
+
+*/
+
+export default {
+    dom: null, //被append的元素
+
+    show({ type, message, onOk, onCancel }) {
+        this.dom && this.dom.remove();
+        this.close();
+
+        this.dom = document.createElement('div');
+
+        let color = 'success'
+        let icon = 'ni-like-2'
+        switch (type) {
+            case 'info':
+                color = 'info'
+                icon = 'ni-air-baloon'
+                break;
+            case 'warning':
+                color = 'warning'
+                icon = 'ni-air-baloon'
+                break;
+            case 'error':
+                color = 'danger'
+                icon = 'ni-fat-remove'
+                break;
         }
-        return (alertMain)
+
+        // 2秒后自动移除
+        const JSXdom = (
+            <div className="message alertClose">
+                <div className={`alert col-lg-4 m-auto alert-${color} alert-dismissible fade show`} role="alert">
+                    <span className="alert-icon mr-2"><i className={`ni ${icon}`}></i></span>
+                    <span className="alert-text"><strong></strong> { message }</span>
+                    <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => this.onCancel(onCancel)}>
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        );
+
+        ReactDOM.render(JSXdom, this.dom);
+        console.log(JSXdom, this.dom, 4444);
+        
+        document.body.appendChild(this.dom);
+    },
+    onCancel(onCancel) {
+        (onCancel instanceof Function) && onCancel();
+        this.dom && this.dom.remove();
+    },
+
+    // settimeout销毁问题没解决
+    close() {
+        setTimeout(() => {
+            this.dom && this.dom.remove();
+        }, 2000);
     }
+
 }
 
 
-export default Alert;

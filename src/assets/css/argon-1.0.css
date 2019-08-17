@@ -7045,10 +7045,7 @@ button.close
     right: 0;
     bottom: 0;
     left: 0;
-
-    display: none;
     overflow: hidden;
-
     outline: 0;
 }
 

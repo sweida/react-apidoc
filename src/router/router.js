@@ -5,6 +5,7 @@ import ForgotPassword from 'pages/sign/forgotPassword'
 import ChangePassword from 'pages/changePassword'
 import List from 'pages/list'
 import Addapi from 'pages/addapi'
+import Myapi from 'pages/myapi'
 
 const router = [
     { path: "/", component: List, auth: true },
@@ -14,6 +15,7 @@ const router = [
     { path: "/changePassword", component: ChangePassword },
     { path: "/list", component: List, auth: true },
     { path: "/addapi", component: Addapi, auth: true },
+    { path: "/myapi", component: Myapi, auth: true },
 ];
 
 export default router
