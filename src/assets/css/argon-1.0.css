@@ -14672,7 +14672,7 @@ a.btn-icon-only
 .card-lift--hover:hover
 {
     transition: all .15s ease; 
-    transform: translateY(-20px);
+    transform: translateY(-10px);
 }
 @media screen and (prefers-reduced-motion: reduce)
 {

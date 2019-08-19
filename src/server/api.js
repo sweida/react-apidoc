@@ -1,10 +1,27 @@
 import req from './fetch'
 // let beasUrl = " http://127.0.0.1:8080/api/v2/"
 
-export const apidocs = () => {
-    return req.get("apidoc/list").then(res => res.json())
+// 注册
+export const register = (data) => {
+    return req.post("signup", data).then(res => res.json())
 }
 
+// 新增项目
+export const addProject = (data) => {
+    return req.post("project/add", data).then(res => res.json())
+}
+
+// 项目列表
+export const projectList = () => {
+    return req.post("project/list").then(res => res.json())
+}
+
+// api列表
+export const apiList = (data) => {
+    return req.get("apidoc/list", data).then(res => res.json())
+}
+
+// 新增api
 export const addapi = (data) => {
     return req.post("apidoc/add", data).then(res => res.json())
 }

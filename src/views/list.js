@@ -7,7 +7,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import Hidden from 'component/Hidden'
 
-import Mask from 'component/Modal';
+import Mask from 'component/Mask';
 // import ReactDOM from 'react-dom';
 // import { Link } from 'react-router-dom'
 

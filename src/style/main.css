@@ -54,3 +54,30 @@ input:-webkit-autofill {
     opacity: 0;
   }
 }
+
+.projects{
+  display: flex;
+  flex-wrap: wrap;
+  /* justify-content: space-between; */
+}
+
+.projeclist{
+  width: 23%;
+  margin: 0 1%
+}
+
+.cursor{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .projeclist {
+    width: 48%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .projeclist {
+    width: 100%;
+  }
+}

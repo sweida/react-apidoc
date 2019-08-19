@@ -154,6 +154,7 @@ class Addapi extends React.Component {
                                             <div className="col-md-10">
                                                 <textarea
                                                     className="form-control"
+                                                    placeholder={this.state.demoRequestParams}
                                                     value={this.state.requestParams}
                                                     onChange={(e) => this.handleInputChange('requestParams', e)}
                                                     rows="8"
@@ -221,3 +222,15 @@ function Top() {
 
 
 export default Addapi
+
+
+// { 
+//     url: number,    // 路由
+//     requestType: string,    // 请求方式
+//     classify: string,
+//     title: '',
+//     requestParams: '',
+//     results: '',
+//     modal: false,
+//     fade: true
+// } 

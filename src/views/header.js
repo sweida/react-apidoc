@@ -29,11 +29,11 @@ class Header extends React.Component {
                 <div className="container">
                     <a className="navbar-brand" href="#">天翼保理api接口文档</a>
 
-                    <Link to="/" className="btn btn-3 btn-icon btn-info">
+                    <Link to="/projects" className="btn btn-3 btn-icon btn-info">
                         <span className="btn-inner--icon">
                             <i className="ni ni-atom"></i>
                         </span>
-                        <span className="btn-inner--text">api接口列表</span>
+                        <span className="btn-inner--text">项目列表</span>
                     </Link>
                     <Link to="addapi" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
