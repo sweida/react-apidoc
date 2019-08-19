@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
-import { apidocs } from '../server/api'
+import { apiList } from '../server/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
@@ -22,7 +22,10 @@ class List extends React.Component {
 		};
 	}
 	componentDidMount() {
-		apidocs().then(res => {
+		let params = {
+			id: this.props.match.params.id
+		}
+		apiList(params).then(res => {
 			this.setState({ apidocList: res.data.data })
 		})
 		marked.setOptions({
@@ -76,7 +79,18 @@ function ListControl(props) {
 		}
 	});
 	return (
-		<div className="container">
+		<div className="container mt-4">
+			<div className="mb-5">
+				{/* <span className="text-success">●</span>
+				<small>撒地方放</small> */}
+				<span class="badge badge-pill badge-lg badge-success">所属项目：收拾收拾</span>
+				<button type="button" className="btn btn-primary float-right">
+					<span className="btn-inner--icon mr-2">
+						<i className="ni ni-atom"></i>
+					</span>
+					新增接口
+				</button>
+			</div>
 			{list}
 		</div>
 	)

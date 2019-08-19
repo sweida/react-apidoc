@@ -52,7 +52,6 @@ export default {
         );
 
         ReactDOM.render(JSXdom, this.dom);
-        console.log(JSXdom, this.dom, 4444);
         
         document.body.appendChild(this.dom);
     },

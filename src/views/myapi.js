@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
-import { apidocs } from '../server/api'
+import { apiList } from '../server/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
@@ -16,7 +16,7 @@ class List extends React.Component {
 		this.state = { apidocList: [] };
 	}
 	componentDidMount() {
-		apidocs().then(res => {
+		apiList().then(res => {
 			this.setState({ apidocList: res.data.data })
 		})
 		marked.setOptions({

@@ -9,12 +9,13 @@ import Myapi from 'pages/myapi'
 import Projects from 'pages/projects'
 
 const router = [
-    { path: "/", component: List, auth: true },
+    { path: "/", component: Projects, auth: true },
     { path: "/login", component: Login },
     { path: "/register", component: Register },
     { path: "/forgotPassword", component: ForgotPassword },
     { path: "/changePassword", component: ChangePassword },
-    { path: "/list", component: List, auth: true },
+    // { path: "/list", component: List, auth: true },
+    { path: "/projects/:id", component: List, auth: true },
     { path: "/addapi", component: Addapi, auth: true },
     { path: "/myapi", component: Myapi, auth: true },
     { path: "/projects", component: Projects, auth: true },

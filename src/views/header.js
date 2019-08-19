@@ -35,7 +35,7 @@ class Header extends React.Component {
                         </span>
                         <span className="btn-inner--text">项目列表</span>
                     </Link>
-                    <Link to="addapi" className="btn btn-3 btn-icon btn-primary">
+                    <Link to="/addapi" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
                             <i className="ni ni-atom"></i>
                         </span>
@@ -50,7 +50,7 @@ class Header extends React.Component {
                             <div className="row">
                                 <div className="col-6 collapse-brand">
                                     <a href="./index.html">
-                                        <img alt="" src="./assets/img/brand/blue.png" />
+                                        <img alt="" src="/assets/img/brand/blue.png" />
                                     </a>
                                 </div>
                                 <div className="col-6 collapse-close">

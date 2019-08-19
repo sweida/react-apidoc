@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
-import { apidocs } from '../server/api'
+import { addProject, projectList } from '../server/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
@@ -12,17 +12,16 @@ import Mask from 'component/Modal';
 import { Link } from 'react-router-dom'
 
 
-
 class Projects extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			apidocList: [],
+			projectList: [],
 		};
 	}
 	componentDidMount() {
-		apidocs().then(res => {
-			this.setState({ apidocList: res.data.data })
+		projectList().then(res => {
+			this.setState({ projectList: res.data })
 		})
 		marked.setOptions({
 			highlight: function (code) {
@@ -56,16 +55,7 @@ class Projects extends React.Component {
 				<Header />
 				<div className="container mt-5">
 					<div className="projects">
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
-						<CardControl />
+						<CardControl projectList={this.state.projectList} />
 						<AddCardControl />
 					</div>
 				</div>
@@ -75,16 +65,19 @@ class Projects extends React.Component {
 }
 
 function CardControl(props) {
-
-	return (
-		<div className="card-lift--hover shadow border-0 card projeclist mb-4">
-			<Link to="list" className="pt-4 pb-3 card-body">
-				<h6 className="text-primary text-uppercase">Download Argon</h6>
-				<p className="description text-body mt-3">Argon is a great free UI package based on </p>
+	const projectList = props.projectList
+	const list = projectList.map((item) => 
+		<div className="card-lift--hover shadow border-0 card projeclist mb-4" key={item.id}>
+			<Link to={`projects/${item.id}`} className="pt-4 pb-3 card-body">
+				<h6 className="text-primary text-uppercase">{item.title}</h6>
+				<p className="description text-body mt-3">{item.descp}</p>
 
 				{/* <Link to="list" className="mt-2 btn btn-primary">点击查看</Link> */}
 			</Link>
 		</div>
+	);
+	return (
+		list
 	)
 }
 
