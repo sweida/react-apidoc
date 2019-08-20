@@ -26,13 +26,34 @@ class Addapi extends React.Component {
             [name]: e.target.value
         });
     }
+    handleCreateDmoe = () => {
+        this.setState({
+            requestParams: 
+`{
+    loginId: string,    // 登录名
+    idcard: string,    // 身份证, 非必传
+    amount: number,     // 额度
+    use_amount: number,      // 可用额度
+}`,
+            results: 
+`{
+    errorCode: number,
+    errorMsg: string,
+    result: {
+        amount: number,     // 额度
+        use_amount: number,      // 可用额度
+    },      // 返回结果
+    success: true,
+}`,
+        })
+    }
     handleSubmit = (e) => {
         e.preventDefault();
         let params = {
             // ...this.state,
             url: this.state.url,
             requestType: this.state.requestType,
-            classify: this.state.classify,
+            project_id: 1,
             title: this.state.title,
             requestParams: '```js\n' + this.state.requestParams + '\n```',
             results: '```js\n' + this.state.results + '\n```',
@@ -77,13 +98,26 @@ class Addapi extends React.Component {
                                         <div className="col-8">
                                             <h5 className="mb-0">添加api文档</h5>
                                         </div>
-                                        {/* <div className="col-4 text-right">
-                                            <Link onClick={() => window.history.go(-1)} className="btn btn-sm btn-primary">后退</Link>
-                                        </div> */}
+                                        <div className="col-4 text-right">
+                                            <button onClick={this.handleCreateDmoe} className="btn btn-sm btn-primary" type="button">生成模板</button>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="card-body">
                                     <form onSubmit={this.handleSubmit}>
+                                        <div className="form-group row">
+                                            <label htmlFor="example-url-input"
+                                                className="col-md-2 col-form-label form-control-label">所属项目</label>
+                                            <div className="col-md-10">
+                                                <input
+                                                    className="form-control"
+                                                    type="text"
+                                                    value={this.state.classify}
+                                                    onChange={(e) => this.handleInputChange('classify', e)}
+                                                    required
+                                                />
+                                            </div>
+                                        </div>
                                         <div className="form-group row">
                                             <label htmlFor="example-text-input"
                                                 className="col-md-2 col-form-label form-control-label">api地址</label>
@@ -124,7 +158,7 @@ class Addapi extends React.Component {
                                         </div>
                                         <div className="form-group row">
                                             <label htmlFor="example-email-input"
-                                                className="col-md-2 col-form-label form-control-label">描叙</label>
+                                                className="col-md-2 col-form-label form-control-label">描述</label>
                                             <div className="col-md-10">
                                                 <input
                                                     className="form-control"
@@ -135,19 +169,7 @@ class Addapi extends React.Component {
                                                 />
                                             </div>
                                         </div>
-                                        <div className="form-group row">
-                                            <label htmlFor="example-url-input"
-                                                className="col-md-2 col-form-label form-control-label">所属项目</label>
-                                            <div className="col-md-10">
-                                                <input
-                                                    className="form-control"
-                                                    type="text"
-                                                    value={this.state.classify}
-                                                    onChange={(e) => this.handleInputChange('classify', e)}
-                                                    required
-                                                />
-                                            </div>
-                                        </div>
+                                        
                                         <div className="form-group row">
                                             <label htmlFor="example-tel-input"
                                                 className="col-md-2 col-form-label form-control-label">请求参数</label>
@@ -235,12 +257,8 @@ export default Addapi
 
 
 // { 
-//     url: number,    // 路由
-//     requestType: string,    // 请求方式
-//     classify: string,
-//     title: '',
-//     requestParams: '',
-//     results: '',
-//     modal: false,
-//     fade: true
+//     loginId: string,    // 登录名
+//     idcard: string,    // 身份证
+//     amount: number,     // 额度
+//     user_amount: number,      // 可用额度
 // } 

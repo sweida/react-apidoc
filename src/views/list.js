@@ -1,16 +1,17 @@
 import React, { Fragment }from 'react'
+import { Link } from 'react-router-dom'
 import Header from './header'
-import "./list.css"
-import { apiList } from '../server/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import Hidden from 'component/Hidden'
+import "./list.css"
+import "style/highlight.css"
 
 import Mask from 'component/Mask';
 // import ReactDOM from 'react-dom';
-import { Link } from 'react-router-dom'
 
+import { apiList } from '../server/api'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -122,67 +123,143 @@ function CommonControl(props) {
 	)
 }
 
+class Detail extends React.PureComponent {
+	handleDelete() {
+		Mask.show({
+			title: '提 示',
+			content: '是否删除该api?',
+			onCancel: () => {
+			},
+			onOk: () => {
+				console.log('Ok');
+			}
+		})
+	}
+	handleEdit() {
+		console.log(3333);
+	}
+	render() {
+		const data = this.props.data
+		return (
+			<div id={data.id} className={`border-${this.props.border} border-top collapse`}>
+				<div className="card-body">
+					<div className="row mb-3 border-bottom">
+						<div className="col-2 mt-3">
+							<span>api地址</span>
+						</div>
+						<div className="col-10">
+							<div className="alert code-bg">
+								<strong>/{data.url}</strong>
+							</div>
+						</div>
+					</div>
+					<div className="row mb-3 border-bottom">
+						<div className="col-2">
+							<span>params</span>
+							<p>(请求参数)</p>
+						</div>
+						<div className="col-10">
+							<div className="alert code-bg">
+								<blockquote className="blockquote mb-0" dangerouslySetInnerHTML={{ __html: marked(data.requestParams) }}>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div className="row ">
+						<div className="col-2">
+							<span>Responses</span>
+							<p>(返回值)</p>
+						</div>
+						<div className="col-10">
+							<div className="alert code-bg">
+								<blockquote className="blockquote mb-0" dangerouslySetInnerHTML={{ __html: marked(data.results) }}>
+								</blockquote>
+							</div>
+						</div>
+					</div>
+					<div className="text-right">
+						<Hidden visible={data.user_id == user.id}>
+							<button type="button" className="btn btn-sm btn-danger " onClick={this.handleDelete}>
+								<span className="btn-inner--icon mr-2">
+									<i className="ni ni-bag-17"></i>
+								</span>
+								<span className="btn-inner--text">删 除 </span>
+							</button>
+						</Hidden>
 
-function Detail(props) {
-	const data = props.data
-	return (
-		<div id={data.id} className={`border-${props.border} border-top collapse`}>
-			<div className="card-body">
-				<div className="row mb-3 border-bottom">
-					<div className="col-2 mt-3">
-						<span>api地址</span>
-					</div>
-					<div className="col-10">
-						<div className="alert code-bg">
-							<strong>/{data.url}</strong> 
-						</div>
-					</div>
-				</div>
-				<div className="row mb-3 border-bottom">
-					<div className="col-2">
-						<span>params</span>
-						<p>(请求参数)</p>
-					</div>
-					<div className="col-10">
-						<div className="alert code-bg">
-							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML= {{ __html: marked(data.requestParams) }}>
-							</blockquote>
-						</div>
-					</div>
-				</div>
-				<div className="row ">
-					<div className="col-2">
-						<span>Responses</span>
-						<p>(返回值)</p>
-					</div>
-					<div className="col-10">
-						<div className="alert code-bg">
-							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML={{ __html: marked(data.results) }}>
-							</blockquote>
-						</div>
-					</div>
-				</div>
-				<div className="text-right">
-					<Hidden visible={data.user_id == user.id}>
-						<button type="button" className="btn btn-sm btn-danger " >
-							<span className="btn-inner--icon mr-2">
-								<i className="ni ni-bag-17"></i>
+						<button type="button" className="btn btn-sm btn-primary" onClick={this.handleEdit}>
+							<span className="btn-inner--icon">
+								<i className="ni ni-planet mr-2"></i>
 							</span>
-							<span className="btn-inner--text">删 除 </span>
+							<span className="btn-inner--text">编 辑 </span>
 						</button>
-					</Hidden>
-					
-					<button type="button" className="btn btn-sm btn-primary">
-						<span className="btn-inner--icon">
-							<i className="ni ni-planet mr-2"></i>
-						</span>
-						<span className="btn-inner--text">编 辑 </span>
-					</button>
+					</div>
 				</div>
 			</div>
-		</div>
-	)
+		)
+	}
 }
+
+// function Detail(props) {
+// 	const data = props.data
+// 	return (
+// 		<div id={data.id} className={`border-${props.border} border-top collapse`}>
+// 			<div className="card-body">
+// 				<div className="row mb-3 border-bottom">
+// 					<div className="col-2 mt-3">
+// 						<span>api地址</span>
+// 					</div>
+// 					<div className="col-10">
+// 						<div className="alert code-bg">
+// 							<strong>/{data.url}</strong> 
+// 						</div>
+// 					</div>
+// 				</div>
+// 				<div className="row mb-3 border-bottom">
+// 					<div className="col-2">
+// 						<span>params</span>
+// 						<p>(请求参数)</p>
+// 					</div>
+// 					<div className="col-10">
+// 						<div className="alert code-bg">
+// 							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML= {{ __html: marked(data.requestParams) }}>
+// 							</blockquote>
+// 						</div>
+// 					</div>
+// 				</div>
+// 				<div className="row ">
+// 					<div className="col-2">
+// 						<span>Responses</span>
+// 						<p>(返回值)</p>
+// 					</div>
+// 					<div className="col-10">
+// 						<div className="alert code-bg">
+// 							<blockquote className="blockquote mb-0" dangerouslySetInnerHTML={{ __html: marked(data.results) }}>
+// 							</blockquote>
+// 						</div>
+// 					</div>
+// 				</div>
+// 				<div className="text-right">
+// 					<Hidden visible={data.user_id == user.id}>
+// 						<button type="button" className="btn btn-sm btn-danger " >
+// 							<span className="btn-inner--icon mr-2">
+// 								<i className="ni ni-bag-17"></i>
+// 							</span>
+// 							<span className="btn-inner--text">删 除 </span>
+// 						</button>
+// 					</Hidden>
+					
+// 					<button type="button" className="btn btn-sm btn-primary">
+// 						<span className="btn-inner--icon">
+// 							<i className="ni ni-planet mr-2"></i>
+// 						</span>
+// 						<span className="btn-inner--text">编 辑 </span>
+// 					</button>
+// 				</div>
+// 			</div>
+// 		</div>
+// 	)
+// }
 
 
 function Modal() {

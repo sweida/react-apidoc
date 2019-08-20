@@ -300,6 +300,7 @@ module.exports = function(webpackEnv) {
         'assets': path.resolve(__dirname, '../src/assets'),
         'pages': path.resolve(__dirname, '../src/views'),
         'server': path.resolve(__dirname, '../src/server'),
+        'style': path.resolve(__dirname, '../src/style'),
       },
       plugins: [
         // Adds support for installing with Plug'n'Play, leading to faster installs and adding

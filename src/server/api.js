@@ -26,6 +26,16 @@ export const addapi = (data) => {
     return req.post("/apidoc/add", data).then(res => res.json())
 }
 
+// 删除api
+export const deleteApi = (data) => {
+    return req.post("/apidoc/delete", data).then(res => res.json())
+}
+
+// 编辑api
+export const editApi = (data) => {
+    return req.post("/apidoc/edit", data).then(res => res.json())
+}
+
 export const login = (data) => {
     return req.post("/login", data).then(res => res.json())
 }
