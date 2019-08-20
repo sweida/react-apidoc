@@ -77,9 +77,9 @@ class Addapi extends React.Component {
                                         <div className="col-8">
                                             <h5 className="mb-0">添加api文档</h5>
                                         </div>
-                                        <div className="col-4 text-right">
+                                        {/* <div className="col-4 text-right">
                                             <Link onClick={() => window.history.go(-1)} className="btn btn-sm btn-primary">后退</Link>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                                 <div className="card-body">
@@ -195,8 +195,19 @@ function Top() {
                 <div className="header-body">
                     <div className="row align-items-center py-4">
                         <div className="col-lg-6 col-7">
-                            <h6 className="h4 text-white d-inline-block mb-0">天翼保理api</h6>
-                            <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
+                            <nav className=" d-md-inline-block ">
+                                <ol className="breadcrumb breadcrumb-links breadcrumb-dark shadow bg-white">
+                                    <li className="breadcrumb-item">
+                                        <span className="btn-inner--icon mr-2">
+                                            <i className="ni ni-align-left-2"></i>
+                                        </span>
+                                        <Link to="/projects">项目列表</Link>
+                                    </li>
+                                    <li className="breadcrumb-item" aria-current="page">企业白条</li>
+                                    <li className="breadcrumb-item active" aria-current="page">新增接口</li>
+                                </ol>
+                            </nav>
+                            {/* <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
                                 <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <li className="breadcrumb-item"><a
                                         href="https://argon-dashboard-pro-laravel.creative-tim.com/dashboard"><i
@@ -206,11 +217,10 @@ function Top() {
 										Management</a></li>
                                     <li className="breadcrumb-item active" aria-current="page">Add Item</li>
                                 </ol>
-                            </nav>
+                            </nav> */}
                         </div>
                         <div className="col-lg-6 col-5 text-right">
-                            <a href="#" className="btn btn-sm btn-neutral">New</a>
-                            <a href="#" className="btn btn-sm btn-neutral">Filters</a>
+                            <Link onClick={() => window.history.go(-1)} className="btn btn-neutral">后退</Link>
                         </div>
                     </div>
                 </div>

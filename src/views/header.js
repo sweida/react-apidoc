@@ -35,12 +35,12 @@ class Header extends React.Component {
                         </span>
                         <span className="btn-inner--text">项目列表</span>
                     </Link>
-                    <Link to="/addapi" className="btn btn-3 btn-icon btn-primary">
+                    {/* <Link to="/addapi" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
                             <i className="ni ni-atom"></i>
                         </span>
                         <span className="btn-inner--text">新增接口</span>
-                    </Link>
+                    </Link> */}
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
@@ -80,11 +80,11 @@ class Header extends React.Component {
                                     <span className="nav-link-inner--text d-lg-none">Settings</span>
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
-                                    <Link className="dropdown-item" to="myapi">
+                                    <Link to="/myapi" className="dropdown-item">
                                         <i className="ni ni-planet"></i>
                                         我添加的API
                                     </Link>
-                                    <Link to="changePassword" className="dropdown-item">
+                                    <Link to="/changePassword" className="dropdown-item">
                                         <i className="ni ni-settings-gear-65"></i>
                                         修改密码
                                     </Link>

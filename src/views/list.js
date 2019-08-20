@@ -9,7 +9,7 @@ import Hidden from 'component/Hidden'
 
 import Mask from 'component/Mask';
 // import ReactDOM from 'react-dom';
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 
 const user = JSON.parse(localStorage.getItem('user'))
@@ -55,46 +55,53 @@ class List extends React.Component {
 	}
 
     render() {
-        return (
-			<Fragment>
+		const apidocList = this.state.apidocList
+		const list = apidocList.map((item) => {
+			switch (item.requestType) {
+				case 'post':
+					return <CommonControl key={item.id} data={item} colorType={"success"} />
+				case 'get':
+					return <CommonControl key={item.id} data={item} colorType={"info"} />
+				case 'delete':
+					return <CommonControl key={item.id} data={item} colorType={"danger"} />
+				case 'put':
+					return <CommonControl key={item.id} data={item} colorType={"warning"} />
+			}
+		});
+		return (
+			<>
 				<Header />
-				<ListControl apidocList={this.state.apidocList}/>
-			</Fragment>
+				<div className="container mt-3">
+					<div className="row align-items-center py-3">
+						<div className="col-lg-6 col-7">
+							<nav className=" d-md-inline-block ">
+								<ol className="breadcrumb breadcrumb-links breadcrumb-dark shadow bg-white">
+									<li className="breadcrumb-item">
+										<span className="btn-inner--icon mr-2">
+											<i className="ni ni-align-left-2"></i>
+										</span>
+										<Link to="/projects">项目列表</Link>
+									</li>
+									<li className="breadcrumb-item active" aria-current="page">api 文档</li>
+								</ol>
+							</nav>
+						</div>
+						<div className="col-lg-6 col-5 text-right">
+							<Link to={`/projects/${this.props.match.params.id}/addapi`} className="btn btn-primary ">
+								<span className="btn-inner--icon mr-2">
+									<i className="ni ni-atom"></i>
+								</span>
+								新增接口
+							</Link>
+						</div>
+					</div>
+					{list}
+				</div>
+			</>
         )
     }
 }
 
-function ListControl(props) {
-	const apidocList = props.apidocList
-	const list = apidocList.map((item) => {
-		switch (item.requestType){
-			case 'post':
-				return <CommonControl key={item.id} data={item} colorType={"success"}/>
-			case 'get':
-				return <CommonControl key={item.id} data={item} colorType={"info"} />
-			case 'delete':
-				return <CommonControl key={item.id} data={item} colorType={"danger"} />
-			case 'put':
-				return <CommonControl key={item.id} data={item} colorType={"warning"} />
-		}
-	});
-	return (
-		<div className="container mt-4">
-			<div className="mb-5">
-				{/* <span className="text-success">●</span>
-				<small>撒地方放</small> */}
-				<span class="badge badge-pill badge-lg badge-success">所属项目：收拾收拾</span>
-				<button type="button" className="btn btn-primary float-right">
-					<span className="btn-inner--icon mr-2">
-						<i className="ni ni-atom"></i>
-					</span>
-					新增接口
-				</button>
-			</div>
-			{list}
-		</div>
-	)
-}
 
 function CommonControl(props) {
 	const data = props.data
@@ -157,7 +164,7 @@ function Detail(props) {
 				</div>
 				<div className="text-right">
 					<Hidden visible={data.user_id == user.id}>
-						<button type="button" className="btn btn-sm btn-danger ">
+						<button type="button" className="btn btn-sm btn-danger " >
 							<span className="btn-inner--icon mr-2">
 								<i className="ni ni-bag-17"></i>
 							</span>
@@ -165,7 +172,7 @@ function Detail(props) {
 						</button>
 					</Hidden>
 					
-					<button type="button" className="btn btn-sm btn-primary ">
+					<button type="button" className="btn btn-sm btn-primary">
 						<span className="btn-inner--icon">
 							<i className="ni ni-planet mr-2"></i>
 						</span>

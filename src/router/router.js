@@ -16,6 +16,8 @@ const router = [
     { path: "/changePassword", component: ChangePassword },
     // { path: "/list", component: List, auth: true },
     { path: "/projects/:id", component: List, auth: true },
+    { path: "/projects/:id/addapi", component: Addapi, auth: true },
+    { path: "/projects/:id/edit", component: Addapi, auth: true },
     { path: "/addapi", component: Addapi, auth: true },
     { path: "/myapi", component: Myapi, auth: true },
     { path: "/projects", component: Projects, auth: true },

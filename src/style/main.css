@@ -40,7 +40,7 @@ input:-webkit-autofill {
   opacity: 0;
 } */
 .alertClose {
-  animation: close 2s;
+  animation: close 2.1s;
 }
 
 @keyframes close {
