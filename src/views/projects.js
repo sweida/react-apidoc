@@ -7,8 +7,10 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import Hidden from 'component/Hidden'
 
-import Mask from 'component/Modal';
+import Modal from 'component/Modal';
+import withDialog from 'component/withDialog';
 // import ReactDOM from 'react-dom';
+import Alert from 'component/Alert'
 import { Link } from 'react-router-dom'
 
 
@@ -17,6 +19,8 @@ class Projects extends React.Component {
 		super(props);
 		this.state = { 
 			projectList: [],
+			name: '',
+			descp: '',
 		};
 	}
 	componentDidMount() {
@@ -37,18 +41,20 @@ class Projects extends React.Component {
 			xhtml: false
 		});
 	}
-	showModal() {
-		Mask.show({
-			title: '提 示',
-			content: '是否删除该api?',
-			onCancel: () => {
-			},
-			onOk: () => {
-				console.log('Ok');
-			}
-		})
-	}
 
+	handleOk = (v) => {
+		console.log(32323232);
+		
+		projectList().then(res => {
+			this.setState({ projectList: res.data })
+		})
+	};
+
+	showDialog = () => {
+		WrappedDialog.show({
+			onOk: this.handleOk
+		});
+	};
     render() {
         return (
 			<Fragment>
@@ -56,9 +62,16 @@ class Projects extends React.Component {
 				<div className="container mt-5">
 					<div className="projects">
 						<CardControl projectList={this.state.projectList} />
-						<AddCardControl />
+						<div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-4 pb-3 cursor" onClick={this.showDialog}>
+							<span className="h1">+</span>
+							<p>新增项目</p>
+						</div>
 					</div>
 				</div>
+				{/* <aa>
+					<p>2222</p>
+				</aa> */}
+
 			</Fragment>
         )
     }
@@ -82,15 +95,95 @@ function CardControl(props) {
 }
 
 
-function AddCardControl(props) {
 
-	return (
-		<div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-4 pb-3 cursor">
-			<span className="h1">+</span>
-			<p>新增项目</p>
-		</div>
-	)
+
+// 弹窗
+class SetText extends React.Component {
+	static title = "新增项目";
+
+	static defaultProps = {
+		onClose: () => { }
+	};
+
+	constructor(props) {
+		super(props);
+		this.state = { 
+			title: '',
+			descp: '',
+		};
+	}
+
+	onChange = (name, e) => {
+		this.setState({
+			[name]: e.target.value
+		});
+	}
+
+	handleOk = (e) => {
+		e.preventDefault();
+		let params = {
+			...this.state
+		}
+		this.props.onOk(
+			addProject(params).then(res => {
+				if (res.status == 'success') {
+					this.props.onClose();
+					Alert.show({
+						type: 'success',
+						message: res.message
+					})
+				} else {
+					Alert.show({
+						type: 'error',
+						message: res.message
+					})
+				}
+			})
+		);
+	};
+
+	render() {
+		return (
+			<div className="p-4">
+				<form onSubmit={this.handleOk}>
+					<div className="form-group row">
+						<label htmlFor="example-text-input"
+							className="col-md-3 col-form-label form-control-label">项目名称</label>
+						<div className="col-md-9">
+							<input
+								className="form-control"
+								type="text"
+								value={this.state.title}
+								onChange={(e) => this.onChange('title', e)}
+								required
+							/>
+						</div>
+					</div>
+					<div className="form-group row">
+						<label htmlFor="example-text-input"
+							className="col-md-3 col-form-label form-control-label">项目描述</label>
+						<div className="col-md-9">
+							<input
+								className="form-control"
+								type="text"
+								value={this.state.descp}
+								onChange={(e) => this.onChange('descp', e)}
+								required
+							/>
+						</div>
+					</div>
+					<div className="modal-footer border-top-0 px-0">
+						<button type="button" className="btn btn-secondary mr-3" onClick={this.props.onClose}>取 消</button>
+						<button type="submit" className="btn btn-primary">确 定</button>
+					</div>
+				</form>
+			</div>
+		);
+	}
 }
+
+const WrappedDialog = withDialog(SetText);
+
 
 
 export default Projects
