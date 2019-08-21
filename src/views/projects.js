@@ -62,7 +62,7 @@ class Projects extends React.Component {
 				<div className="container mt-5">
 					<div className="projects">
 						<CardControl projectList={this.state.projectList} />
-						<div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-4 pb-3 cursor" onClick={this.showDialog}>
+						<div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-3 pb-2 cursor" onClick={this.showDialog}>
 							<span className="h1">+</span>
 							<p>新增项目</p>
 						</div>
@@ -82,7 +82,10 @@ function CardControl(props) {
 	const list = projectList.map((item) => 
 		<div className="card-lift--hover shadow border-0 card projeclist mb-4" key={item.id}>
 			<Link to={`projects/${item.id}`} className="pt-4 pb-3 card-body">
-				<h6 className="text-primary text-uppercase">{item.title}</h6>
+				<h6 className="text-primary text-uppercase project-title">
+					{item.title} 
+					<span class="ml-2 badge badge-pill badge-info">{item.count}</span>
+				</h6>
 				<p className="description text-body mt-3">{item.descp}</p>
 
 				{/* <Link to="list" className="mt-2 btn btn-primary">点击查看</Link> */}

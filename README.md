@@ -68,3 +68,11 @@ const store = createStore(reducer, composeEnhancers(
      // other store enhancers if any
 ));
 ```
+
+### 未完成功能
+
+- [ ] 分页
+- [ ] 编辑api
+- [ ] 已删除的api
+- [ ] 个人api
+- [ ] 自动更新删除列表

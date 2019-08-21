@@ -31,6 +31,16 @@ export const deleteApi = (data) => {
     return req.post("/apidoc/delete", data).then(res => res.json())
 }
 
+// 删除的api列表
+export const deleteList = (data) => {
+    return req.post("/apidoc/deleteList", data).then(res => res.json())
+}
+
+// 恢复删除
+export const restored = (data) => {
+    return req.post("/apidoc/restored", data).then(res => res.json())
+}
+
 // 编辑api
 export const editApi = (data) => {
     return req.post("/apidoc/edit", data).then(res => res.json())
@@ -47,6 +57,11 @@ export const logout = (data) => {
 // 个人信息
 export const userInfo = (data) => {
     return req.get("/user/info", data).then(res => res.json())
+}
+
+// 个人添加的api
+export const personApi = () => {
+    return req.get("/apidoc/person").then(res => res.json())
 }
 
 // 修改密码

@@ -1,7 +1,7 @@
 import React, { Fragment }from 'react'
 import Header from './header'
 import "./list.css"
-import { apiList } from '../server/api'
+import { personApi } from '../server/api'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
@@ -16,7 +16,7 @@ class List extends React.Component {
 		this.state = { apidocList: [] };
 	}
 	componentDidMount() {
-		apiList().then(res => {
+		personApi().then(res => {
 			this.setState({ apidocList: res.data.data })
 		})
 		marked.setOptions({
@@ -59,7 +59,7 @@ function ListControl(props) {
 		}
 	});
 	return (
-		<div className="container">
+		<div className="container mt-5">
 			{list}
 		</div>
 	)

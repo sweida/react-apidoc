@@ -7,6 +7,7 @@ import List from 'pages/list'
 import Addapi from 'pages/addapi'
 import Myapi from 'pages/myapi'
 import Projects from 'pages/projects'
+import DeleteList from 'pages/deleteList'
 
 const router = [
     { path: "/", component: Projects, auth: true },
@@ -21,6 +22,7 @@ const router = [
     { path: "/addapi", component: Addapi, auth: true },
     { path: "/myapi", component: Myapi, auth: true },
     { path: "/projects", component: Projects, auth: true },
+    { path: "/deleteList", component: DeleteList, auth: true },
 ];
 
 export default router

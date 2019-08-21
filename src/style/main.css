@@ -63,9 +63,26 @@ input:-webkit-autofill {
 
 .projeclist{
   width: 23%;
-  margin: 0 1%
+  margin: 0 1%;
+  height: 127px;
 }
 
+.project-title{
+  display: flex;
+  align-items: center;
+}
+
+.project-title .badge{
+  padding: 3px 10px;
+}
+
+.projeclist p {
+  overflow:hidden;
+  text-overflow:ellipsis;
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+}
 .cursor{
   cursor: pointer;
 }

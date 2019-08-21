@@ -12,7 +12,7 @@ import Mask from 'component/Mask';
 import Alert from 'component/Alert'
 // import ReactDOM from 'react-dom';
 
-import { apiList, deleteApi } from '../server/api'
+import { apiList, deleteList, restored } from '../server/api'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -24,10 +24,7 @@ class List extends React.Component {
 		};
 	}
 	componentDidMount() {
-		let params = {
-			id: this.props.match.params.id
-		}
-		apiList(params).then(res => {
+		deleteList().then(res => {
 			this.setState({ apidocList: res.data.data })
 		})
 		marked.setOptions({
@@ -43,17 +40,6 @@ class List extends React.Component {
 			smartypants: false,
 			xhtml: false
 		});
-	}
-	showModal() {
-		Mask.show({
-			title: '提 示',
-			content: '是否删除该api?',
-			onCancel: () => {
-			},
-			onOk: () => {
-				console.log('Ok');
-			}
-		})
 	}
 
     render() {
@@ -73,30 +59,7 @@ class List extends React.Component {
 		return (
 			<>
 				<Header />
-				<div className="container mt-3">
-					<div className="row align-items-center py-3">
-						<div className="col-lg-6 col-7">
-							<nav className=" d-md-inline-block ">
-								<ol className="breadcrumb breadcrumb-links breadcrumb-dark shadow bg-white">
-									<li className="breadcrumb-item">
-										<span className="btn-inner--icon mr-2">
-											<i className="ni ni-align-left-2"></i>
-										</span>
-										<Link to="/projects">项目列表</Link>
-									</li>
-									<li className="breadcrumb-item active" aria-current="page">api 文档</li>
-								</ol>
-							</nav>
-						</div>
-						<div className="col-lg-6 col-5 text-right">
-							<Link to={`/projects/${this.props.match.params.id}/addapi`} className="btn btn-primary ">
-								<span className="btn-inner--icon mr-2">
-									<i className="ni ni-atom"></i>
-								</span>
-								新增接口
-							</Link>
-						</div>
-					</div>
+				<div className="container mt-5">
 					{list}
 				</div>
 			</>
@@ -125,17 +88,17 @@ function CommonControl(props) {
 }
 
 class Detail extends React.PureComponent {
-	handleDelete(id) {
+	handleRestored(id) {
 		let params = {
 			id: id
 		}
 		Mask.show({
 			title: '提 示',
-			content: '是否删除该api?',
+			content: '是否恢复该api?',
 			onCancel: () => {
 			},
 			onOk: () => {
-				deleteApi(params).then(res => {
+				restored(params).then(res => {
 					// this.setState({ apidocList: res.data.data })
 					if (res.status == 'success') {
 						Alert.show({
@@ -204,11 +167,11 @@ class Detail extends React.PureComponent {
 							</button>
 						</Hidden> */}
 
-						<button type="button" className="btn btn-sm btn-primary" onClick={this.handleEdit}>
+						<button type="button" className="btn btn-sm btn-info" onClick={() => this.handleRestored(data.id)}>
 							<span className="btn-inner--icon">
 								<i className="ni ni-planet mr-2"></i>
 							</span>
-							<span className="btn-inner--text">编 辑 </span>
+							<span className="btn-inner--text">恢 复 </span>
 						</button>
 					</div>
 				</div>

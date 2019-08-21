@@ -21,6 +21,9 @@ class Addapi extends React.Component {
             // }
         };
     }
+    // componentDidMount() {
+    //     console.log(this.props.match.params.id);
+    // }
     handleInputChange = (name, e) => {
         this.setState({
             [name]: e.target.value
@@ -53,7 +56,7 @@ class Addapi extends React.Component {
             // ...this.state,
             url: this.state.url,
             requestType: this.state.requestType,
-            project_id: 1,
+            project_id: this.props.match.params.id,
             title: this.state.title,
             requestParams: '```js\n' + this.state.requestParams + '\n```',
             results: '```js\n' + this.state.results + '\n```',
@@ -62,7 +65,13 @@ class Addapi extends React.Component {
             if (res.status == 'success') {
                 this.setState({
                     modal: true,
-                    fade: true
+                    fade: true,
+                    url: '',
+                    requestType: 'post',
+                    classify: '',
+                    title: '',
+                    requestParams: '',
+                    results: '',
                 })
             }
         })

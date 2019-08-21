@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { logout } from 'server/api'
+import Alert from 'component/Alert'
 
 class Header extends React.Component {
     constructor(props) {
@@ -16,6 +17,15 @@ class Header extends React.Component {
                 localStorage.removeItem('token')
                 this.setState({
                     loginStatus: false
+                })
+                Alert.show({
+                    type: 'success',
+                    message: res.message
+                })
+            } else {
+                Alert.show({
+                    type: 'error',
+                    message: res.message
                 })
             }
         })
@@ -83,6 +93,10 @@ class Header extends React.Component {
                                     <Link to="/myapi" className="dropdown-item">
                                         <i className="ni ni-planet"></i>
                                         我添加的API
+                                    </Link>
+                                    <Link to="/deleteList" className="dropdown-item">
+                                        <i className="ni ni-atom"></i>
+                                        已删除的API
                                     </Link>
                                     <Link to="/changePassword" className="dropdown-item">
                                         <i className="ni ni-settings-gear-65"></i>
