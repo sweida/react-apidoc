@@ -41,7 +41,7 @@ export default {
         // 2秒后自动移除
         const JSXdom = (
             <div className="message alertClose">
-                <div className={`alert col-lg-4 m-auto alert-${color} alert-dismissible fade show`} role="alert">
+                <div className={`alert col-3 m-auto alert-${color} alert-dismissible fade show`} role="alert">
                     <span className="alert-icon mr-2"><i className={`ni ${icon}`}></i></span>
                     <span className="alert-text"><strong></strong> { message }</span>
                     <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => this.onCancel(onCancel)}>

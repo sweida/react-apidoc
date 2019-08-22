@@ -30,7 +30,7 @@ class Login extends React.Component {
         }
         login(params).then(res => {
             if (res.status == 'success') {
-                localStorage.setItem('token', res.data.token)
+                localStorage.setItem('token', res.data.token);
                 history.push('/projects');
                 Alert.show({
                     title: '提 示',

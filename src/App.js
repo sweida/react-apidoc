@@ -13,9 +13,14 @@ import 'assets/vendor/font-awesome/css/font-awesome.min.css'
 class App extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      token: localStorage.getItem('token')
+    }
   }
   componentDidMount() {
     if (localStorage.getItem('token')) {
+      console.log('是否进来');
+      
       userInfo().then(res => {
         if (res.status == 'success') {
           localStorage.setItem('user', JSON.stringify(res.data))
@@ -24,20 +29,23 @@ class App extends Component {
     }
   }
   render() {
-    let token = localStorage.getItem('token')
-    // let token = this.props.token
-
     return (
       <BrowserRouter>
         {/* 路由拦截 */}
           <Router history={history}>
             <Switch>
-                {router.map((item, index) => {
+              {
+                router.map((item, index) => {
                   return <Route key={index} path={item.path} exact render={props =>
-                    <item.component {...props} />
-                    } />
-                })}
-                <Route component={NotFound} />
+                    (!item.auth ? (<item.component {...props} />) :
+                      (this.state.token ?
+                        <item.component {...props} /> :
+                        <Redirect push to={{ pathname: '/login', state: { from: props.location } }} />
+                      )
+                    )} />
+                })
+              }
+              <Route component={NotFound} />
             </Switch>
           </Router>
       </BrowserRouter>

@@ -22,7 +22,7 @@ export const apiList = (data) => {
 }
 
 // 新增api
-export const addapi = (data) => {
+export const addApi = (data) => {
     return req.post("/apidoc/add", data).then()
 }
 

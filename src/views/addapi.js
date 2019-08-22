@@ -2,28 +2,38 @@ import React, { Fragment } from 'react'
 import Header from './header'
 import { Link } from 'react-router-dom'
 import "./list.css"
-import { addapi } from '../server/api'
+import { addApi, editApi } from '../server/api'
 import Modal from "component/sucModal"
 
 class Addapi extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            // apiData: {
-                url: '',
-                requestType: 'post',
-                classify: '',
-                title: '',
-                requestParams: '',
-                results: '',
-                modal: false,
-                fade: true
-            // }
+            projectName: '',
+            url: '',
+            requestType: 'post',
+            classify: '',
+            title: '',
+            requestParams: '',
+            results: '',
+            modal: false,
+            fade: true,
+            isEdit: false
         };
     }
-    // componentDidMount() {
-    //     console.log(this.props.match.params.id);
-    // }
+    componentDidMount() {
+        console.log(this.props, 54545);
+        if (this.props.match.params.apiid) {
+            console.log('编辑api');
+            let apiData = this.props.location.state.apiData
+            
+            this.setState({
+                isEdit: true,
+                ...apiData,
+                projectName: apiData.project.title
+            })
+        }
+    }
     handleInputChange = (name, e) => {
         this.setState({
             [name]: e.target.value
@@ -50,6 +60,7 @@ class Addapi extends React.Component {
 }`,
         })
     }
+    // 新增
     handleSubmit = (e) => {
         e.preventDefault();
         let params = {
@@ -61,7 +72,7 @@ class Addapi extends React.Component {
             requestParams: '```js\n' + this.state.requestParams + '\n```',
             results: '```js\n' + this.state.results + '\n```',
         }
-        addapi(params).then(res => {
+        addApi(params).then(res => {
             if (res.status == 'success') {
                 this.setState({
                     modal: true,
@@ -72,6 +83,29 @@ class Addapi extends React.Component {
                     title: '',
                     requestParams: '',
                     results: '',
+                })
+            }
+        })
+    }
+    // 编辑保存
+    handleUpdata = (e) => {
+        console.log('编辑保存');
+        
+        e.preventDefault();
+        let params = {
+            id: this.props.match.params.apiid,
+            url: this.state.url,
+            requestType: this.state.requestType,
+            project_id: this.props.match.params.id,
+            title: this.state.title,
+            requestParams: this.state.requestParams,
+            results: this.state.results,
+        }
+        editApi(params).then(res => {
+            if (res.status == 'success') {
+                this.setState({
+                    modal: true,
+                    fade: true,
                 })
             }
         })
@@ -93,11 +127,38 @@ class Addapi extends React.Component {
         }, 400);
     }
     render() {
+        const Bread = (
+            <div className="header bg-primary pb-6">
+                <div className="container container-fluid">
+                    <div className="header-body">
+                        <div className="row align-items-center py-4">
+                            <div className="col-lg-6 col-7">
+                                <nav className=" d-md-inline-block ">
+                                    <ol className="breadcrumb breadcrumb-links breadcrumb-dark shadow bg-white">
+                                        <li className="breadcrumb-item">
+                                            <span className="btn-inner--icon mr-2">
+                                                <i className="ni ni-align-left-2"></i>
+                                            </span>
+                                            <Link to="/projects">项目列表</Link>
+                                        </li>
+                                        <li className="breadcrumb-item" aria-current="page">{this.state.projectName || '企业白条'}</li>
+                                        <li className="breadcrumb-item active" aria-current="page">{this.state.isEdit ? '编辑api' : '新增api'}</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div className="col-lg-6 col-5 text-right">
+                                <Link to="#" onClick={() => window.history.go(-1)} className="btn btn-neutral">后退</Link>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
         return (
             <React.Fragment>
-                {this.state.modal ? <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/> : null}
+                {this.state.modal && <Modal closeModal={this.closeModal} fadeOut={this.state.fade}/>}
                 <Header />
-                <Top />
+                { Bread }
                 <div className="container container-fluid mt--6 mb-5">
                     <div className="row">
                         <div className="col-xl-12 order-xl-1">
@@ -105,7 +166,7 @@ class Addapi extends React.Component {
                                 <div className="card-header">
                                     <div className="row align-items-center">
                                         <div className="col-8">
-                                            <h5 className="mb-0">添加api文档</h5>
+                                            <h5 className="mb-0">{this.state.isEdit ? '编辑api文档' : '添加api文档'}</h5>
                                         </div>
                                         <div className="col-4 text-right">
                                             <button onClick={this.handleCreateDmoe} className="btn btn-sm btn-primary" type="button">生成模板</button>
@@ -113,7 +174,7 @@ class Addapi extends React.Component {
                                     </div>
                                 </div>
                                 <div className="card-body">
-                                    <form onSubmit={this.handleSubmit}>
+                                    <form onSubmit={this.state.isEdit ? this.handleUpdata : this.handleSubmit}>
                                         <div className="form-group row">
                                             <label htmlFor="example-url-input"
                                                 className="col-md-2 col-form-label form-control-label">所属项目</label>
@@ -121,8 +182,9 @@ class Addapi extends React.Component {
                                                 <input
                                                     className="form-control"
                                                     type="text"
-                                                    value={this.state.classify}
+                                                    value={this.state.projectName}
                                                     onChange={(e) => this.handleInputChange('classify', e)}
+                                                    disabled
                                                     required
                                                 />
                                             </div>
@@ -205,7 +267,10 @@ class Addapi extends React.Component {
                                         </div>
 
                                         <div className="text-center m-auto col-md-3">
-                                            <button className="btn btn-success btn-block mb-3" type="sumbit" >提 交</button>
+                                            {this.state.isEdit ? 
+                                                <button className="btn btn-info btn-block mb-3" type="sumbit" >保存编辑</button> :
+                                                <button className="btn btn-success btn-block mb-3" type="sumbit" >提 交</button>
+                                            }
                                         </div>
                                     </form>
                                 </div>
@@ -219,55 +284,6 @@ class Addapi extends React.Component {
 }
 
 
-function Top() {
-    return (
-        <div className="header bg-primary pb-6">
-            <div className="container container-fluid">
-                <div className="header-body">
-                    <div className="row align-items-center py-4">
-                        <div className="col-lg-6 col-7">
-                            <nav className=" d-md-inline-block ">
-                                <ol className="breadcrumb breadcrumb-links breadcrumb-dark shadow bg-white">
-                                    <li className="breadcrumb-item">
-                                        <span className="btn-inner--icon mr-2">
-                                            <i className="ni ni-align-left-2"></i>
-                                        </span>
-                                        <Link to="/projects">项目列表</Link>
-                                    </li>
-                                    <li className="breadcrumb-item" aria-current="page">企业白条</li>
-                                    <li className="breadcrumb-item active" aria-current="page">新增接口</li>
-                                </ol>
-                            </nav>
-                            {/* <nav aria-label="breadcrumb" className="d-none d-md-inline-block ml-md-4">
-                                <ol className="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li className="breadcrumb-item"><a
-                                        href="https://argon-dashboard-pro-laravel.creative-tim.com/dashboard"><i
-                                            className="fas fa-home"></i></a></li>
-                                    <li className="breadcrumb-item"><a
-                                        href="https://argon-dashboard-pro-laravel.creative-tim.com/item">Item
-										Management</a></li>
-                                    <li className="breadcrumb-item active" aria-current="page">Add Item</li>
-                                </ol>
-                            </nav> */}
-                        </div>
-                        <div className="col-lg-6 col-5 text-right">
-                            <Link onClick={() => window.history.go(-1)} className="btn btn-neutral">后退</Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
-}
-
 
 
 export default Addapi
-
-
-// { 
-//     loginId: string,    // 登录名
-//     idcard: string,    // 身份证
-//     amount: number,     // 额度
-//     user_amount: number,      // 可用额度
-// } 

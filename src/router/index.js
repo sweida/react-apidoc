@@ -8,6 +8,8 @@ import Addapi from 'pages/addapi'
 import Myapi from 'pages/myapi'
 import Projects from 'pages/projects'
 import DeleteList from 'pages/deleteList'
+import Host from 'pages/host'
+import ErrorCode from 'pages/errorCode'
 
 const router = [
     { path: "/", component: Projects, auth: true },
@@ -18,11 +20,13 @@ const router = [
     // { path: "/list", component: List, auth: true },
     { path: "/projects/:id", component: List, auth: true },
     { path: "/projects/:id/addapi", component: Addapi, auth: true },
-    { path: "/projects/:id/edit", component: Addapi, auth: true },
+    { path: "/projects/:id/edit/:apiid", component: Addapi, auth: true },
     { path: "/addapi", component: Addapi, auth: true },
     { path: "/myapi", component: Myapi, auth: true },
     { path: "/projects", component: Projects, auth: true },
     { path: "/deleteList", component: DeleteList, auth: true },
+    { path: "/host", component: Host, auth: true },
+    { path: "/errorCode", component: ErrorCode, auth: true },
 ];
 
 export default router

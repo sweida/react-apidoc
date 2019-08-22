@@ -76,3 +76,5 @@ const store = createStore(reducer, composeEnhancers(
 - [ ] 已删除的api
 - [ ] 个人api
 - [ ] 自动更新删除列表
+
+token， user需要实时更新

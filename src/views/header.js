@@ -37,7 +37,7 @@ class Header extends React.Component {
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-default">
                 <div className="container">
-                    <a className="navbar-brand" href="#">天翼保理api接口文档</a>
+                    <Link className="navbar-brand" to="#">天翼保理api接口文档</Link>
 
                     <Link to="/projects" className="btn btn-3 btn-icon btn-info">
                         <span className="btn-inner--icon">
@@ -45,12 +45,18 @@ class Header extends React.Component {
                         </span>
                         <span className="btn-inner--text">项目列表</span>
                     </Link>
-                    {/* <Link to="/addapi" className="btn btn-3 btn-icon btn-primary">
+                    <Link to="/host" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
                             <i className="ni ni-atom"></i>
                         </span>
-                        <span className="btn-inner--text">新增接口</span>
-                    </Link> */}
+                        <span className="btn-inner--text">环境入口</span>
+                    </Link>
+                    <Link to="/errorcode" className="btn btn-3 btn-icon btn-primary">
+                        <span className="btn-inner--icon">
+                            <i className="ni ni-atom"></i>
+                        </span>
+                        <span className="btn-inner--text">错误码</span>
+                    </Link>
 
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-default" aria-controls="navbar-default" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>

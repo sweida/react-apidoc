@@ -2,7 +2,7 @@ import React from 'react'
 import Mask from 'component/Mask';
 import Alert from 'component/Alert'
 import { deleteApi, restored } from '../server/api'
-
+import history from 'router/history'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -61,7 +61,9 @@ class ApiCard extends React.Component {
 		})
 	}
 	handleEdit() {
-		console.log(3333);
+		let project_id = this.props.data.project_id
+		let id = this.props.data.id
+		history.push(`/projects/${project_id}/edit/${id}`, {apiData: this.props.data});
 	}
 	render() {
 		const data = this.props.data
@@ -84,7 +86,7 @@ class ApiCard extends React.Component {
 						<span className="btn-inner--text">删 除 </span>
 					</button>
 				}
-				<button type="button" className="btn btn-sm btn-primary" onClick={this.handleEdit}>
+				<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(data)}>
 					<span className="btn-inner--icon">
 						<i className="ni ni-planet mr-2"></i>
 					</span>
