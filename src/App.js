@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter, Router, Route, Switch, Redirect } from 'react-router-dom'
 import { userInfo } from 'server/api'
 import NotFound from 'component/notFound'
-import router from './router/router'
+import router from 'router/index'
+import history from 'router/history'
+
 
 import 'assets/css/argon-1.0.css'
 import 'assets/vendor/nucleo/css/nucleo.css'
@@ -28,18 +30,16 @@ class App extends Component {
     return (
       <BrowserRouter>
         {/* 路由拦截 */}
-        <Switch>
-          {router.map((item, index) => {
-            return <Route key={index} path={item.path} exact render={props =>
-              (!item.auth ? (<item.component {...props} />) : 
-                (token ? 
-                  <item.component {...props} /> : 
-                  <Redirect to={{pathname: '/login', state: {from: props.location }}} />
-                )
-              )} />
-          })}
-          <Route component={NotFound} />
-        </Switch>
+          <Router history={history}>
+            <Switch>
+                {router.map((item, index) => {
+                  return <Route key={index} path={item.path} exact render={props =>
+                    <item.component {...props} />
+                    } />
+                })}
+                <Route component={NotFound} />
+            </Switch>
+          </Router>
       </BrowserRouter>
     );
   }
@@ -49,5 +49,19 @@ class App extends Component {
 //   return { token: state.token }
 // }
 // export default connect(mapStateToProps)(App)
+
+
+// {
+//   router.map((item, index) => {
+//     return <Route key={index} path={item.path} exact render={props =>
+//       (!item.auth ? (<item.component {...props} />) :
+//         (token ?
+//           <item.component {...props} /> :
+//           <Redirect to={{ pathname: '/login', state: { from: props.location } }} />
+//         )
+//       )} />
+//   })
+// }
+
 
 export default App;

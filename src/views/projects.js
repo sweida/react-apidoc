@@ -84,7 +84,7 @@ function CardControl(props) {
 			<Link to={`projects/${item.id}`} className="pt-4 pb-3 card-body">
 				<h6 className="text-primary text-uppercase project-title">
 					{item.title} 
-					<span class="ml-2 badge badge-pill badge-info">{item.count}</span>
+					<span className="ml-2 badge badge-pill badge-info">{item.count}</span>
 				</h6>
 				<p className="description text-body mt-3">{item.descp}</p>
 

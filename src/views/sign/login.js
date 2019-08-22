@@ -6,15 +6,15 @@ import { login } from 'server/api'
 import Alert from 'component/Alert'
 import github from 'assets/img/icons/common/github.svg'
 import google from 'assets/img/icons/common/google.svg'
+import history from "router/history";
 
-// const history = createBrowserHistory();
-class LoginForm extends React.Component {
+
+class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { 
+        this.state = {
             name: '',
             password: '',
-            loginStatus: false
         }
     }
     handleInputChange = (name, e) => {
@@ -31,9 +31,7 @@ class LoginForm extends React.Component {
         login(params).then(res => {
             if (res.status == 'success') {
                 localStorage.setItem('token', res.data.token)
-                this.setState({
-                    loginStatus: true
-                });
+                history.push('/projects');
                 Alert.show({
                     title: '提 示',
                     message: '登录成功，欢迎回来！！'
@@ -41,13 +39,8 @@ class LoginForm extends React.Component {
             }
         })
     }
-
-    
     render() {
-        if (this.state.loginStatus) {
-            return <Redirect push to="/" />
-        }
-        return (
+        const loginForm = (
             <div className="col-lg-5">
                 <div className="card bg-secondary shadow border-0">
                     <div className="card-header bg-white pb-5">
@@ -134,27 +127,9 @@ class LoginForm extends React.Component {
                 </div>
             </div>
         )
-
-    }
-}
-
-function succeeeMessage() {
-    return (
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <span class="alert-icon"><i class="ni ni-like-2"></i></span>
-            <span class="alert-text"><strong>Success!</strong> This is a success alert—check it out!</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    )
-}
-
-class Login extends React.Component {
-    render() {
         return (
             <Wrapper>
-                <LoginForm />
+                { loginForm }
             </Wrapper>
         )
     }

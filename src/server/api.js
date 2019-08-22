@@ -61,7 +61,7 @@ export const userInfo = (data) => {
 
 // 个人添加的api
 export const personApi = () => {
-    return req.get("/apidoc/personss").then()
+    return req.get("/apidoc/person").then()
 }
 
 // 修改密码
