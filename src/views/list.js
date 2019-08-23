@@ -12,7 +12,7 @@ import "style/highlight.css"
 import ApiCard from 'pages/apiCard'
 // import ReactDOM from 'react-dom';
 
-import { apiList, deleteApi } from '../server/api'
+import { apiList } from '../server/api'
 
 const user = JSON.parse(localStorage.getItem('user'))
 
@@ -96,3 +96,4 @@ class List extends React.Component {
 
 export default List
 
+// state.filter(item => item.id !== action.gameid)
