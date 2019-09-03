@@ -1,13 +1,30 @@
 import 'whatwg-fetch'
-
+import Alert from 'component/Alert'
+import history from "router/history";
+import store from 'store/index'
 
 const handleResponse = (response) => {
     if (response.ok) {
         return response.json();
     } else {
-        let error = new Error(response.statusText);
-        error.response = response
-        throw error
+        console.log(response, response.json(), 123);
+        if ( response.status == 422) {
+            Alert.show({
+                type: 'error',
+                message: '未登录或登录状态失效'
+            })
+            history.push('/login');
+            localStorage.removeItem('token')
+            store().dispatch({
+                type: 'set_token',
+                payload: null
+            })
+            return false
+        }
+        // return response;
+        // let error = new Error(response.statusText);
+        // error.response = response
+        // throw error
     }
 }
 

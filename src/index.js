@@ -3,12 +3,15 @@ import ReactDOM from 'react-dom';
 import '@/style/main.css';
 import App from './App';
 import { Provider } from 'react-redux';
-import configureStore from './redux/configureStore'
+import configureStore from 'store/index'
 
 import * as serviceWorker from './serviceWorker';
 
 
 const store = configureStore()
+
+
+// react-redux提供Provider，把所有代码包裹起来
 
 
 ReactDOM.render( 

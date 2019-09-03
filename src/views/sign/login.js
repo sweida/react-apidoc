@@ -7,7 +7,9 @@ import Alert from 'component/Alert'
 import github from 'assets/img/icons/common/github.svg'
 import google from 'assets/img/icons/common/google.svg'
 import history from "router/history";
-
+import { connect } from 'react-redux'
+import { loginAction } from 'actions/actionCreators'
+import store from 'store/index'
 
 class Login extends React.Component {
     constructor(props) {
@@ -16,6 +18,7 @@ class Login extends React.Component {
             name: '',
             password: '',
         }
+        console.log(this.props, 'redux');
     }
     handleInputChange = (name, e) => {
         this.setState({
@@ -28,18 +31,23 @@ class Login extends React.Component {
             name: this.state.name,
             password: this.state.password,
         }
-        login(params).then(res => {
+
+        this.props.loginAction(params).then(res => {
             if (res.status == 'success') {
-                localStorage.setItem('token', res.data.token);
                 history.push('/projects');
                 Alert.show({
-                    title: '提 示',
                     message: '登录成功，欢迎回来！！'
+                })
+            } else {
+                Alert.show({
+                    type: 'error',
+                    message: res.message
                 })
             }
         })
     }
     render() {
+        let token = this.props.token
         const loginForm = (
             <div className="col-lg-5">
                 <div className="card bg-secondary shadow border-0">
@@ -135,4 +143,26 @@ class Login extends React.Component {
     }
 }
 
-export default Login
+
+// 如果只有render方法，则可以写成无状态组件
+
+
+// 数据
+const mapStateToProps = (state) =>{
+    return {
+        token: state.user.token
+    }
+}
+
+// 业务逻辑
+// function mapDispatchToProps(dispatch) {
+//     return {
+//         // LoginHandle(e) {
+//         //     e.preventDefault();
+//         //     dispatch({ type: 'set_token' })
+//         // }
+//     }
+// }
+
+
+export default connect(mapStateToProps, { loginAction })(Login)

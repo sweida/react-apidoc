@@ -4,6 +4,7 @@ import { userInfo } from 'server/api'
 import NotFound from 'component/notFound'
 import router from 'router/index'
 import history from 'router/history'
+import { connect } from 'react-redux'
 
 
 import 'assets/css/argon-1.0.css'
@@ -13,9 +14,9 @@ import 'assets/vendor/font-awesome/css/font-awesome.min.css'
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      token: localStorage.getItem('token')
-    }
+    // this.state = {
+    //   token: localStorage.getItem('token')
+    // }
   }
   componentDidMount() {
     if (localStorage.getItem('token')) {
@@ -28,7 +29,14 @@ class App extends Component {
       })
     }
   }
+  componentWillReceiveProps() {
+    console.log(this.props, 43434);
+    
+  }
   render() {
+    let token = this.props.token
+    console.log(token, 'token');
+    
     return (
       <BrowserRouter>
         {/* 路由拦截 */}
@@ -38,7 +46,7 @@ class App extends Component {
                 router.map((item, index) => {
                   return <Route key={index} path={item.path} exact render={props =>
                     (!item.auth ? (<item.component {...props} />) :
-                      (this.state.token ?
+                      (token ?
                         <item.component {...props} /> :
                         <Redirect push to={{ pathname: '/login', state: { from: props.location } }} />
                       )
@@ -72,4 +80,15 @@ class App extends Component {
 // }
 
 
-export default App;
+// 数据
+const mapStateToProps = (state) => {
+  console.log(state, 55444);
+  return {
+    token: state.user.token
+  }
+}
+
+
+export default connect(mapStateToProps, null)(App)
+
+// export default App;

@@ -18,7 +18,26 @@ class Addapi extends React.Component {
             results: '',
             modal: false,
             fade: true,
-            isEdit: false
+            isEdit: false,
+            requestTypeList: [
+                {
+                    name: 'POST',
+                    color: 'success',
+                    active: true
+                }, {
+                    name: 'GET',
+                    color: 'info',
+                    active: false
+                }, {
+                    name: 'DELETE',
+                    color: 'danger',
+                    active: false
+                }, {
+                    name: 'PUT',
+                    color: 'warning',
+                    active: false
+                }
+            ],
         };
     }
     componentDidMount() {
@@ -26,10 +45,28 @@ class Addapi extends React.Component {
         if (this.props.match.params.apiid) {
             console.log('编辑api');
             let apiData = this.props.location.state.apiData
-            
+
+            // 显示请求方式
+            let index = 0
+            switch (apiData.requestType) {
+                case 'get':
+                    index = 1
+                    break
+                case 'delete':
+                    index = 2
+                    break
+                case 'put':
+                    index = 3
+                    break
+            }
+            let requestTypeList = this.state.requestTypeList;
+            requestTypeList[0].active = false
+            requestTypeList[index].active = true
+
             this.setState({
                 isEdit: true,
                 ...apiData,
+                ...requestTypeList,
                 projectName: apiData.project.title
             })
         }
@@ -42,14 +79,17 @@ class Addapi extends React.Component {
     handleCreateDmoe = () => {
         this.setState({
             requestParams: 
-`{
+`\`\`\`js
+{
     loginId: string,    // 登录名
     idcard: string,    // 身份证, 非必传
     amount: number,     // 额度
     use_amount: number,      // 可用额度
-}`,
+}
+\`\`\``,
             results: 
-`{
+`\`\`\`js
+{
     errorCode: number,
     errorMsg: string,
     result: {
@@ -57,20 +97,20 @@ class Addapi extends React.Component {
         use_amount: number,      // 可用额度
     },      // 返回结果
     success: true,
-}`,
+}
+\`\`\``,
         })
     }
     // 新增
     handleSubmit = (e) => {
         e.preventDefault();
         let params = {
-            // ...this.state,
             url: this.state.url,
             requestType: this.state.requestType,
             project_id: this.props.match.params.id,
             title: this.state.title,
-            requestParams: '```js\n' + this.state.requestParams + '\n```',
-            results: '```js\n' + this.state.results + '\n```',
+            requestParams: this.state.requestParams,
+            results: this.state.results,
         }
         addApi(params).then(res => {
             if (res.status == 'success') {
@@ -87,11 +127,15 @@ class Addapi extends React.Component {
             }
         })
     }
+    handleRequestType = (name) => {
+        this.setState({
+            requestType: name.toLowerCase()
+        });
+    }
     // 编辑保存
     handleUpdata = (e) => {
-        console.log('编辑保存');
-        
         e.preventDefault();
+
         let params = {
             id: this.props.match.params.apiid,
             url: this.state.url,
@@ -208,22 +252,19 @@ class Addapi extends React.Component {
                                             <div className="col-md-5">
                                                 <ul className="nav nav-pills nav-fill flex-column flex-md-row" id="tabs-text"
                                                     role="tablist">
-                                                    <li className="nav-item">
-                                                        <a className="nav-link btn-outline-success active" data-toggle="tab"
-                                                            href="#" role="tab" aria-selected="true">POST</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link btn-outline-info" data-toggle="tab" href="#"
-                                                            role="tab" aria-selected="false">GET</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link btn-danger" data-toggle="tab" href="#"
-                                                            role="tab" aria-selected="false">DELETE</a>
-                                                    </li>
-                                                    <li className="nav-item">
-                                                        <a className="nav-link btn-warning" data-toggle="tab" href="#"
-                                                            role="tab" aria-selected="false">PUT</a>
-                                                    </li>
+                                                    {
+                                                        this.state.requestTypeList.map((item, index) => {
+                                                            return (
+                                                                <li className="nav-item" key={index}>
+                                                                    <Link className={`nav-link btn-outline-${item.color} ${item.active == true ? 'active' : ''}`} 
+                                                                        data-toggle="tab"
+                                                                        to="#" role="tab" 
+                                                                        onClick={() => this.handleRequestType(item.name)}
+                                                                        aria-selected={item.active}>{item.name}</Link>
+                                                                </li>
+                                                            )
+                                                        })
+                                                    }
                                                 </ul>
                                             </div>
                                         </div>
