@@ -19,8 +19,6 @@ class Projects extends React.Component {
 		super(props);
 		this.state = { 
 			projectList: [],
-			name: '',
-			descp: '',
 		};
 	}
 	componentDidMount() {
@@ -42,14 +40,20 @@ class Projects extends React.Component {
 		});
 	}
 
-	handleOk = (v) => {
+	handleOk = () => {
 		console.log(32323232);
 		
 		projectList().then(res => {
 			this.setState({ projectList: res.data })
 		})
 	};
-
+	handleEdit = (data) => {
+		WrappedDialog.show({
+			onOk: this.handleOk,
+			descp: data.descp,
+			projectTitle: data.title,
+		});
+	}
 	showDialog = () => {
 		WrappedDialog.show({
 			onOk: this.handleOk
@@ -57,22 +61,19 @@ class Projects extends React.Component {
 	};
     render() {
         return (
-			<Fragment>
+			<>
 				<Header />
 				<div className="container mt-5">
 					<div className="projects">
-						<CardControl projectList={this.state.projectList} />
+						<CardControl projectList={this.state.projectList} handleEdit={this.handleEdit}/>
 						<div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-3 pb-2 cursor" onClick={this.showDialog}>
 							<span className="h1">+</span>
 							<p>新增项目</p>
 						</div>
 					</div>
 				</div>
-				{/* <aa>
-					<p>2222</p>
-				</aa> */}
 
-			</Fragment>
+			</>
         )
     }
 }
@@ -83,13 +84,13 @@ function CardControl(props) {
 		<div className="card-lift--hover shadow border-0 card projeclist mb-4" key={item.id}>
 			<Link to={`projects/${item.id}`} className="pt-4 pb-3 card-body">
 				<h6 className="text-primary text-uppercase project-title">
+					<i className="ni ni-book-bookmark mr-2"></i>
 					{item.title} 
 					<span className="ml-2 badge badge-pill badge-info">{item.count}</span>
 				</h6>
 				<p className="description text-body mt-3">{item.descp}</p>
-
-				{/* <Link to="list" className="mt-2 btn btn-primary">点击查看</Link> */}
 			</Link>
+			{/* <i className="ni ni-ruler-pencil editBtn" onClick={() => props.handleEdit(item)}></i> */}
 		</div>
 	);
 	return (
@@ -101,8 +102,8 @@ function CardControl(props) {
 
 
 // 弹窗
-class SetText extends React.Component {
-	static title = "新增项目";
+class SetText extends React.Component { 
+	static header = "新增项目";
 
 	static defaultProps = {
 		onClose: () => { }
@@ -111,9 +112,10 @@ class SetText extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			title: '',
-			descp: '',
+			title: props.projectTitle,
+			descp: props.descp,
 		};
+		console.log(props, 4545);
 	}
 
 	onChange = (name, e) => {

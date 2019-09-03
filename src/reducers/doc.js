@@ -1,4 +1,3 @@
-import { GET_LIST } from 'actions/actionTypes'
 
 const defaultState = {
     apilist: '',
@@ -6,7 +5,7 @@ const defaultState = {
 
 const doc = (state = defaultState, action) => {
     switch (action.type) {
-        case GET_LIST:
+        case 'GET_LIST':
             return {
                 ...defaultState,
                 apilist: action.data

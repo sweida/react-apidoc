@@ -11,7 +11,7 @@ import ReactDOM from "react-dom";
 
 const withDialog = (WrappedComponent) => {
     function EnhancedComponent(props) {
-        const { title, onClose, ...others } = props;
+        const { header, onClose, ...others } = props;
 
         
         return (
@@ -21,7 +21,7 @@ const withDialog = (WrappedComponent) => {
                     <div className="modal-dialog modal-dialog-centered" role="document" style={{ minWidth: '600px'}}>
                         <div className="modal-content">
                             <div className="modal-header">
-                                <h5 className="modal-title" >{WrappedComponent.title}</h5>
+                                <h5 className="modal-title" >{WrappedComponent.header}</h5>
                                 <button type="button" className="close" onClose={WrappedComponent.onClose}>
                                     <span>&times;</span>
                                 </button>

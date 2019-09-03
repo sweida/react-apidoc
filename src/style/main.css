@@ -87,6 +87,13 @@ input:-webkit-autofill {
   cursor: pointer;
 }
 
+.editBtn{
+  position: absolute;
+  right: 15px;
+  bottom: 10px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 768px) {
   .projeclist {
     width: 48%;

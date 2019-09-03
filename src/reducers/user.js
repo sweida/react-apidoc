@@ -1,17 +1,30 @@
-import { SET_TOKEN } from 'actions/actionTypes'
 
 const defaultState = {
-    userInfo: '',
+    userInfo: localStorage.getItem('userinfo'),
     token: localStorage.getItem('token'),
 }
 
 const user = (state = defaultState, action) => {
     switch (action.type) {
-        case SET_TOKEN:
+        case 'SET_TOKEN':
             localStorage.setItem('token', action.data)
             return {
                 ...defaultState,
                 token: action.data
+            }
+        case 'SET_USERINFO':
+            localStorage.setItem('userinfo', JSON.stringify(action.data))
+            return {
+                ...defaultState,
+                userInfo: action.data
+            }
+        case 'LOGOUT':
+            localStorage.removeItem('userinfo')
+            localStorage.removeItem('token')
+            return {
+                ...defaultState,
+                userInfo: null,
+                token: null
             }
         default:
             return state;

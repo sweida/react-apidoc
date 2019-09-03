@@ -8,8 +8,9 @@ import github from 'assets/img/icons/common/github.svg'
 import google from 'assets/img/icons/common/google.svg'
 import history from "router/history";
 import { connect } from 'react-redux'
-import { loginAction } from 'actions/actionCreators'
+import { loginAction, getUserInfo } from 'actions/actionCreators'
 import store from 'store/index'
+// import { bindActionCreators } from 'redux'
 
 class Login extends React.Component {
     constructor(props) {
@@ -31,13 +32,15 @@ class Login extends React.Component {
             name: this.state.name,
             password: this.state.password,
         }
-
         this.props.loginAction(params).then(res => {
-            if (res.status == 'success') {
-                history.push('/projects');
+            history.push('/projects');
+                if (res.status == 'success') {
                 Alert.show({
                     message: '登录成功，欢迎回来！！'
                 })
+                // setTimeout(() => {
+                //     this.props.getUserInfo()
+                // }, 500)
             } else {
                 Alert.show({
                     type: 'error',
@@ -45,7 +48,30 @@ class Login extends React.Component {
                 })
             }
         })
+        // login(params).then(res => {
+        //     if (res.status == 'success') {
+        //         this.props.dispatch(setToken(res.data.token))
+        //         getUserInfo()
+        //         history.push('/projects');
+        //         Alert.show({
+        //             message: '登录成功，欢迎回来！！'
+        //         })
+        //     } else {
+        //         Alert.show({
+        //             type: 'error',
+        //             message: res.message
+        //         })
+        //     }
+        // })
     }
+    // getUserInfo = () => {
+    //     userInfo().then(res => {
+    //         if (res.status == 'success') {
+    //             this.props.dispatch(setUserInfo(res.data))
+    //             console.log('jinla');
+    //         }
+    //     })
+    // }
     render() {
         let token = this.props.token
         const loginForm = (
@@ -157,12 +183,9 @@ const mapStateToProps = (state) =>{
 // 业务逻辑
 // function mapDispatchToProps(dispatch) {
 //     return {
-//         // LoginHandle(e) {
-//         //     e.preventDefault();
-//         //     dispatch({ type: 'set_token' })
-//         // }
+//         actions: dispatch(getUserInfo)
 //     }
 // }
 
 
-export default connect(mapStateToProps, { loginAction })(Login)
+export default connect(mapStateToProps, { loginAction, getUserInfo })(Login)

@@ -2,22 +2,19 @@ import React from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import { logout } from 'server/api'
 import Alert from 'component/Alert'
+import { connect } from 'react-redux'
+import { logoutAction } from 'actions/actionCreators'
+import history from "router/history";
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            loginStatus: true
-        };
     }
     LogoutHandle = () => {
         logout().then(res => {
             if (res.status == 'success') {
-                localStorage.removeItem('user')
-                localStorage.removeItem('token')
-                this.setState({
-                    loginStatus: false
-                })
+                this.props.dispatch(logoutAction())
+                history.push('/login');
                 Alert.show({
                     type: 'success',
                     message: res.message
@@ -31,9 +28,6 @@ class Header extends React.Component {
         })
     }
     render() {
-        if (!this.state.loginStatus) {
-            return <Redirect push to="/login" />
-        }
         return (
             <nav className="navbar navbar-expand-lg navbar-dark bg-default">
                 <div className="container">
@@ -125,4 +119,4 @@ class Header extends React.Component {
 
 
 
-export default Header;
+export default connect()(Header)

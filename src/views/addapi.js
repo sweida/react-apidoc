@@ -81,8 +81,8 @@ class Addapi extends React.Component {
             requestParams: 
 `\`\`\`js
 {
-    loginId: string,    // 登录名
-    idcard: string,    // 身份证, 非必传
+    loginId: string,    // 登录名, 必传
+    initiationID: string,    //     流水日志, 必传
     amount: number,     // 额度
     use_amount: number,      // 可用额度
 }

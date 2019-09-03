@@ -4,8 +4,6 @@ import Alert from 'component/Alert'
 import { deleteApi, restored } from '../server/api'
 import history from 'router/history'
 
-const user = JSON.parse(localStorage.getItem('user'))
-
 
 class ApiCard extends React.Component {
 	handleDelete(id) {
@@ -78,7 +76,7 @@ class ApiCard extends React.Component {
 		)
 		const commonBtn = (
 			<>
-				{data.length!=0 && data.user_id == user.id &&
+				{data.length!=0 && data.user_id == this.props.userInfo.id &&
 					<button type="button" className="btn btn-sm btn-danger " onClick={() => this.handleDelete(data.id)}>
 						<span className="btn-inner--icon mr-2">
 							<i className="ni ni-bag-17"></i>
@@ -98,7 +96,7 @@ class ApiCard extends React.Component {
 		return(
 			<>
 				<div className={`${data.requestType} border border-${this.props.colorType} my-3`}>
-					<div className="px-3 py-2" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
+					<div className="px-3 py-2 cursor" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
 						<button className={`btn btn-sm btn-${this.props.colorType}`} type="button">{data.requestType}</button>
 						<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
 						<small>{data.title}</small>

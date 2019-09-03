@@ -52,6 +52,7 @@
     "react-redux": "^7.1.0",
     "react-router-dom": "^5.0.1",
     "redux": "^4.0.4",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.3.0",
     "resolve": "1.12.0",
     "resolve-url-loader": "3.1.0",
@@ -89,6 +90,7 @@
   },
   "proxy": "http://127.0.0.1:8080/api/v2/",
   "devDependencies": {
+    "axios": "^0.19.0",
     "eslint": "^2.13.1",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-plugin-import": "^1.16.0",

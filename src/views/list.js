@@ -10,6 +10,7 @@ import "./list.css"
 import "style/highlight.css"
 
 import ApiCard from 'pages/apiCard'
+import { connect } from 'react-redux'
 // import ReactDOM from 'react-dom';
 
 import { apiList } from '../server/api'
@@ -50,13 +51,13 @@ class List extends React.Component {
 		const apiCard = apidocList.map((item) => {
 			switch (item.requestType) {
 				case 'post':
-					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} userInfo={this.props.userInfo}/>
 				case 'get':
-					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} userInfo={this.props.userInfo}/>
 				case 'delete':
-					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} userInfo={this.props.userInfo}/>
 				case 'put':
-					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} userInfo={this.props.userInfo}/>
 			}
 		});
 		return (
@@ -94,6 +95,12 @@ class List extends React.Component {
 }
 
 
-export default List
+const mapStateToProps = (state) => {
+	return {
+		userInfo: state.user.userInfo
+	}
+}
+
+export default connect(mapStateToProps, null)(List)
 
 // state.filter(item => item.id !== action.gameid)
