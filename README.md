@@ -78,3 +78,5 @@ const store = createStore(reducer, composeEnhancers(
 - [ ] 自动更新删除列表
 
 token， user需要实时更新
+
+最后一个问题，redux数据保存到loaclstroage

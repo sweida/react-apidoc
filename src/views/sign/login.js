@@ -1,6 +1,5 @@
 import React from 'react'
-// import ReactDOM from 'react-dom';
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Wrapper from './Wrapper'
 import { login } from 'server/api'
 import Alert from 'component/Alert'
@@ -10,10 +9,10 @@ import history from "router/history";
 import { connect } from 'react-redux'
 import { loginAction, getUserInfo } from 'actions/actionCreators'
 import store from 'store/index'
-// import { bindActionCreators } from 'redux'
+
 
 @connect(
-    state => ({ token: state.user }),
+    null,
     { loginAction, getUserInfo }
 )
 
@@ -51,16 +50,8 @@ class Login extends React.Component {
             }
         })
     }
-    // getUserInfo = () => {
-    //     userInfo().then(res => {
-    //         if (res.status == 'success') {
-    //             this.props.dispatch(setUserInfo(res.data))
-    //             console.log('jinla');
-    //         }
-    //     })
-    // }
+
     render() {
-        let token = this.props.token
         const loginForm = (
             <div className="col-lg-5">
                 <div className="card bg-secondary shadow border-0">

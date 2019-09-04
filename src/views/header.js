@@ -6,14 +6,17 @@ import { connect } from 'react-redux'
 import { logoutAction } from 'actions/actionCreators'
 import history from "router/history";
 
+
+@connect(
+    null,
+    { logoutAction }
+)
+
 class Header extends React.Component {
-    constructor(props) {
-        super(props);
-    }
     LogoutHandle = () => {
         logout().then(res => {
             if (res.status == 'success') {
-                this.props.dispatch(logoutAction())
+                this.props.logoutAction()
                 history.push('/login');
                 Alert.show({
                     type: 'success',
@@ -119,4 +122,4 @@ class Header extends React.Component {
 
 
 
-export default connect()(Header)
+export default Header

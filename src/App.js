@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { BrowserRouter, Router, Route, Switch, Redirect } from 'react-router-dom'
-import { userInfo } from 'server/api'
 import NotFound from 'component/notFound'
 import router from 'router/index'
 import history from 'router/history'
@@ -12,7 +11,7 @@ import 'assets/vendor/nucleo/css/nucleo.css'
 import 'assets/vendor/font-awesome/css/font-awesome.min.css'
 
 @connect (
-    state => ({ token: state.user }),
+    state => ({ token: state.user.token }),
     { getUserInfo }
 )
 

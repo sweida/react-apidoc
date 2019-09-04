@@ -7,7 +7,7 @@ const doc = (state = defaultState, action) => {
     switch (action.type) {
         case 'GET_LIST':
             return {
-                ...defaultState,
+                ...state,
                 apilist: action.data
             }
         default:
