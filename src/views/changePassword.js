@@ -73,7 +73,7 @@ class ForgotPassword extends React.Component {
                         <span></span>
                     </div>
                 </section>
-                <section className="section section-skew">
+                <section className="section section-skew py-0">
                     <div className="container mt--400">
                         <div className="col-lg-5 m-auto">
                             <div className="card bg-secondary shadow border-0">

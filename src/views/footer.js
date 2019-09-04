@@ -14,13 +14,13 @@ class Footer extends React.Component {
                 <div className="container">
                     <div className="row align-items-center justify-content-md-between">
                         <div className="col-md-12">
-                            <h6 className="copyright text-center">
+                            <div className="copyright text-center">
                                 &copy; 2019
                                 <span className="text-primary ml-2">Creative with <i className="ni ni-favourite-28 text-danger"></i> by 甜橙保理技术部</span>.
-                                <h6>
+                                <h5>
                                     base on <span className="text-primary">Laravel</span> + <span className="text-primary">react</span>
-                                </h6>
-                            </h6>
+                                </h5>
+                            </div>
                         </div>
                     </div>
                 </div>
