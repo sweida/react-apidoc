@@ -17,9 +17,9 @@ class Footer extends React.Component {
                             <div className="copyright text-center">
                                 &copy; 2019
                                 <span className="text-primary ml-2">Creative with <i className="ni ni-favourite-28 text-danger"></i> by 甜橙保理技术部</span>.
-                                <h5>
+                                <h6>
                                     base on <span className="text-primary">Laravel</span> + <span className="text-primary">react</span>
-                                </h5>
+                                </h6>
                             </div>
                         </div>
                     </div>

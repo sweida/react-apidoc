@@ -2,6 +2,7 @@
   "name": "apidoc",
   "version": "0.1.0",
   "private": true,
+  "homepage": ".",
   "dependencies": {
     "@babel/core": "7.5.5",
     "@svgr/webpack": "4.3.2",
@@ -72,6 +73,8 @@
   },
   "scripts": {
     "start": "node scripts/start.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js"
   },
