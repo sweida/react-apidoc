@@ -14,7 +14,6 @@ import "./list.css"
 import "style/highlight.css"
 
 
-
 class List extends React.Component {
 	constructor(props) {
 		super(props);

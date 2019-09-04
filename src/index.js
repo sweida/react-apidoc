@@ -12,8 +12,6 @@ const store = configureStore()
 
 
 // react-redux提供Provider，把所有代码包裹起来
-
-
 ReactDOM.render( 
     <Provider store={ store }>
         <App />, 
@@ -21,7 +19,7 @@ ReactDOM.render(
     document.getElementById('root') 
 );
 
-//上面的代码本身已经有了，加下面的代码即可
+// 热更新，上面的代码本身已经有了，加下面的代码即可
 if (module.hot) {
     module.hot.accept('./App', () => {
         ReactDOM.render(

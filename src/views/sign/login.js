@@ -12,6 +12,11 @@ import { loginAction, getUserInfo } from 'actions/actionCreators'
 import store from 'store/index'
 // import { bindActionCreators } from 'redux'
 
+@connect(
+    state => ({ token: state.user }),
+    { loginAction, getUserInfo }
+)
+
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -19,7 +24,6 @@ class Login extends React.Component {
             name: '',
             password: '',
         }
-        console.log(this.props, 'redux');
     }
     handleInputChange = (name, e) => {
         this.setState({
@@ -33,14 +37,12 @@ class Login extends React.Component {
             password: this.state.password,
         }
         this.props.loginAction(params).then(res => {
-            history.push('/projects');
-                if (res.status == 'success') {
+            if (res.status == 'success') {
+                history.push('/projects');
                 Alert.show({
                     message: '登录成功，欢迎回来！！'
                 })
-                // setTimeout(() => {
-                //     this.props.getUserInfo()
-                // }, 500)
+                this.props.getUserInfo()
             } else {
                 Alert.show({
                     type: 'error',
@@ -48,21 +50,6 @@ class Login extends React.Component {
                 })
             }
         })
-        // login(params).then(res => {
-        //     if (res.status == 'success') {
-        //         this.props.dispatch(setToken(res.data.token))
-        //         getUserInfo()
-        //         history.push('/projects');
-        //         Alert.show({
-        //             message: '登录成功，欢迎回来！！'
-        //         })
-        //     } else {
-        //         Alert.show({
-        //             type: 'error',
-        //             message: res.message
-        //         })
-        //     }
-        // })
     }
     // getUserInfo = () => {
     //     userInfo().then(res => {
@@ -174,11 +161,11 @@ class Login extends React.Component {
 
 
 // 数据
-const mapStateToProps = (state) =>{
-    return {
-        token: state.user.token
-    }
-}
+// const mapStateToProps = (state) =>{
+//     return {
+//         token: state.user.token
+//     }
+// }
 
 // 业务逻辑
 // function mapDispatchToProps(dispatch) {
@@ -188,4 +175,6 @@ const mapStateToProps = (state) =>{
 // }
 
 
-export default connect(mapStateToProps, { loginAction, getUserInfo })(Login)
+// export default connect(mapStateToProps, { loginAction, getUserInfo })(Login)
+
+export default Login

@@ -1,8 +1,8 @@
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import action from './actions/action.js'
+import actions from 'actions/actionCreators.js'
 
 export default connect(
     state => state.main,
-    dispatch => bindActionCreators(action, dispatch)
+    dispatch => bindActionCreators(actions, dispatch)
 )

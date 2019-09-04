@@ -3,7 +3,12 @@ import Mask from 'component/Mask';
 import Alert from 'component/Alert'
 import { deleteApi, restored } from '../server/api'
 import history from 'router/history'
+import { connect } from 'react-redux'
 
+@connect(
+	state => ({ userInfo: state.user }),
+	{}
+)
 
 class ApiCard extends React.Component {
 	handleDelete(id) {

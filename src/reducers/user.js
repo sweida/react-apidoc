@@ -1,6 +1,6 @@
 
 const defaultState = {
-    userInfo: localStorage.getItem('userinfo'),
+    userInfo: localStorage.getItem('userInfo'),
     token: localStorage.getItem('token'),
 }
 
@@ -9,20 +9,20 @@ const user = (state = defaultState, action) => {
         case 'SET_TOKEN':
             localStorage.setItem('token', action.data)
             return {
-                ...defaultState,
+                ...state,
                 token: action.data
             }
         case 'SET_USERINFO':
-            localStorage.setItem('userinfo', JSON.stringify(action.data))
+            localStorage.setItem('userInfo', JSON.stringify(action.data))
             return {
-                ...defaultState,
+                ...state,
                 userInfo: action.data
             }
         case 'LOGOUT':
-            localStorage.removeItem('userinfo')
+            localStorage.removeItem('userInfo')
             localStorage.removeItem('token')
             return {
-                ...defaultState,
+                ...state,
                 userInfo: null,
                 token: null
             }
