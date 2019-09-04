@@ -36,6 +36,7 @@ export const getUserInfo = () => dispatch => {
         if (res.status == 'success') {
             dispatch(setUserInfo(res.data))
         }
+        return Promise.resolve(res);
     })
 }
 

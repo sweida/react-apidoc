@@ -20,8 +20,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            password: '',
+            name: 'admin',
+            password: '123456',
         }
     }
     handleInputChange = (name, e) => {
@@ -37,11 +37,12 @@ class Login extends React.Component {
         }
         this.props.loginAction(params).then(res => {
             if (res.status == 'success') {
-                history.push('/projects');
                 Alert.show({
                     message: '登录成功，欢迎回来！！'
                 })
-                this.props.getUserInfo()
+                this.props.getUserInfo().then(() => {
+                    history.push('/projects');
+                })
             } else {
                 Alert.show({
                     type: 'error',
@@ -84,7 +85,7 @@ class Login extends React.Component {
                                 <div className="input-group input-group-alternative">
                                     <div className="input-group-prepend">
                                         <span className="input-group-text"><i
-                                            className="ni ni-email-83"></i></span>
+                                            className="ni ni-circle-08"></i></span>
                                     </div>
                                     <input
                                         className="form-control"

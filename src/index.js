@@ -14,7 +14,7 @@ const store = configureStore()
 // react-redux提供Provider，把所有代码包裹起来
 ReactDOM.render( 
     <Provider store={ store }>
-        <App />, 
+        <App />
     </Provider>,
     document.getElementById('root') 
 );

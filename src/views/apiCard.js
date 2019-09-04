@@ -6,8 +6,8 @@ import history from 'router/history'
 import { connect } from 'react-redux'
 
 @connect(
-	state => ({ userInfo: state.user }),
-	{}
+	state => ({ userInfo: state.user.userInfo }),
+	null
 )
 
 class ApiCard extends React.Component {

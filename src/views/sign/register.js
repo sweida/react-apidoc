@@ -69,7 +69,7 @@ class RegisterForm extends React.Component {
                             <div className="form-group">
                                 <div className="input-group input-group-alternative mb-3">
                                     <div className="input-group-prepend">
-                                        <span className="input-group-text"><i className="ni ni-hat-3"></i></span>
+                                        <span className="input-group-text"><i className="ni ni-circle-08"></i></span>
                                     </div>
                                     <input
                                         className="form-control"
