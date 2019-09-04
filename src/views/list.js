@@ -11,7 +11,7 @@ import "style/highlight.css"
 
 import ApiCard from 'pages/apiCard'
 import { apiList } from '../server/api'
-
+import Footer from './footer'
 
 class List extends React.Component {
 	constructor(props) {
@@ -85,6 +85,7 @@ class List extends React.Component {
 					</div>
 					{apiCard}
 				</div>
+				<Footer />
 			</>
         )
     }

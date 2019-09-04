@@ -14,7 +14,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import "./list.css"
 import "style/highlight.css"
-// import ReactDOM from 'react-dom';
+import Footer from './footer.js'
 
 import { deleteList } from '../server/api'
 
@@ -64,6 +64,7 @@ class DeleteController extends React.Component {
 				<div className="container mt-5">
 					{list}
 				</div>
+				<Footer />
 			</>
         )
     }

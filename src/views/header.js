@@ -75,18 +75,6 @@ class Header extends React.Component {
                             </div>
                         </div>
                         <ul className="navbar-nav ml-lg-auto">
-                            {/* <li className="nav-item">
-                                <Link className="nav-link nav-link-icon" to="login">
-                                    <i className="ni ni-favourite-28"></i>
-                                    <span className="nav-link-inner--text d-lg-none">Discover</span>
-                                </Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link className="nav-link nav-link-icon" to="#">
-                                    <i className="ni ni-notification-70"></i>
-                                    <span className="nav-link-inner--text d-lg-none">Profile</span>
-                                </Link>
-                            </li> */}
                             <li className="nav-item dropdown">
                                 <Link className="nav-link nav-link-icon" to="#" id="navbar-default_dropdown_1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span className="mr-1">{this.props.userInfo && this.props.userInfo.name}</span>

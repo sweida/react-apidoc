@@ -7,11 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html, body{
+  height: 100%;
+}
+#root{
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+#root > .container, main {
+  flex: 1;
+}
+.section-shaped{
+  min-block-size: -webkit-fill-available;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
-
 
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;

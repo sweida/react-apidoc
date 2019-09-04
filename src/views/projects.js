@@ -12,7 +12,7 @@ import withDialog from 'component/withDialog';
 // import ReactDOM from 'react-dom';
 import Alert from 'component/Alert'
 import { Link } from 'react-router-dom'
-
+import Footer from './footer'
 
 class Projects extends React.Component {
 	constructor(props) {
@@ -72,7 +72,7 @@ class Projects extends React.Component {
 						</div>
 					</div>
 				</div>
-
+				<Footer />
 			</>
         )
     }

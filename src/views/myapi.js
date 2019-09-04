@@ -12,7 +12,7 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import "./list.css"
 import "style/highlight.css"
-
+import Footer from './footer.js'
 
 class List extends React.Component {
 	constructor(props) {
@@ -43,6 +43,7 @@ class List extends React.Component {
 			<React.Fragment>
 				<Header />
 				<ListControl apidocList={this.state.apidocList}/>
+				<Footer />
 			</React.Fragment>
         )
     }
