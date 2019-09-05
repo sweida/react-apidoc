@@ -52,6 +52,11 @@ service.interceptors.response.use(
             })
             localStorage.removeItem('token')
             return false
+        } else {
+            Alert.show({
+                type: 'error',
+                message: error.response.status + error.response.data.message
+            })
         }
         // if (error.response.status == 401) {
         //     // 登录过期
