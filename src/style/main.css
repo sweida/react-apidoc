@@ -108,6 +108,26 @@ input:-webkit-autofill {
   cursor: pointer;
 }
 
+.table th, .table td{
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-gray700{
+  color: #525f7f;
+}
+
+.text-gray700:hover{
+  color: #5e72e4;
+}
+
+.badge {
+  text-transform: none !important;
+  font-size: 14px !important;
+}
+
 @media screen and (max-width: 768px) {
   .projeclist {
     width: 48%;

@@ -68,3 +68,18 @@ export const personApi = () => {
 export const resetpassword = (data) => {
     return http.post("/apis/user/resetpassword", data).then()
 }
+
+
+// 链接模块
+export const addLink = (data) => {
+    return http.post("/apis/link/add", data).then()
+}
+export const editLink = (data) => {
+    return http.post("/apis/link/edit", data).then()
+}
+export const deleteLink = (data) => {
+    return http.post("/apis/link/delete", data).then()
+}
+export const linkList = (data) => {
+    return http.post("/apis/link/list", data).then()
+}

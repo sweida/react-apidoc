@@ -47,18 +47,8 @@ class Addapi extends React.Component {
             let apiData = this.props.location.state.apiData
 
             // 显示请求方式
-            let index = 0
-            switch (apiData.requestType) {
-                case 'get':
-                    index = 1
-                    break
-                case 'delete':
-                    index = 2
-                    break
-                case 'put':
-                    index = 3
-                    break
-            }
+            let arr = ['post', 'get', 'delete', 'put']
+            let index = arr.indexOf(apiData.requestType)
             let requestTypeList = this.state.requestTypeList;
             requestTypeList[0].active = false
             requestTypeList[index].active = true

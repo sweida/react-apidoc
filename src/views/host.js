@@ -8,10 +8,11 @@ import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
 import "./list.css"
 import "style/highlight.css"
-import { addProject, projectList } from '../server/api'
+import { addLink, linkList, deleteLink, editLink } from '../server/api'
 import withDialog from 'component/withDialog';
 import Alert from 'component/Alert'
-import ApiCard from 'pages/apiCard'
+import Footer from './footer.js'
+import Mask from 'component/Mask';
 // import ReactDOM from 'react-dom';
 
 import { apiList, deleteApi } from '../server/api'
@@ -22,43 +23,48 @@ class Host extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { 
-			apidocList: [],
+			linkList: [],
+			color: {
+				'通用': 'success',
+				'46': 'info',
+				'综测': 'primary',
+				'生产': 'danger',
+			}
 		};
 	}
 	componentDidMount() {
-		marked.setOptions({
-			highlight: function (code) {
-				return hljs.highlightAuto(code).value;
-			},
-			pedantic: false,
-			gfm: true,
-			tables: true,
-			breaks: false,
-			sanitize: false,
-			smartLists: true,
-			smartypants: false,
-			xhtml: false
-		});
-		let params = {
-			id: this.props.match.params.id
-		}
-		apiList(params).then(res => {
-			this.setState({ apidocList: res.data.data })
+		this.getLinkList()
+	}
+
+	// 获取列表
+	getLinkList () {
+		linkList().then(res => {
+			this.setState({ linkList: res.data.data })
 		})
 	}
 
-	handleOk = () => {
-		console.log(32323232);
+	// 复制功能
+	copyToClipboard(txt) {
+		if (window.clipboardData) {
+			window.clipboardData.clearData();
+			window.clipboardData.setData("Text", txt);
+			alert('复制成功！')
+		} else {
+			alert('请手动复制！')
+		}
+	}
 
-		projectList().then(res => {
-			this.setState({ projectList: res.data })
-		})
+	handleOk = () => {
+		this.getLinkList()
 	};
 	handleEdit = (data) => {
 		WrappedDialog.show({
 			onOk: this.handleOk,
-			descp: data.descp,
+			url: data.url,
 			projectTitle: data.title,
+			username: data.username,
+			password: data.password,
+			type: data.type
 		});
 	}
 	showDialog = () => {
@@ -66,9 +72,43 @@ class Host extends React.Component {
 			onOk: this.handleOk
 		});
 	};
+
+	handleDelete(id) {
+		let params = {
+			id: id
+		}
+		Mask.show({
+			title: '提 示',
+			content: '是否删除该链接?',
+			onCancel: () => {
+			},
+			onOk: () => {
+				deleteLink(params).then(res => {
+					if (res.status == 'success') {
+						Alert.show({
+							message: res.message
+						})
+						this.getLinkList()
+					} else {
+						Alert.show({
+							type: 'error',
+							message: res.message
+						})
+					}
+				})
+				console.log('Ok');
+			}
+		})
+	}
 	
 
     render() {
+		const color = {
+			'通用': 'success',
+			'46': 'info',
+			'综测': 'primary',
+			'生产': 'danger',
+		}
 		return (
 			<>
 				<Header />
@@ -100,128 +140,53 @@ class Host extends React.Component {
 									</tr>
 								</thead>
 								<tbody className="list">
-									<tr>
-										<th scope="row">
-											<div className="media align-items-center">
-												<div className="media-body">
-													<span className="name mb-0 text-sm">Argon Design System</span>
-												</div>
-											</div>
-										</th>
-										<td className="budget">
-											<span class="badge badge-primary">46</span>
-											<span class="badge badge-info">综测</span>
-											<span class="badge badge-danger">生产</span>
-											<span class="badge badge-success">通用</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<button type="button" className="btn btn-sm btn-danger">
-												<span className="btn-inner--text">删除</span>
-											</button>
-											<button type="button" className="btn btn-sm btn-primary">
-												<span className="btn-inner--text">编辑</span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">
-											<div className="media align-items-center">
-
-												<div className="media-body">													<span className="name mb-0 text-sm">Argon Design System</span>
-												</div>
-											</div>
-										</th>
-										<td className="budget">
-											$2500 USD
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<button type="button" className="btn btn-sm btn-danger">
-												<span className="btn-inner--text">删除</span>
-											</button>
-											<button type="button" className="btn btn-sm btn-primary">
-												<span className="btn-inner--text">编辑</span>
-											</button>
-										</td>
-									</tr>
-									<tr>
-										<th scope="row">
-											<div className="media align-items-center">
-
-												<div className="media-body">
-													<span className="name mb-0 text-sm">Argon Design System</span>
-												</div>											</div>
-										</th>
-										<td className="budget">
-											$2500 USD
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<span className="badge badge-dot mr-4">
-												<i className="bg-warning"></i>
-												<span className="status">pending</span>
-											</span>
-										</td>
-										<td>
-											<button type="button" className="btn btn-sm btn-danger">
-												<span className="btn-inner--text">删除</span>
-											</button>
-											<button type="button" className="btn btn-sm btn-primary">
-												<span className="btn-inner--text">编辑</span>
-											</button>
-										</td>
-									</tr>
+									{ 
+										this.state.linkList.map((item) => {
+											return (
+												<tr key={item.id}>
+													<th scope="row">
+														<div className="media align-items-center">
+															<a href={item.url} target="_blank" className="media-body text-gray700">
+																<span className="name mb-0 text-sm">{item.title}</span>
+															</a>
+														</div>
+													</th>
+													<td className="budget">
+														<span className={`badge badge-${color[item.type]}`}>{item.type}</span>
+													</td>
+													<td>
+														<span className="badge mr-4">
+															<span className="status">{item.url}</span>
+														</span>
+													</td>
+													<td>
+														<span className="badge mr-4">
+															<span className="status">{item.username || '无'}</span>
+														</span>
+													</td>
+													<td>
+														<span className="badge mr-4">
+															<span className="status">{item.password || '无'}</span>
+														</span>
+													</td>
+													<td>
+														<button type="button" className="btn btn-sm btn-danger" onClick={() => this.handleDelete(item.id)}>
+															<span className="btn-inner--text">删除</span>
+														</button>
+														<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(item)}>
+															<span className="btn-inner--text">编辑</span>
+														</button>
+													</td>
+												</tr>
+											)
+										})
+									 }
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
+				<Footer />
 			</>
         )
     }
@@ -240,28 +205,53 @@ class SetText extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isEdit: false,
 			title: props.projectTitle,
-			descp: props.descp,
+			url: props.url,
+			type: '通用',
+			username: props.username || '',
+			password: props.password || '',
 			requestTypeList: [
 				{
-					name: '46',
+					name: '通用',
 					color: 'success',
 					active: true
 				}, {
-					name: '综测',
+					name: '46',
 					color: 'info',
+					active: false
+				}, {
+					name: '综测',
+					color: 'primary',
 					active: false
 				}, {
 					name: '生产',
 					color: 'danger',
 					active: false
-				}, {
-					name: '通用',
-					color: 'warning',
-					active: false
 				}
 			],
 		};
+	}
+
+	componentDidMount() {
+		// 显示请求方式
+		if (this.props.type) {
+			let arr = ['通用', '46', '综测', '生产']
+			let index = arr.indexOf(this.props.type)
+			let requestTypeList = this.state.requestTypeList;
+			requestTypeList[0].active = false
+			requestTypeList[index].active = true
+			this.setState({
+				isEdit: !!this.props.type,
+				...requestTypeList,
+			})
+		}
+
+	}
+	handleType = (name) => {
+		this.setState({
+			type: name
+		});
 	}
 
 	onChange = (name, e) => {
@@ -270,13 +260,38 @@ class SetText extends React.Component {
 		});
 	}
 
+	// 新增
 	handleOk = (e) => {
 		e.preventDefault();
 		let params = {
 			...this.state
 		}
 		this.props.onOk(
-			addProject(params).then(res => {
+			addLink(params).then(res => {
+				if (res.status == 'success') {
+					this.props.onClose();
+					Alert.show({
+						type: 'success',
+						message: res.message
+					})
+				} else {
+					Alert.show({
+						type: 'error',
+						message: res.message
+					})
+				}
+			})
+		);
+	};
+
+	// 编辑
+	handleEdit = (e) => {
+		e.preventDefault();
+		let params = {
+			...this.state
+		}
+		this.props.onOk(
+			editLink(params).then(res => {
 				if (res.status == 'success') {
 					this.props.onClose();
 					Alert.show({
@@ -296,7 +311,7 @@ class SetText extends React.Component {
 	render() {
 		return (
 			<div className="p-4">
-				<form onSubmit={this.handleOk}>
+				<form onSubmit={!this.state.isEdit ? this.handleOk : this.handleEdit}>
 					<div className="form-group row">
 						<label htmlFor="example-text-input"
 							className="col-md-3 col-form-label form-control-label">名称</label>
@@ -323,6 +338,7 @@ class SetText extends React.Component {
 												<div className={`nav-link btn-outline-${item.color} ${item.active == true ? 'active' : ''}`}
 													data-toggle="tab"
 													role="tab"
+													onClick={() => this.handleType(item.name)}
 													aria-selected={item.active}>{item.name}</div>
 											</li>
 										)
@@ -338,8 +354,8 @@ class SetText extends React.Component {
 							<input
 								className="form-control"
 								type="text"
-								value={this.state.title}
-								onChange={(e) => this.onChange('title', e)}
+								value={this.state.url}
+								onChange={(e) => this.onChange('url', e)}
 								required
 							/>
 						</div>
@@ -351,8 +367,8 @@ class SetText extends React.Component {
 							<input
 								className="form-control"
 								type="text"
-								value={this.state.descp}
-								onChange={(e) => this.onChange('descp', e)}
+								value={this.state.username}
+								onChange={(e) => this.onChange('username', e)}
 							/>
 						</div>
 					</div>
@@ -363,14 +379,17 @@ class SetText extends React.Component {
 							<input
 								className="form-control"
 								type="text"
-								value={this.state.descp}
-								onChange={(e) => this.onChange('descp', e)}
+								value={this.state.password}
+								onChange={(e) => this.onChange('password', e)}
 							/>
 						</div>
 					</div>
 					<div className="modal-footer border-top-0 px-0">
 						<button type="button" className="btn btn-secondary mr-3" onClick={this.props.onClose}>取 消</button>
-						<button type="submit" className="btn btn-primary">确 定</button>
+						{ !this.state.isEdit ? 
+							<button type="submit" className="btn btn-primary">确 定</button>
+							: <button type="submit" className="btn btn-info">修 改</button>
+						}
 					</div>
 				</form>
 			</div>
