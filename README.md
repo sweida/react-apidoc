@@ -77,6 +77,15 @@ const store = createStore(reducer, composeEnhancers(
 - [ ] 个人api
 - [ ] 自动更新删除列表
 
+- [ ] 图片没打包，
+- [ ] 部署后内页css引用地址不对
+- [-] 打包后去掉.map文件
+
 token， user需要实时更新
 
 最后一个问题，redux数据保存到loaclstroage
+
+存在的问题
+
+图片没打包，
+部署后
