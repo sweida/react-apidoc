@@ -5,7 +5,7 @@ import Alert from 'component/Alert'
 import { connect } from 'react-redux'
 import { logoutAction } from 'actions/actionCreators'
 import history from "router/history";
-
+import logo from "assets/img/brand/blue.png"
 
 @connect(
     (state) => ({userInfo: state.user.userInfo}),
@@ -63,7 +63,7 @@ class Header extends React.Component {
                             <div className="row">
                                 <div className="col-6 collapse-brand">
                                     <a href="./index.html">
-                                        <img alt="" src="/assets/img/brand/blue.png" />
+                                        <img alt="" src={logo} />
                                     </a>
                                 </div>
                                 <div className="col-6 collapse-close">
