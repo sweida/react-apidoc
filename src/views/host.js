@@ -60,6 +60,7 @@ class Host extends React.Component {
 	handleEdit = (data) => {
 		WrappedDialog.show({
 			onOk: this.handleOk,
+			id: data.id,
 			url: data.url,
 			projectTitle: data.title,
 			username: data.username,
@@ -208,7 +209,7 @@ class SetText extends React.Component {
 			isEdit: false,
 			title: props.projectTitle,
 			url: props.url,
-			type: '通用',
+			type: props.type || '通用',
 			username: props.username || '',
 			password: props.password || '',
 			requestTypeList: [
@@ -288,7 +289,8 @@ class SetText extends React.Component {
 	handleEdit = (e) => {
 		e.preventDefault();
 		let params = {
-			...this.state
+			...this.state,
+			id: this.props.id
 		}
 		this.props.onOk(
 			editLink(params).then(res => {
