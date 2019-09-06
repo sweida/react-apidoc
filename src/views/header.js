@@ -48,9 +48,9 @@ class Header extends React.Component {
                         </span>
                         <span className="btn-inner--text">环境入口</span>
                     </Link>
-                    <Link to="/routine" className="btn btn-3 btn-icon btn-primary">
+                    <Link to="/routines" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
-                            <i className="ni ni-atom"></i>
+                            <i className="ni ni-app"></i>
                         </span>
                         <span className="btn-inner--text">小功能</span>
                     </Link>

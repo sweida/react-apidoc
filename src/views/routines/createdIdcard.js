@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './header'
-import Footer from './footer'
+import Header from 'pages/header'
+import Footer from 'pages/footer'
 
 var IDValidator = require('id-validator');
 var GB2260 = require('id-validator/src/GB2260');
@@ -89,7 +89,7 @@ class CheckIdcard extends React.Component {
                                     value={this.state.isShowAdd}
                                     onChange={this.handleCheckChange}
                                 />
-                                <label className="custom-control-label" for="customCheck">是否显示地区</label>
+                                <label className="custom-control-label" htmlFor="customCheck">是否显示地区</label>
                             </div>
                         </div>
                     </div>

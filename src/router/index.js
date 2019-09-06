@@ -10,9 +10,10 @@ import Projects from 'pages/projects'
 import DeleteList from 'pages/deleteList'
 import Host from 'pages/host'
 import ErrorCode from 'pages/errorCode'
-import Routine from 'pages/routine'
-import CheckIdcard from 'pages/checkIdcard'
-import CreatedIdcard from 'pages/createdIdcard'
+import Routines from 'pages/routines/index'
+import CheckIdcard from 'pages/routines/checkIdcard'
+import CreatedIdcard from 'pages/routines/createdIdcard'
+import License from 'pages/routines/license'
 
 const router = [
     { path: "/", component: Projects, auth: true },
@@ -30,9 +31,10 @@ const router = [
     { path: "/deleteList", component: DeleteList, auth: true },
     { path: "/host", component: Host, auth: true },
     { path: "/errorCode", component: ErrorCode, auth: true },
-    { path: "/routine", component: Routine, auth: true },
+    { path: "/routines", component: Routines, auth: true },
     { path: "/checkIdcard", component: CheckIdcard, auth: true },
     { path: "/createdIdcard", component: CreatedIdcard, auth: true },
+    { path: "/license", component: License, auth: true },
 ];
 
 export default router

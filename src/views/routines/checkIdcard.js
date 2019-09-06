@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from './header'
-import Footer from './footer'
+import Header from 'pages/header'
+import Footer from 'pages/footer'
 import Alert from 'component/Alert'
 
 var IDValidator = require('id-validator');
@@ -61,7 +61,7 @@ class CheckIdcard extends React.Component {
                             <div className="col-5 ">
                                 <button type="button" className="btn btn-primary mr-4" onClick={this.CheckIdCard}>
                                     <span className="btn-inner--icon mr-2">
-                                        <i className="ni ni-archive-2"></i>
+                                        <i className="ni ni-key-25"></i>
                                     </span>
                                     <span className="btn-inner--text">校验身份证</span>
                                 </button>
