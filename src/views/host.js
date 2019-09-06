@@ -45,7 +45,9 @@ class Host extends React.Component {
 	}
 
 	handleOk = () => {
-		this.getLinkList()
+		setTimeout(() => {
+			this.getLinkList()
+		}, 200)
 	};
 	handleEdit = (data) => {
 		WrappedDialog.show({
