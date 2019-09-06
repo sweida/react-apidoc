@@ -1,23 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from './header'
-import "./list.css"
-
-import marked from 'marked'
-import hljs from 'highlight.js'
-import 'highlight.js/styles/github.css';
-import "./list.css"
-import "style/highlight.css"
-import { addLink, linkList, deleteLink, editLink } from '../server/api'
-import withDialog from 'component/withDialog';
-import Alert from 'component/Alert'
 import Footer from './footer.js'
-import Mask from 'component/Mask';
-// import ReactDOM from 'react-dom';
+import Mask from 'component/Mask'
+import Alert from 'component/Alert'
+import withDialog from 'component/withDialog'
+import "./list.css"
+import { addLink, linkList, deleteLink, editLink } from '../server/api'
 
-import { apiList, deleteApi } from '../server/api'
-
-const user = JSON.parse(localStorage.getItem('user'))
 
 class Host extends React.Component {
 	constructor(props) {
