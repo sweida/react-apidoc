@@ -95,7 +95,8 @@ class CheckIdcard extends React.Component {
                     </div>
 
                     <textarea
-                        className="form-control"
+                        className="form-control bg-white"
+                        readOnly
                         placeholder="生成身份证"
                         value={this.state.IdCardArr}
                         onChange={(e) => this.handleInputChange('IdCardArr', e)}

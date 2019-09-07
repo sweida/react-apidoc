@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 import Header from './header'
 import { Link } from 'react-router-dom'
 import "./list.css"
-import { addApi, editApi } from '../server/api'
+import { addApi, editApi } from 'server/api'
 import Modal from "component/sucModal"
 
 class Addapi extends React.Component {

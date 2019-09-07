@@ -33,7 +33,7 @@ class Routine extends React.Component {
                             </Link>
                         </div>
                         <div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-4 pb-2 cursor" onClick={this.showDialog}>
-                            <Link to="createdidcard">
+                            <Link to="license">
                                 <span className="h2"><i className="ni ni-collection"></i></span>
                                 <p className="text-default pt-2">生成营业执照</p>
                             </Link>

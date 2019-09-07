@@ -83,3 +83,8 @@ export const deleteLink = (data) => {
 export const linkList = (data) => {
     return http.post("/apis/link/list", data).then()
 }
+
+// 获取营业执照
+export const getBusiness = (data) => {
+    return http.post("/apis/business/list", data).then();
+}

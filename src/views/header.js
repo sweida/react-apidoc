@@ -44,7 +44,7 @@ class Header extends React.Component {
                     </Link>
                     <Link to="/host" className="btn btn-3 btn-icon btn-primary">
                         <span className="btn-inner--icon">
-                            <i className="ni ni-atom"></i>
+                            <i className="ni ni-spaceship"></i>
                         </span>
                         <span className="btn-inner--text">环境入口</span>
                     </Link>

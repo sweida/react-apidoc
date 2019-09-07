@@ -1,7 +1,7 @@
 import React from 'react'
 import Mask from 'component/Mask';
 import Alert from 'component/Alert'
-import { deleteApi, restored } from '../server/api'
+import { deleteApi, restored } from 'server/api'
 import history from 'router/history'
 import { connect } from 'react-redux'
 
