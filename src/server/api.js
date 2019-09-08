@@ -88,3 +88,11 @@ export const linkList = (data) => {
 export const getBusiness = (data) => {
     return http.post("/apis/business/list", data).then();
 }
+
+export const UserList = (data) => {
+    return http.post("/apis/user/list", data).then();
+}
+// 冻结和恢复
+export const DeleteOrRestored = (data) => {
+    return http.post("/apis/user/deleteorrestored", data).then();
+}

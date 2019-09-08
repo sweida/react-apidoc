@@ -30,6 +30,20 @@ code {
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px white inset !important;
 }
+
+.notFound{
+  max-width: 600px;
+  margin: auto;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 60px;
+  text-align: center;
+}
+.notFound img{
+  width: 100%;
+}
+
 .section-profile-cover {
   z-index: -1;
 }
@@ -126,6 +140,14 @@ input:-webkit-autofill {
 .badge {
   text-transform: none !important;
   font-size: 14px !important;
+}
+.badge.user_tate {
+  display: flex;
+  line-height: 24px;
+  padding: 0;
+}
+.user_tate .custom-toggle{
+  margin: 0 5px;
 }
 
 @media screen and (max-width: 768px) {

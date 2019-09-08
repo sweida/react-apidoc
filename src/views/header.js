@@ -81,14 +81,22 @@ class Header extends React.Component {
                                     <i className="ni ni-circle-08"></i>
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-default_dropdown_1">
+                                    { this.props.userInfo.admin &&
+                                        <Link to="/teams" className="dropdown-item">
+                                            <i className="ni ni-single-02"></i>
+                                            团队成员
+                                        </Link>
+                                    }
                                     <Link to="/myapi" className="dropdown-item">
                                         <i className="ni ni-planet"></i>
                                         我添加的API
                                     </Link>
-                                    <Link to="/deleteList" className="dropdown-item">
-                                        <i className="ni ni-atom"></i>
-                                        已删除的API
-                                    </Link>
+                                    { this.props.userInfo.admin && 
+                                        <Link to="/deleteList" className="dropdown-item">
+                                            <i className="ni ni-atom"></i>
+                                            已删除的API
+                                        </Link>
+                                    }
                                     <Link to="/changePassword" className="dropdown-item">
                                         <i className="ni ni-settings-gear-65"></i>
                                         修改密码
