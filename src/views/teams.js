@@ -50,7 +50,7 @@ class Teams extends React.Component {
 										<th scope="col" className="sort"> 邮箱 </th>
 										<th scope="col" className="sort"> 权限 </th>
 										<th scope="col" className="sort"> 是否冻结账户 </th>
-										<th scope="col" className="sort"> 最后登录 </th>
+										<th scope="col" className="sort"> 最后登录时间 </th>
 									</tr>
 								</thead>
 								<tbody className="list">

@@ -14,7 +14,9 @@ import Routines from 'pages/routines/index'
 import CheckIdcard from 'pages/routines/checkIdcard'
 import CreatedIdcard from 'pages/routines/createdIdcard'
 import License from "pages/routines/license";
-import Teams from 'pages/teams'
+import Bankcard from "pages/routines/bankcard";
+import Generator from "pages/routines/generator";
+import Teams from "pages/teams";
 
 const router = [
     { path: "/", component: Projects, auth: true },
@@ -36,7 +38,9 @@ const router = [
     { path: "/checkIdcard", component: CheckIdcard, auth: true },
     { path: "/createdIdcard", component: CreatedIdcard, auth: true },
     { path: "/license", component: License, auth: true },
-    { path: "/teams", component: Teams, auth: true, admin: true },
+    { path: "/bankcard", component: Bankcard, auth: true },
+    { path: "/generator", component: Generator, auth: true },
+    { path: "/teams", component: Teams, auth: true, admin: true }
 ];
 
 export default router

@@ -112,8 +112,8 @@ class CheckIdcard extends React.Component {
 							<input
 							type="number"
 							min="1"
-							max="20"
-							placeholder="单次最多20个"
+							max="50"
+							placeholder="单次最多50个"
 							className="form-control pl-2 border-left"
 							value={this.state.num}
 							onChange={e => this.handleInputChange("num", e)}
@@ -170,7 +170,7 @@ class CheckIdcard extends React.Component {
             	<textarea
 					className="form-control bg-white"
 					readOnly
-					placeholder="一次最多生成20个营业执照，目前只有企业三证合一的"
+					placeholder="一次最多生成50个营业执照，目前只有企业三证合一的"
 					value={this.state.licenses}
 					onChange={e => this.handleInputChange("licenses", e)}
 					rows="15"
