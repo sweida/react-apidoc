@@ -20,10 +20,6 @@ const projectList = [
         name: "生成银行卡号",
         icon: "ni-credit-card",
         href: "bankcard"
-    }, {
-        name: "生成四要素",
-        icon: "ni-badge",
-        href: "generator"
     }
 ]
 
