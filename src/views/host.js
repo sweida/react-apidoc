@@ -5,15 +5,25 @@ import Footer from './footer.js'
 import Mask from 'component/Mask'
 import Alert from 'component/Alert'
 import withDialog from 'component/withDialog'
+import Select from "react-select";
 import "./list.css"
 import { addLink, linkList, deleteLink, editLink } from '../server/api'
 
+const options = [
+    { label: "全部环境", value: "all" },
+    { label: "通用", value: "通用" },
+    { label: "综测", value: "综测" },
+    { label: "46", value: "46" },
+    { label: "生产", value: "生产" }
+]
 
 class Host extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { 
+		this.state = {
 			linkList: [],
+			newList: [],
+			selectedOption: options[0],
 			color: {
 				'通用': 'success',
 				'46': 'info',
@@ -29,20 +39,34 @@ class Host extends React.Component {
 	// 获取列表
 	getLinkList () {
 		linkList().then(res => {
-			this.setState({ linkList: res.data.data })
+			this.setState({
+                linkList: res.data.data,
+                newList: res.data.data
+            });
 		})
 	}
 
-	// 复制功能
-	copyToClipboard(txt) {
-		if (window.clipboardData) {
-			window.clipboardData.clearData();
-			window.clipboardData.setData("Text", txt);
-			alert('复制成功！')
-		} else {
-			alert('请手动复制！')
-		}
+	filterByName = (arr, type) => {
+		return arr.filter(item => item.type == type)
 	}
+
+	handleSelectChange = selectedOption => {
+		if (selectedOption.value == 'all') {
+			this.setState({
+                selectedOption,
+                newList: this.state.linkList
+            });
+			return 
+		}
+
+		let newList = this.filterByName(this.state.linkList, selectedOption.value)
+		
+        this.setState({
+            selectedOption,
+            newList: newList
+        });
+    }
+
 
 	handleOk = () => {
 		setTimeout(() => {
@@ -106,9 +130,14 @@ class Host extends React.Component {
 			<>
 				<Header />
 				<div className="container mt-4">
-					<div className="row align-items-center py-3">
-						<div className="col-lg-6 col-7">
-							
+					<div className="row flex align-items-center justify-content-between py-3">
+						<div className="col-lg-3 col-7">
+							<Select
+                                value={this.state.selectedOption}
+                                className="cardSelect"
+                                onChange={this.handleSelectChange}
+                                options={options}
+                            />
 						</div>
 						<div className="col-lg-6 col-5 text-right">
 							<Link to="#" className="btn btn-primary " onClick={this.showDialog}>
@@ -134,7 +163,7 @@ class Host extends React.Component {
 								</thead>
 								<tbody className="list">
 									{ 
-										this.state.linkList.map((item) => {
+										this.state.newList.map((item) => {
 											return (
 												<tr key={item.id}>
 													<th scope="row">

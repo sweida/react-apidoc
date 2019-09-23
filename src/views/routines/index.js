@@ -3,33 +3,35 @@ import Header from 'pages/header'
 import { Link } from 'react-router-dom'
 import Footer from 'pages/footer'
 
+const projectList = [
+    {
+        name: "生成身份证",
+        icon: "ni-badge",
+        href: "createdidcard"
+    }, {
+        name: "校验身份证",
+        icon: "ni-key-25",
+        href: "checkidcard"
+    }, {
+        name: "生成营业执照",
+        icon: "ni-collection",
+        href: "license"
+    }, {
+        name: "生成银行卡号",
+        icon: "ni-credit-card",
+        href: "bankcard"
+    }, {
+        name: "生成四要素",
+        icon: "ni-badge",
+        href: "generator"
+    }
+]
+
 class Routine extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            projectList: [
-                {
-                    name: "生成身份证",
-                    icon: "ni-badge",
-                    href: "createdidcard"
-                }, {
-                    name: "校验身份证",
-                    icon: "ni-key-25",
-                    href: "checkidcard"
-                }, {
-                    name: "生成营业执照",
-                    icon: "ni-collection",
-                    href: "license"
-                }, {
-                    name: "生成银行卡号",
-                    icon: "ni-credit-card",
-                    href: "bankcard"
-                }, {
-                    name: "生成四要素",
-                    icon: "ni-badge",
-                    href: "generator"
-                }
-            ]
+            
         };
     }
     componentDidMount() {
@@ -43,7 +45,7 @@ class Routine extends React.Component {
                 <div className="container mt-5">
                     <div className="projects">
                         { 
-                            this.state.projectList.map((item, index) => {
+                            projectList.map((item, index) => {
                                 return (
                                     <div className="card-lift--hover shadow border-0 card projeclist mb-4 text-center pt-4 pb-2 cursor" key={index}>
                                         <Link to={item.href}>
