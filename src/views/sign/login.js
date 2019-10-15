@@ -51,19 +51,19 @@ class Login extends React.Component {
             type: "name"
         };
         this.props.loginAction(params).then(res => {
-            if (res.status == "success") {
+            // if (res.status == "success") {
                 Alert.show({
                     message: "登录成功，欢迎回来！！"
                 });
                 this.props.getUserInfo().then(() => {
                     history.push("/projects");
                 });
-            } else {
-                Alert.show({
-                    type: "error",
-                    message: res.message
-                });
-            }
+            // } else {
+            //     Alert.show({
+            //         type: "error",
+            //         message: res.message
+            //     });
+            // }
         });
     };
     // github授权登录

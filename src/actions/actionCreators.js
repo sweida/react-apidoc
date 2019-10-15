@@ -1,3 +1,6 @@
+
+// 这个文件是例子，不需要的
+
 import { login, userInfo, apiList } from 'server/api'
 
 export const setToken = (data) => ({

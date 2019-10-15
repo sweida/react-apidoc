@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from './header'
 import "./list.css"
 
+import Loading from 'component/Loading'
 import marked from 'marked'
 import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css';
@@ -18,6 +19,7 @@ class List extends React.Component {
 		super(props);
 		this.state = { 
 			apidocList: [],
+			loading: true
 		};
 	}
 	componentDidMount() {
@@ -38,7 +40,10 @@ class List extends React.Component {
 			id: this.props.match.params.id
 		}
 		apiList(params).then(res => {
-			this.setState({ apidocList: res.data.data })
+			this.setState({ 
+				apidocList: res.data.data,
+				loading: false
+			})
 		})
 	}
 
@@ -83,7 +88,8 @@ class List extends React.Component {
 							</Link>
 						</div>
 					</div>
-					{apiCard}
+					{ this.state.loading && <Loading /> }
+					{ apiCard }
 				</div>
 				<Footer />
 			</>

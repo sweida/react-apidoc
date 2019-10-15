@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Header from './header'
 import Footer from './footer.js'
+
+import Loading from "component/Loading";
 import Mask from 'component/Mask'
 import Alert from 'component/Alert'
 import withDialog from 'component/withDialog'
@@ -24,6 +26,7 @@ class Host extends React.Component {
 			linkList: [],
 			newList: [],
 			selectedOption: options[0],
+			loading: true,
 			color: {
 				'通用': 'success',
 				'46': 'info',
@@ -41,7 +44,8 @@ class Host extends React.Component {
 		linkList().then(res => {
 			this.setState({
                 linkList: res.data.data,
-                newList: res.data.data
+				newList: res.data.data,
+				loading: false
             });
 		})
 	}
@@ -129,85 +133,89 @@ class Host extends React.Component {
 		return (
 			<>
 				<Header />
-				<div className="container mt-4">
-					<div className="row flex align-items-center justify-content-between py-3">
-						<div className="col-lg-3 col-7">
-							<Select
-                                value={this.state.selectedOption}
-                                className="cardSelect"
-                                onChange={this.handleSelectChange}
-                                options={options}
-                            />
+				{this.state.loading && <Loading />}
+				{this.state.linkList.length > 0 &&
+					<div className="container mt-4">
+						<div className="row flex align-items-center justify-content-between py-3">
+							<div className="col-lg-3 col-7">
+								<Select
+									value={this.state.selectedOption}
+									className="cardSelect"
+									onChange={this.handleSelectChange}
+									options={options}
+								/>
+							</div>
+							<div className="col-lg-6 col-5 text-right">
+								<Link to="#" className="btn btn-primary " onClick={this.showDialog}>
+									<span className="btn-inner--icon mr-2">
+										<i className="ni ni-atom"></i>
+									</span>
+									新增链接
+								</Link>
+							</div>
 						</div>
-						<div className="col-lg-6 col-5 text-right">
-							<Link to="#" className="btn btn-primary " onClick={this.showDialog}>
-								<span className="btn-inner--icon mr-2">
-									<i className="ni ni-atom"></i>
-								</span>
-								新增链接
-							</Link>
+					
+						<div className="table-responsive">
+							<div>
+								<table className="table align-items-center">
+									<thead className="thead-light">
+										<tr>
+											<th scope="col" className="sort" data-sort="name">名称</th>
+											<th scope="col" className="sort" data-sort="budget">环境</th>
+											<th scope="col" className="sort" data-sort="status">地址</th>
+											<th scope="col" className="sort" data-sort="status">用户名</th>
+											<th scope="col" className="sort" data-sort="status">密码</th>
+											<th scope="col" className="sort" data-sort="completion">操作</th>
+										</tr>
+									</thead>
+									<tbody className="list">
+										{ 
+											this.state.newList.map((item) => {
+												return (
+													<tr key={item.id}>
+														<th scope="row">
+															<div className="media align-items-center">
+																<a href={item.url} target="_blank" className="media-body text-gray700">
+																	<span className="name mb-0 text-sm">{item.title}</span>
+																</a>
+															</div>
+														</th>
+														<td className="budget">
+															<span className={`badge badge-${color[item.type]}`}>{item.type}</span>
+														</td>
+														<td>
+															<span className="badge mr-4">
+																<span className="status">{item.url}</span>
+															</span>
+														</td>
+														<td>
+															<span className="badge mr-4">
+																<span className="status">{item.username || '无'}</span>
+															</span>
+														</td>
+														<td>
+															<span className="badge mr-4">
+																<span className="status">{item.password || '无'}</span>
+															</span>
+														</td>
+														<td>
+															<button type="button" className="btn btn-sm btn-danger" onClick={() => this.handleDelete(item.id)}>
+																<span className="btn-inner--text">删除</span>
+															</button>
+															<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(item)}>
+																<span className="btn-inner--text">编辑</span>
+															</button>
+														</td>
+													</tr>
+												)
+											})
+										}
+									</tbody>
+								</table>
+							</div>
 						</div>
 					</div>
-					<div className="table-responsive">
-						<div>
-							<table className="table align-items-center">
-								<thead className="thead-light">
-									<tr>
-										<th scope="col" className="sort" data-sort="name">名称</th>
-										<th scope="col" className="sort" data-sort="budget">环境</th>
-										<th scope="col" className="sort" data-sort="status">地址</th>
-										<th scope="col" className="sort" data-sort="status">用户名</th>
-										<th scope="col" className="sort" data-sort="status">密码</th>
-										<th scope="col" className="sort" data-sort="completion">操作</th>
-									</tr>
-								</thead>
-								<tbody className="list">
-									{ 
-										this.state.newList.map((item) => {
-											return (
-												<tr key={item.id}>
-													<th scope="row">
-														<div className="media align-items-center">
-															<a href={item.url} target="_blank" className="media-body text-gray700">
-																<span className="name mb-0 text-sm">{item.title}</span>
-															</a>
-														</div>
-													</th>
-													<td className="budget">
-														<span className={`badge badge-${color[item.type]}`}>{item.type}</span>
-													</td>
-													<td>
-														<span className="badge mr-4">
-															<span className="status">{item.url}</span>
-														</span>
-													</td>
-													<td>
-														<span className="badge mr-4">
-															<span className="status">{item.username || '无'}</span>
-														</span>
-													</td>
-													<td>
-														<span className="badge mr-4">
-															<span className="status">{item.password || '无'}</span>
-														</span>
-													</td>
-													<td>
-														<button type="button" className="btn btn-sm btn-danger" onClick={() => this.handleDelete(item.id)}>
-															<span className="btn-inner--text">删除</span>
-														</button>
-														<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(item)}>
-															<span className="btn-inner--text">编辑</span>
-														</button>
-													</td>
-												</tr>
-											)
-										})
-									 }
-								</tbody>
-							</table>
-						</div>
-					</div>
-				</div>
+				}
 				<Footer />
 			</>
         )

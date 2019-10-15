@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import Header from './header'
 
 
+import Loading from "component/Loading";
 import Mask from 'component/Mask';
 import Alert from 'component/Alert'
 
@@ -23,11 +24,15 @@ class DeleteController extends React.Component {
 		super(props);
 		this.state = { 
 			apidocList: [],
+			loading: true
 		};
 	}
 	componentDidMount() {
 		deleteList().then(res => {
-			this.setState({ apidocList: res.data.data })
+			this.setState({ 
+				apidocList: res.data.data,
+				loading: false
+			})
 		})
 		marked.setOptions({
 			highlight: function (code) {
@@ -59,14 +64,15 @@ class DeleteController extends React.Component {
 			}
 		});
 		return (
-			<>
-				<Header />
-				<div className="container mt-5">
-					{list}
-				</div>
-				<Footer />
-			</>
-        )
+            <>
+                <Header />
+                <div className="container mt-5">
+                    {this.state.loading && <Loading />}
+                    {list}
+                </div>
+                <Footer />
+            </>
+        );
     }
 }
 
