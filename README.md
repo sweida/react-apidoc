@@ -72,10 +72,10 @@ const store = createStore(reducer, composeEnhancers(
 ### 未完成功能
 
 - [ ] 分页
-- [ ] 编辑api
-- [ ] 已删除的api
-- [ ] 个人api
-- [ ] 自动更新删除列表
+- [-] 编辑api
+- [-] 已删除的api
+- [-] 个人api
+- [-] 自动更新删除列表
 
 - [ ] 图片没打包，
 - [ ] 部署后内页css引用地址不对

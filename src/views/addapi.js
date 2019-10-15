@@ -9,7 +9,7 @@ class Addapi extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            projectName: '',
+            project: '',
             url: '',
             requestType: 'post',
             classify: '',
@@ -57,7 +57,11 @@ class Addapi extends React.Component {
                 isEdit: true,
                 ...apiData,
                 ...requestTypeList,
-                projectName: apiData.project.title
+                project: this.props.location.state.apiData.project
+            });
+        } else {
+            this.setState({
+                project: this.props.location.state.project
             })
         }
     }
@@ -175,7 +179,9 @@ class Addapi extends React.Component {
                                             </span>
                                             <Link to="/projects">项目列表</Link>
                                         </li>
-                                        <li className="breadcrumb-item" aria-current="page">{this.state.projectName || '企业白条'}</li>
+                                        <Link to={`/projects/${this.state.project.id}`} className="breadcrumb-item" aria-current="page">
+                                            {this.state.project.title}
+                                        </Link>
                                         <li className="breadcrumb-item active" aria-current="page">{this.state.isEdit ? '编辑api' : '新增api'}</li>
                                     </ol>
                                 </nav>
@@ -216,7 +222,7 @@ class Addapi extends React.Component {
                                                 <input
                                                     className="form-control"
                                                     type="text"
-                                                    value={this.state.projectName}
+                                                    value={this.state.project.title}
                                                     onChange={(e) => this.handleInputChange('classify', e)}
                                                     disabled
                                                     required

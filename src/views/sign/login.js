@@ -24,8 +24,6 @@ class Login extends React.Component {
         };
     }
     componentDidMount() {
-        console.log(this.props, 444);
-
         let token = this.props.location.search.split("=");
         if (token[0] == "?token") {
             this.props.setToken("Bearer " + token[1]);
@@ -50,20 +48,23 @@ class Login extends React.Component {
             password: this.state.password,
             type: "name"
         };
+
+        this.state.name.indexOf('@') == -1 ? params.type = 'name' : params.type = 'email'
+
         this.props.loginAction(params).then(res => {
-            // if (res.status == "success") {
+            if (res.status == "success") {
                 Alert.show({
                     message: "登录成功，欢迎回来！！"
                 });
                 this.props.getUserInfo().then(() => {
                     history.push("/projects");
                 });
-            // } else {
-            //     Alert.show({
-            //         type: "error",
-            //         message: res.message
-            //     });
-            // }
+            } else {
+                Alert.show({
+                    type: "error",
+                    message: res.message
+                });
+            }
         });
     };
     // github授权登录
@@ -121,7 +122,7 @@ class Login extends React.Component {
                                     <input
                                         className="form-control"
                                         type="text"
-                                        placeholder="username"
+                                        placeholder="用户名或邮箱"
                                         value={this.state.name}
                                         onChange={e => this.handleInputChange("name", e) }
                                         required
@@ -138,7 +139,7 @@ class Login extends React.Component {
                                     <input
                                         className="form-control"
                                         type="Password"
-                                        placeholder="Password"
+                                        placeholder="密码"
                                         value={this.state.password}
                                         onChange={e => this.handleInputChange( "password", e ) }
                                         required
@@ -167,18 +168,18 @@ class Login extends React.Component {
                                 </button>
                             </div>
                         </form>
-                        <div className="row mt-3">
-                            <div className="col-6">
-                                <small>
-                                    <Link to="forgotpassword" className="text-success font-weight-700"> 忘记密码? </Link>
-                                </small>
-                            </div>
-                            <div className="col-6 text-right">
-                                <small>
-                                    <Link to="register" className="text-success font-weight-700">去注册</Link>
-                                </small>
-                            </div>
-                        </div>
+                    </div>
+                </div>
+                <div className="row mt-3">
+                    <div className="col-6">
+                        <small>
+                            <Link to="forgotpassword" className="text-light font-weight-700"> 忘记密码? </Link>
+                        </small>
+                    </div>
+                    <div className="col-6 text-right">
+                        <small>
+                            <Link to="register" className="text-light font-weight-700">去注册</Link>
+                        </small>
                     </div>
                 </div>
             </div>

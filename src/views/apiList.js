@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import history from "router/history";
 import Header from './header'
 import "./list.css"
 
@@ -19,6 +20,7 @@ class List extends React.Component {
 		super(props);
 		this.state = { 
 			apidocList: [],
+			project: '',
 			loading: true
 		};
 	}
@@ -42,9 +44,14 @@ class List extends React.Component {
 		apiList(params).then(res => {
 			this.setState({ 
 				apidocList: res.data.data,
+				project: res.data.project,
 				loading: false
 			})
 		})
+	}
+
+	newApi(project) {
+		history.push(`/projects/${project.id}/addapi`, {project: project})
 	}
 
     render() {
@@ -75,17 +82,17 @@ class List extends React.Component {
 										</span>
 										<Link to="/projects">项目列表</Link>
 									</li>
-									<li className="breadcrumb-item active" aria-current="page">企业白条H5</li>
+									<li className="breadcrumb-item active" aria-current="page">{this.state.project.title}</li>
 								</ol>
 							</nav>
 						</div>
 						<div className="col-lg-6 col-5 text-right">
-							<Link to={`/projects/${this.props.match.params.id}/addapi`} className="btn btn-primary ">
+							<button className="btn btn-primary" onClick={() => this.newApi(this.state.project)}>
 								<span className="btn-inner--icon mr-2">
 									<i className="ni ni-atom"></i>
 								</span>
 								新增接口
-							</Link>
+							</button>
 						</div>
 					</div>
 					{ this.state.loading && <Loading /> }
