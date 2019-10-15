@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { logout } from 'server/api'
 import Alert from 'component/Alert'
 import { connect } from 'react-redux'
-import { logoutAction } from 'actions/actionCreators'
+import { logoutAction } from 'actions/index'
 import history from "router/history";
 import logo from "assets/img/brand/blue.png"
 

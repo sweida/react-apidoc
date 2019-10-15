@@ -1,26 +1,22 @@
 import { login } from 'server/api'
-
  
-// export const loginAction = {
-//     type: 'LOGIN'
-// }
 
-// export const userInfoAction = {
-//     type: 'USERINFO'
-// }
+// 设置token
+export const setToken = (data) => ({
+    type: 'SET_TOKEN',
+    data
+})
 
-export const loginPost = (dispatch) => {
-    const res = await login()
-    dispatch({
-        type: 'LOGIN',
-        payload: {}
-    })
-}
+export const logoutAction = () => ({
+    type: 'LOGOUT',
+})
 
-export const loginPost = (data) => {
-    const res = await login()
-    dispatch({
-        type: 'LOGIN',
-        payload: data
-    })
-}
+export const loginAction = params => async dispatch => {
+    const res = await login(params);
+    if (res.status == "success") {
+        dispatch(setToken(res.data.token));
+    }
+    return Promise.resolve(res);
+};
+
+

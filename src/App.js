@@ -4,7 +4,7 @@ import NotFound from 'component/notFound'
 import router from 'router/index'
 import history from 'router/history'
 import { connect } from 'react-redux'
-import { getUserInfo } from 'actions/actionCreators'
+import { getUserInfo } from 'actions/index'
 
 import 'assets/css/argon-1.0.css'
 import 'assets/vendor/nucleo/css/nucleo.css'

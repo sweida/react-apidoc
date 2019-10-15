@@ -2,6 +2,7 @@ import axios from 'axios'
 import Alert from 'component/Alert'
 import history from "router/history";
 import store from 'store/index'
+import { setToken } from "actions/index";
 
 // 配置开发和生产的请求接口
 const service = axios.create({
@@ -10,7 +11,7 @@ const service = axios.create({
 
 // 设置header请求头，发起请求前做的事情
 service.interceptors.request.use(
-    config => {
+    config => {      
         config.headers['Authorization'] = localStorage.getItem('token')
         config.headers['X-Requested-With'] = 'XMLHttpRequest'
         return config
@@ -25,7 +26,8 @@ service.interceptors.response.use(
     res => {
         // 当有新的token时自动更新新的token
         if (res.headers.authorization) {
-            // store.dispatch("Token", res.headers.authorization);
+            store().dispatch(setToken(res.headers.authorization));
+            console.log('刷新token');
         }
         // 统一处理错误
         if (res.data.status == 'success') {
@@ -40,24 +42,24 @@ service.interceptors.response.use(
         return Promise.reject(res.data)
     },
     error => {
-        if (error.response.status == 422) {
-            Alert.show({
-                type: 'error',
-                message: error.response.data.message
-            })
-            history.push('/login');
-            store().dispatch({
-                type: 'set_token',
-                data: null
-            })
-            localStorage.removeItem('token')
-            return false
-        } else {
-            Alert.show({
-                type: 'error',
-                message: error.response.status + error.response.data.message
-            })
-        }
+        // if (error.response.status == 422) {
+        //     Alert.show({
+        //         type: 'error',
+        //         message: error.response.data.message
+        //     })
+        //     history.push('/login');
+        //     store().dispatch({
+        //         type: 'set_token',
+        //         data: null
+        //     })
+        //     localStorage.removeItem('token')
+        //     return false
+        // } else {
+        //     Alert.show({
+        //         type: 'error',
+        //         message: error.response.status + error.response.data.message
+        //     })
+        // }
         // if (error.response.status == 401) {
         //     // 登录过期
         //     Notice.warning({

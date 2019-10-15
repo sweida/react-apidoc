@@ -5,7 +5,7 @@ class Wrapper extends React.Component {
     render() {
         return (
             <main>
-                 <section className="section section-shaped section-lg my-0">
+                 <section className="section section-shaped my-0">
                      <div className="shape shape-style-1 bg-gradient-default">
                          <span></span>
                          <span></span>

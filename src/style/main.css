@@ -10,6 +10,13 @@ body {
 html, body{
   height: 100%;
 }
+main{
+  display: flex !important;
+  flex-direction: column;
+}
+.section{
+  flex: 1;
+}
 #root{
   min-height: 100%;
   display: flex;
@@ -18,9 +25,7 @@ html, body{
 #root > .container, main {
   flex: 1;
 }
-.section-shaped{
-  min-block-size: -webkit-fill-available;
-}
+
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -49,7 +54,7 @@ input:-webkit-autofill {
 }
 
 .mt--400{
-  margin-top: -36rem;
+  margin-top: -28rem;
 }
 
 .message{
@@ -157,6 +162,35 @@ input:-webkit-autofill {
 .cardSelect>div{
   flex: 1;
 }
+
+.snack{
+  border-left: 2px solid #adb5bd;
+  border-top: 2px solid #adb5bd;
+  border-right: 2px solid #fff;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  display: block;
+  position: absolute;
+  top: 9px;
+  left: 17px;
+  animation: random 1.2s linear infinite;
+}
+
+.btn:disabled{
+  box-shadow: 0 4px 6px rgba(50, 50, 93, .11),
+  0 1px 3px rgba(0, 0, 0, .08) !important;
+}
+
+@keyframes random {
+  0% {
+    transform:rotate(0deg);
+  }
+  100% {
+    transform:rotate(360deg);
+  }
+}
+
 
 @media screen and (max-width: 768px) {
   .projeclist {

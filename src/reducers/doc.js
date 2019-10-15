@@ -5,11 +5,11 @@ const defaultState = {
 
 const doc = (state = defaultState, action) => {
     switch (action.type) {
-        case 'GET_LIST':
+        case "SET_APILIST":
             return {
                 ...state,
                 apilist: action.data
-            }
+            };
         default:
             return state;
     }

@@ -82,7 +82,7 @@ class ForgotPassword extends React.Component {
                                         修改密码
                                     </div>
                                 </div>
-                                <div className="card-body px-lg-5 py-lg-5">
+                                <div className="card-body px-lg-5">
                                     <form onSubmit={this.handleSubmit}>
                                         <div className="form-group mb-3">
                                             <div className="input-group input-group-alternative">

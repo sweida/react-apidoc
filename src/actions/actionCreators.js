@@ -14,37 +14,38 @@ export const setUserInfo = (data) => ({
     data
 })
 
-export const getList = (data) => ({
-    type: 'GET_LIST',
+export const setApiList = (data) => ({
+    type: 'SET_APILIST',
     data
 })
 
 // 登录信息
-export const loginAction = (params) => dispatch => {
-    return login(params).then(res => {
-        if (res.status == 'success') {
-            dispatch(setToken(res.data.token))
-        }
-        return Promise.resolve(res);
-    })
+export const loginAction = (params) => async dispatch => {
+    const res = await login(params)
+    if (res.status == 'success') {
+        dispatch(setToken(res.data.token))
+    }
+    return Promise.resolve(res);
 }
 
 
-// 获取用户信息
-export const getUserInfo = () => dispatch => {
-    return userInfo().then(res => {
-        if (res.status == 'success') {
-            dispatch(setUserInfo(res.data))
-        }
-        return Promise.resolve(res);
-    })
+// 使用异步的例子
+export const getUserInfo = () => async dispatch => {
+    const res = await userInfo()
+    if (res.status == "success") {
+        dispatch(setUserInfo(res.data));
+    }
+    return Promise.resolve(res)
 }
 
+
+
+// 不用异步的例子
 export const getApiList = (params) => dispatch => {
     return apiList(params).then(res => {
-        if (res.status == 'success') {
-            dispatch(getList(res.data.token))
+        if (res.status == "success") {
+            dispatch(setApiList(res.data.data));
         }
         return Promise.resolve(res);
-    })
-}
+    });
+};

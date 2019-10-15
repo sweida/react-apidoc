@@ -50,6 +50,10 @@ export const login = (data) => {
     return http.post("/apis/login", data).then()
 }
 
+export const githubLogin = () => {
+    return http.get("/apis/github").then()
+}
+
 export const logout = (data) => {
     return http.post("/apis/logout", data).then()
 }
