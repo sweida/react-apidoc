@@ -82,19 +82,21 @@ class ApiCard extends React.Component {
 		const commonBtn = (
 			<>
 				{data.length!=0 && data.user_id == this.props.userInfo.id &&
-					<button type="button" className="btn btn-sm btn-danger " onClick={() => this.handleDelete(data.id)}>
-						<span className="btn-inner--icon mr-2">
-							<i className="ni ni-bag-17"></i>
-						</span>
-						<span className="btn-inner--text">删 除 </span>
-					</button>
+					<>
+						<button type="button" className="btn btn-sm btn-danger " onClick={() => this.handleDelete(data.id)}>
+							<span className="btn-inner--icon mr-2">
+								<i className="ni ni-bag-17"></i>
+							</span>
+							<span className="btn-inner--text">删 除 </span>
+						</button>
+						<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(data)}>
+							<span className="btn-inner--icon">
+								<i className="ni ni-planet mr-2"></i>
+							</span>
+							<span className="btn-inner--text">编 辑 </span>
+						</button>
+					</>
 				}
-				<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(data)}>
-					<span className="btn-inner--icon">
-						<i className="ni ni-planet mr-2"></i>
-					</span>
-					<span className="btn-inner--text">编 辑 </span>
-				</button>
 			</>
 		)
 
