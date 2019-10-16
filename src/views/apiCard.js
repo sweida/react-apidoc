@@ -26,6 +26,7 @@ class ApiCard extends React.Component {
 						Alert.show({
 							message: res.message
 						})
+						this.props.getApiList();
 					} else {
 						Alert.show({
 							type: 'error',
@@ -33,7 +34,7 @@ class ApiCard extends React.Component {
 						})
 					}
 				})
-				console.log('Ok');
+				console.log('Ok', );
 			}
 		})
 	}
@@ -52,6 +53,7 @@ class ApiCard extends React.Component {
 						Alert.show({
 							message: res.message
 						})
+						this.props.getApiList();
 					} else {
 						Alert.show({
 							type: 'error',
@@ -81,7 +83,7 @@ class ApiCard extends React.Component {
 		)
 		const commonBtn = (
 			<>
-				{data.length!=0 && data.user_id == this.props.userInfo.id &&
+				{data.user_id == this.props.userInfo.id &&
 					<>
 						<button type="button" className="btn btn-sm btn-danger " onClick={() => this.handleDelete(data.id)}>
 							<span className="btn-inner--icon mr-2">
@@ -103,10 +105,11 @@ class ApiCard extends React.Component {
 		return(
 			<>
 				<div className={`${data.requestType} border border-${this.props.colorType} my-3`}>
-					<div className="px-3 py-2 cursor" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
+					<div className="px-3 py-2 cursor d-flex align-items-center" data-toggle="collapse" data-target={`#${data.id}`} aria-expanded="true" aria-controls="collapseOne">
 						<button className={`btn btn-sm btn-${this.props.colorType}`} type="button">{data.requestType}</button>
 						<span className="font-weight-bold ml-2 mr-3">/{data.url}</span>
-						<small>{data.title}</small>
+						<small className="flex-fill">{data.title}</small>
+						<span className={`badge badge-${this.props.colorType} mr-2`}>{data.project.title}</span>
 						<div className="close">
 							<i className={`fa fa-code text-${this.props.colorType}`}></i>
 						</div>

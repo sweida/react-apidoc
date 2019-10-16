@@ -28,12 +28,6 @@ class DeleteController extends React.Component {
 		};
 	}
 	componentDidMount() {
-		deleteList().then(res => {
-			this.setState({ 
-				apidocList: res.data.data,
-				loading: false
-			})
-		})
 		marked.setOptions({
 			highlight: function (code) {
 				return hljs.highlightAuto(code).value;
@@ -47,6 +41,16 @@ class DeleteController extends React.Component {
 			smartypants: false,
 			xhtml: false
 		});
+		this.getApiList()
+	}
+
+	getApiList() {
+		deleteList().then(res => {
+            this.setState({
+                apidocList: res.data.data,
+                loading: false
+            });
+        });
 	}
 
     render() {
@@ -54,13 +58,13 @@ class DeleteController extends React.Component {
 		const list = apidocList.map((item) => {
 			switch (item.requestType) {
 				case 'post':
-					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} restored={true}/>
+					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} restored={true} getApiList={() => this.getApiList()}/>
 				case 'get':
-					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} restored={true}/>
+					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} restored={true} getApiList={() => this.getApiList()}/>
 				case 'delete':
-					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} restored={true}/>
+					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} restored={true} getApiList={() => this.getApiList()}/>
 				case 'put':
-					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} restored={true}/>
+					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} restored={true} getApiList={() => this.getApiList()}/>
 			}
 		});
 		return (

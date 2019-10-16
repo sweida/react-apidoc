@@ -24,12 +24,6 @@ class List extends React.Component {
         };
 	}
 	componentDidMount() {
-		personApi().then(res => {
-			this.setState({
-                apidocList: res.data.data,
-                loading: false
-            });
-		})
 		marked.setOptions({
 			highlight: function (code) {
 				return hljs.highlightAuto(code).value;
@@ -43,19 +37,29 @@ class List extends React.Component {
 			smartypants: false,
 			xhtml: false
 		}); 
+		this.getApiList()
+	}
+
+	getApiList() {
+		personApi().then(res => {
+            this.setState({
+                apidocList: res.data.data,
+                loading: false
+            });
+        });
 	}
 
     render() {
 		const list = this.state.apidocList.map((item) => {
 			switch (item.requestType){
 				case 'post':
-					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} />
+					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} getApiList={() => this.getApiList()} />
 				case 'get':
-					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} />
+					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} getApiList={() => this.getApiList()} />
 				case 'delete':
-					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} />
+					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} getApiList={() => this.getApiList()} />
 				case 'put':
-					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} />
+					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} getApiList={() => this.getApiList()} />
 			}
 		});
         return (

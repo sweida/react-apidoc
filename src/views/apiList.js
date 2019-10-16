@@ -38,16 +38,20 @@ class List extends React.Component {
 			smartypants: false,
 			xhtml: false
 		});
+		this.getApiList()
+		
+	}
+	getApiList(id) {
 		let params = {
 			id: this.props.match.params.id
-		}
+		};
 		apiList(params).then(res => {
-			this.setState({ 
+			this.setState({
 				apidocList: res.data.data,
 				project: res.data.project,
 				loading: false
-			})
-		})
+			});
+		});
 	}
 
 	newApi(project) {
@@ -59,13 +63,13 @@ class List extends React.Component {
 		const apiCard = apidocList.map((item) => {
 			switch (item.requestType) {
 				case 'post':
-					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"success"} marked={marked} getApiList={() => this.getApiList()}/>
 				case 'get':
-					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"info"} marked={marked} getApiList={() => this.getApiList()}/>
 				case 'delete':
-					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"danger"} marked={marked} getApiList={() => this.getApiList()}/>
 				case 'put':
-					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked}/>
+					return <ApiCard key={item.id} data={item} colorType={"warning"} marked={marked} getApiList={() => this.getApiList()}/>
 			}
 		});
 		return (
