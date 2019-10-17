@@ -7,7 +7,6 @@ import google from 'assets/img/icons/common/google.svg'
 import history from "router/history";
 import { connect } from 'react-redux'
 import { loginAction, getUserInfo, setToken } from "actions/index";
-import store from 'store/index'
 
 
 @connect(
@@ -24,6 +23,8 @@ class Login extends React.Component {
         };
     }
     componentDidMount() {
+        console.log(process.env.REACT_APP_GITHUB_URL, '环境变量');
+        
         let token = this.props.location.search.split("=");
         if (token[0] == "?token") {
             this.props.setToken("Bearer " + token[1]);
@@ -68,11 +69,11 @@ class Login extends React.Component {
         });
     };
     // github授权登录
-    handleGithub = e => {
+    handleGithub = () => {
         this.setState({
             githubDisabled: true
         });
-        window.location.href = "http://localhost:8080/api/v1/github";
+        window.location.href = process.env.REACT_APP_GITHUB_URL + "/api/v1/github"
     };
 
     render() {

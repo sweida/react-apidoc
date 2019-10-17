@@ -6,9 +6,14 @@ import thunk from 'redux-thunk'
 
 // rootReducer即所有reducers
 const configureStore = () => {
-    const store = createStore(rootReducer, composeWithDevTools(
-        applyMiddleware(logger, thunk)
-    ))
+    let store = null;
+    if (process.env.NODE_ENV === "development") {
+        store = createStore(rootReducer, composeWithDevTools(
+            applyMiddleware(logger, thunk)
+        ))
+    } else {
+        store = createStore(rootReducer, applyMiddleware(thunk));
+    }
 
     //热更新
     if (process.env.NODE_ENV !== "production") {

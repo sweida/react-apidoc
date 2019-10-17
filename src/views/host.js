@@ -19,6 +19,13 @@ const options = [
     { label: "生产", value: "生产" }
 ]
 
+const color = {
+	'通用': 'success',
+	'46': 'info',
+	'综测': 'primary',
+	'生产': 'danger'
+}
+
 class Host extends React.Component {
 	constructor(props) {
 		super(props);
@@ -27,12 +34,6 @@ class Host extends React.Component {
 			newList: [],
 			selectedOption: options[0],
 			loading: true,
-			color: {
-				'通用': 'success',
-				'46': 'info',
-				'综测': 'primary',
-				'生产': 'danger',
-			}
 		};
 	}
 	componentDidMount() {
@@ -124,17 +125,9 @@ class Host extends React.Component {
 	
 
     render() {
-		const color = {
-			'通用': 'success',
-			'46': 'info',
-			'综测': 'primary',
-			'生产': 'danger',
-		}
 		return (
 			<>
 				<Header />
-				{this.state.loading && <Loading />}
-				{this.state.linkList.length > 0 &&
 					<div className="container mt-4">
 						<div className="row flex align-items-center justify-content-between py-3">
 							<div className="col-lg-3 col-7">
@@ -154,68 +147,69 @@ class Host extends React.Component {
 								</Link>
 							</div>
 						</div>
-					
-						<div className="table-responsive">
-							<div>
-								<table className="table align-items-center">
-									<thead className="thead-light">
-										<tr>
-											<th scope="col" className="sort" data-sort="name">名称</th>
-											<th scope="col" className="sort" data-sort="budget">环境</th>
-											<th scope="col" className="sort" data-sort="status">地址</th>
-											<th scope="col" className="sort" data-sort="status">用户名</th>
-											<th scope="col" className="sort" data-sort="status">密码</th>
-											<th scope="col" className="sort" data-sort="completion">操作</th>
-										</tr>
-									</thead>
-									<tbody className="list">
-										{ 
-											this.state.newList.map((item) => {
-												return (
-													<tr key={item.id}>
-														<th scope="row">
-															<div className="media align-items-center">
-																<a href={item.url} target="_blank" className="media-body text-gray700">
-																	<span className="name mb-0 text-sm">{item.title}</span>
-																</a>
-															</div>
-														</th>
-														<td className="budget">
-															<span className={`badge badge-${color[item.type]}`}>{item.type}</span>
-														</td>
-														<td>
-															<span className="badge mr-4">
-																<span className="status">{item.url}</span>
-															</span>
-														</td>
-														<td>
-															<span className="badge mr-4">
-																<span className="status">{item.username || '无'}</span>
-															</span>
-														</td>
-														<td>
-															<span className="badge mr-4">
-																<span className="status">{item.password || '无'}</span>
-															</span>
-														</td>
-														<td>
-															<button type="button" className="btn btn-sm btn-danger" onClick={() => this.handleDelete(item.id)}>
-																<span className="btn-inner--text">删除</span>
-															</button>
-															<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(item)}>
-																<span className="btn-inner--text">编辑</span>
-															</button>
-														</td>
-													</tr>
-												)
-											})
-										}
-									</tbody>
-								</table>
+						{this.state.loading && <Loading />}
+						{this.state.linkList.length > 0 &&
+							<div className="table-responsive">
+								<div>
+									<table className="table align-items-center">
+										<thead className="thead-light">
+											<tr>
+												<th scope="col" className="sort" data-sort="name">名称</th>
+												<th scope="col" className="sort" data-sort="budget">环境</th>
+												<th scope="col" className="sort" data-sort="status">地址</th>
+												<th scope="col" className="sort" data-sort="status">用户名</th>
+												<th scope="col" className="sort" data-sort="status">密码</th>
+												<th scope="col" className="sort" data-sort="completion">操作</th>
+											</tr>
+										</thead>
+										<tbody className="list">
+											{ 
+												this.state.newList.map((item) => {
+													return (
+														<tr key={item.id}>
+															<th scope="row">
+																<div className="media align-items-center">
+																	<a href={item.url} target="_blank" className="media-body text-gray700">
+																		<span className="name mb-0 text-sm">{item.title}</span>
+																	</a>
+																</div>
+															</th>
+															<td className="budget">
+																<span className={`badge badge-${color[item.type]}`}>{item.type}</span>
+															</td>
+															<td>
+																<span className="badge mr-4">
+																	<span className="status">{item.url}</span>
+																</span>
+															</td>
+															<td>
+																<span className="badge mr-4">
+																	<span className="status">{item.username || '无'}</span>
+																</span>
+															</td>
+															<td>
+																<span className="badge mr-4">
+																	<span className="status">{item.password || '无'}</span>
+																</span>
+															</td>
+															<td>
+																<button type="button" className="btn btn-sm btn-danger" onClick={() => this.handleDelete(item.id)}>
+																	<span className="btn-inner--text">删除</span>
+																</button>
+																<button type="button" className="btn btn-sm btn-primary" onClick={() => this.handleEdit(item)}>
+																	<span className="btn-inner--text">编辑</span>
+																</button>
+															</td>
+														</tr>
+													)
+												})
+											}
+										</tbody>
+									</table>
+								</div>
 							</div>
-						</div>
+						}
 					</div>
-				}
 				<Footer />
 			</>
         )

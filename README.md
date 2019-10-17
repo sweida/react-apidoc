@@ -72,14 +72,14 @@ const store = createStore(reducer, composeEnhancers(
 ### 未完成功能
 
 - [ ] 分页
-- [-] 编辑api
-- [-] 已删除的api
-- [-] 个人api
-- [-] 自动更新删除列表
+- [x] 编辑api
+- [x] 已删除的api
+- [x] 个人api
+- [x] 自动更新删除列表
 
 - [ ] 图片没打包，
 - [ ] 部署后内页css引用地址不对
-- [-] 打包后去掉.map文件
+- [x] 打包后去掉.map文件
 
 token， user需要实时更新
 
