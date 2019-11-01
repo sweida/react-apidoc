@@ -41,11 +41,12 @@ class Projects extends React.Component {
 	}
 
 	handleOk = () => {
-		console.log(32323232);
-		
-		projectList().then(res => {
-			this.setState({ projectList: res.data })
-		})
+		// 没写延时会同时触发，导致数据没更新
+		setTimeout(() => {
+			projectList().then(res => {
+				this.setState({ projectList: res.data })
+			})
+		}, 300)
 	};
 	handleEdit = (data) => {
 		WrappedDialog.show({

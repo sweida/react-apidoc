@@ -75,26 +75,40 @@ class Addapi extends React.Component {
             requestParams: 
 `\`\`\`js
 {
-    loginId: string,    // 登录名, 必传
-    initiationID: string,    //     流水日志, 必传
-    amount: number,     // 额度
-    use_amount: number,      // 可用额度
+    name: string,         // 登录名, 必传
+    eamil: string,        // 邮箱, 必传
+    password: string,     // 密码
 }
 \`\`\``,
             results: 
 `\`\`\`js
 {
-    errorCode: number,
-    errorMsg: string,
-    result: {
-        amount: number,     // 额度
-        use_amount: number,      // 可用额度
-    },      // 返回结果
-    success: true,
+    code: 200,
+    data: {
+        {id: 1, title: "001", type: "技能"},
+        {id: 2, title: "002", type: "技能"}
+    },
+    status: 'success'
 }
 \`\`\``,
         })
     }
+// {
+//     loginId: string,    // 登录名, 必传
+//     initiationID: string,    //     流水日志, 必传
+//     amount: number,     // 额度
+//     use_amount: number,      // 可用额度
+// }
+// {
+//     errorCode: number,
+//     errorMsg: string,
+//     result: {
+//         amount: number,     // 额度
+//         use_amount: number,      // 可用额度
+//     },      // 返回结果
+//     success: true,
+// }
+
     // 新增
     handleSubmit = (e) => {
         e.preventDefault();
