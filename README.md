@@ -1,5 +1,6 @@
 ## api文档手动编写项目
 
+管理员多个几个权限，因为老是有人将admin（有管理员权限）搞事情，所以关闭该账号了
 ![项目预览](http://static.golang365.com/nZFs9CxCHBSmZGlFDOXcWtDXfeDdh9FwFVk37yPv.png)
 ![项目预览](http://static.golang365.com/C3zHE0DkWqZ1dHzy7KP2GEz6V6Pg2BYgBwZtONm2.png)
 可以生成模版
