@@ -1,6 +1,7 @@
 ## api文档手动编写项目
 
 #### 预览地址：http://blog-doc.golang365.com
+#### 后端api（laravel）: https://github.com/sweida/apidoc
 
 管理员多个几个权限，因为老是有人将 admin 账号（有管理员权限）搞事情，所以冻结该账号了，自己用github授权登录吧
 ![项目预览](http://static.golang365.com/nZFs9CxCHBSmZGlFDOXcWtDXfeDdh9FwFVk37yPv.png)
